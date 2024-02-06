@@ -10,7 +10,6 @@ class RegisterApi{
   static Future<void> registerUser(BuildContext context,
       String email,
       String password,
-      String date,
       String mobile,
       String fname,
       String lname,
@@ -20,7 +19,6 @@ class RegisterApi{
       var data={
         "email": email,
         "password": password,
-        "date": date,
         "mobile": mobile,
         "firstname": fname,
         "lastname": lname,

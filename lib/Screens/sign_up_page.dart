@@ -19,7 +19,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   TextEditingController emailController=TextEditingController();
   TextEditingController pwdController=TextEditingController();
-  TextEditingController dateController=TextEditingController();
   TextEditingController mobileController=TextEditingController();
   TextEditingController fnameController=TextEditingController();
   TextEditingController lnameController=TextEditingController();
@@ -60,9 +59,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.email,color: primary,),
                         hintText: "Email",
-                        label: const Text('Email',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         )
                     ),
                     validator: (value) {
@@ -99,59 +97,15 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         prefixIcon: Icon(Icons.lock,color: primary,),
                         hintText: "Password",
-                        label: const Text('Password',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         ),
                     ),
-                    keyboardType: TextInputType.emailAddress,
-
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return 'This field is required';
-                      }
-                      if (value.trim().length < 6) {
-                        return 'Password must be at least 6 characters in length';
-                      }
-                      return null;
-                    },
-
-                  ),
-                ),
-
-                const SizedBox(height: 10,),
-
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextFormField(
-                    controller: dateController,
-                    decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.date_range,color: primary,),
-                        hintText: "Date",
-                        label: const Text('Date',),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
-                        )
-                    ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
                         return 'This field is required';
                       }
                       return null;
-                    },
-                    onTap: () async {
-                      DateTime? pickedDate= await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(2000),
-                        lastDate: DateTime(2100),
-                      );
-                      if (pickedDate != null) {
-                        String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-                        setState(() {
-                          dateController.text = formattedDate;
-                        });
-                      }
                     },
 
                   ),
@@ -167,9 +121,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.phone,color: primary,),
                         hintText: "Contact Number",
-                        label: const Text('Contact Number',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         )
                     ),
 
@@ -195,9 +148,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person,color: primary,),
                         hintText: "First Name",
-                        label: const Text('First Name',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         )
                     ),
                     validator: (value) {
@@ -218,9 +170,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.person,color: primary,),
                         hintText: "Last Name",
-                        label: const Text('Last Name',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         )
                     ),
                     validator: (value) {
@@ -241,9 +192,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                         prefixIcon: Icon(Icons.place,color: primary,),
                         hintText: "Location",
-                        label: const Text('Location',),
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(29)
+                            borderRadius: BorderRadius.circular(12)
                         )
                     ),
                     validator: (value) {
@@ -257,20 +207,25 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 const SizedBox(height: 36,),
 
-                ElevatedButton(onPressed: (){
-                  if (_formKey.currentState!.validate()) {
-                    RegisterApi.registerUser(context,
-                        emailController.text.trim(),
-                        pwdController.text.trim(),
-                        dateController.text.trim(),
-                        mobileController.text.trim(),
-                        fnameController.text.trim(),
-                        lnameController.text.trim(),
-                        locationController.text.trim());
-                  }
-                },
-                    style: ElevatedButton.styleFrom(primary: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(23.0)),),
-                    child: const Text("Sign Up",style: TextStyle(fontSize: 17),)),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(onPressed: (){
+                      if (_formKey.currentState!.validate()) {
+                        RegisterApi.registerUser(context,
+                            emailController.text.trim(),
+                            pwdController.text.trim(),
+                            mobileController.text.trim(),
+                            fnameController.text.trim(),
+                            lnameController.text.trim(),
+                            locationController.text.trim());
+                      }
+                    },
+                        style: ElevatedButton.styleFrom(primary: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
+                        child: const Text("Sign Up",style: TextStyle(fontSize: 17),)),
+                  ),
+                ),
 
                 const SizedBox(height: 20,),
 

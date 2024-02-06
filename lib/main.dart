@@ -8,7 +8,7 @@ void main() {
   runApp(
       const MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: RouteName.login,
+        initialRoute: RouteName.splashScreen,
         onGenerateRoute: RouteNavigation.generateRoute,
       )
   );
