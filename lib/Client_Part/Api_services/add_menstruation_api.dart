@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../Routes/route_names.dart';
 import '../Utilities/constants.dart';
 
+
 class AddMenstruationDateApi {
   static Future<void> addMenstruationDate(
       BuildContext context, String date) async {
@@ -17,7 +18,7 @@ class AddMenstruationDateApi {
         "menstration": date,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_menstrual_date;
+      final urls = ClientAPI.url + ClientAPI.add_menstrual_date;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';

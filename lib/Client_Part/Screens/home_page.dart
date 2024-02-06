@@ -1,8 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/Utilities/colors.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import '../Api_services/viewDashbordDataApi.dart';
+import '../Models/dashboardDataModal.dart';
+import '../Utilities/colors.dart';
+import '../Utilities/constants.dart';
 import '../Utilities/global.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +20,92 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  late SharedPreferences localStorage;
+  late String data ;
+  DashbordDataModel? dashbordDataModel = DashbordDataModel();
+  bool isLoading = true;
+  DashbordDataModel? userDetails;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchUserDetails();
+  }
+
+  Future<DashbordDataModel?> fetchUserDetails() async {
+    String token = (localStorage.getString('token') ?? '' );
+    try {
+      final details = await ViewDashboardData().getDashboardData(token);
+      userDetails=details;
+      setState(() {
+        print(userDetails);
+      });
+    }
+    catch(e){
+      print('Failed to fetch user details: $e');
+      return null;
+    }
+  }
+
+  // getData() async {
+  //   String token = (localStorage.getString('token') ?? '' );
+  //   String url = ClientAPI.url + ClientAPI.dashboard;
+  //   try {
+  //     if (token != null) {
+  //       var response = await http.get(Uri.parse(url), headers: {
+  //         'Authorization': "Token $token",
+  //       });
+  //       if (response.statusCode == 200) {
+  //         log(response.body, name: "response");
+  //         data = response.body;
+  //
+  //         // if (dashbordDataModel!.clientDetails!.subscribed != null &&
+  //         //     dashbordDataModel!.clientDetails!.subscribed == false) {
+  //         //   Navigator.push(
+  //         //     context,
+  //         //     MaterialPageRoute(builder: (context) => HomePage()),
+  //         //   );
+  //         // }
+  //         print(data);
+  //         setState(() {
+  //           isLoading = false;
+  //           data = response.body;
+  //           dashbordDataModel =
+  //               DashbordDataModel.fromJson(json.decode(response.body ?? ""));
+  //           log(dashbordDataModel!.clientDetails!.firstName.toString(), name: "firstnamevv");
+  //           id = jsonDecode(data)['client_details']['id'];
+  //           firstname = jsonDecode(data)['client_details']['first_name'];
+  //           lastname = jsonDecode(data)['client_details']['last_name'];
+  //           date = jsonDecode(data)['client_details']['date'];
+  //           // daysLeft = jsonDecode(data)['daysLeft'];
+  //           // description = jsonDecode(data)['babyDetails']['description'];
+  //           // length = jsonDecode(data)['babyDetails']['length'];
+  //           // weigth = jsonDecode(data)['babyDetails']['weigth'];
+  //           // size = jsonDecode(data)['babyDetails']['size'];
+  //           // // video = jsonDecode(data)['video']['link'];
+  //           // log(image.toString(), name: "image name veeraaaa");
+  //         });
+  //       }
+  //     }
+  //     // else {
+  //     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+  //     //     content: Text(
+  //     //         'Login Details not found. You will be rerouted to the login page'),
+  //     //     backgroundColor: Colors.red,
+  //     //   ));
+  //     //   Future.delayed(Duration(seconds: 2), () {
+  //     //     Navigator.push(
+  //     //       context,
+  //     //       MaterialPageRoute(builder: (context) => Login()),
+  //     //     );
+  //     //   });
+  //     // }
+  //   } catch (e) {
+  //     log(e.toString(), name: "getDataError");
+  //   }
+  // }
 
   Widget _buildName() {
     return Column(
@@ -35,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     TextSpan(
-                      text: 'Name',
+                      text: dashbordDataModel!.clientDetails!.firstName.toString().toUpperCase(),
                       style: GoogleFonts.poppins(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -263,8 +356,8 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
                   child: Image(
                     image: AssetImage(
                       'assets/free_content.png',
@@ -273,7 +366,7 @@ class _HomePageState extends State<HomePage> {
                     height: 60,
                   ),
                 ),
-                Divider(
+                const Divider(
                   height: 10,
                   thickness: .01,
                 ),
@@ -311,7 +404,7 @@ class _HomePageState extends State<HomePage> {
             // );
           },
         ),
-        Divider(
+        const Divider(
           height: 25,
         ),
         Column(
@@ -328,17 +421,17 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
-                    Divider(
+                    const FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
+                    const Divider(
                       height: 10,
                       thickness: .01,
                     ),
-                    Image(
+                    const Image(
                       image: AssetImage('assets/learning.png'),
                       height: 60,
                       color: Colors.black,
                     ),
-                    Divider(
+                    const Divider(
                       height: 10,
                       thickness: .01,
                     ),
@@ -386,7 +479,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
@@ -420,7 +513,7 @@ class _HomePageState extends State<HomePage> {
           child: IconButton(onPressed: (){
             // _launchWhatsapp();
           },
-              icon: FaIcon(FontAwesomeIcons.whatsapp,color: Colors.white,)),
+              icon: const FaIcon(FontAwesomeIcons.whatsapp,color: Colors.white,)),
         ),),
       body: Container(
         width: MediaQuery.of(context).size.width,

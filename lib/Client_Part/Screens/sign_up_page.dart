@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:login_register/Api_services/register_api_service.dart';
-import 'package:login_register/Utilities/colors.dart';
 
+import '../Api_services/register_api_service.dart';
 import '../Routes/route_names.dart';
+import '../Utilities/colors.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});

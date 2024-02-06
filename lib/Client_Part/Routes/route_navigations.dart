@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:login_register/Routes/route_names.dart';
-import 'package:login_register/Screens/add_menstration_date.dart';
-import 'package:login_register/Screens/home_page.dart';
-import 'package:login_register/Screens/sign_up_page.dart';
-import 'package:login_register/Screens/splash_screen.dart';
+import 'package:login_register/Client_Part/Routes/route_names.dart';
 
+import '../Screens/add_menstration_date.dart';
+import '../Screens/home_page.dart';
 import '../Screens/login_page.dart';
+import '../Screens/sign_up_page.dart';
+import '../Screens/splash_screen.dart';
 
 class RouteNavigation{
   static Route<dynamic> generateRoute(RouteSettings settings){

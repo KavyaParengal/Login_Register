@@ -18,7 +18,7 @@ class LoginApi {
         "password": password,
       };
       //print(data);
-      final urls = APIConstants.url + APIConstants.login;
+      final urls = ClientAPI.url + ClientAPI.login;
       //print(urls);
       var response = await http.post(Uri.parse(urls), body: data);
       var body = response.body;

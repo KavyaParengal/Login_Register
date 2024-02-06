@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_register/Routes/route_names.dart';
 
+import '../Routes/route_names.dart';
 import '../Utilities/constants.dart';
 
 class RegisterApi{
@@ -25,7 +25,7 @@ class RegisterApi{
         "location" : location,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.register;
+      final urls = ClientAPI.url + ClientAPI.register;
       print(urls);
       var response = await http.post(Uri.parse(urls),body: data);
       var body = json.decode(response.body);

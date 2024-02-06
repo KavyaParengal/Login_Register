@@ -2,11 +2,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:login_register/Screens/home_page.dart';
-import 'package:login_register/Screens/login_page.dart';
+import 'package:login_register/Client_Part/Screens/home_page.dart';
+import 'package:login_register/Client_Part/Screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Routes/route_names.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
