@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                       style: GoogleFonts.poppins(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(
@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
                       style: GoogleFonts.poppins(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                       style: GoogleFonts.poppins(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -81,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 TextSpan(
@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                   style: GoogleFonts.poppins(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ]),
@@ -134,7 +134,7 @@ class _HomePageState extends State<HomePage> {
           width: 285,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: Colors.white.withOpacity(0.1),
+            color: Colors.black.withOpacity(0.1),
           ),
           child: SingleChildScrollView(
             child: Column(
@@ -163,14 +163,14 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               "Length",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.black, fontSize: 10),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
                             '22',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 10),
+                                color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -188,14 +188,14 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               'Weight',
                               style: GoogleFonts.poppins(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.black, fontSize: 10),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
                             '4',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 10),
+                                color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -213,14 +213,14 @@ class _HomePageState extends State<HomePage> {
                             child: Text(
                               "Size",
                               style: GoogleFonts.poppins(
-                                  color: Colors.white, fontSize: 10),
+                                  color: Colors.black, fontSize: 10),
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
                             '55',
                             style: GoogleFonts.poppins(
-                                color: Colors.white, fontSize: 10),
+                                color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -231,10 +231,10 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     // child: Text(description==null?"" :utf8.decode(description.codeUnits),
-                      child: Text('aaaaaaaadcbdvb hfvbhrv ndv nfvjehyufrienv fbfdjfir nfjhgio4rj',
+                      child: Text('aaaaaa aadcbdvb hfvbhrv ndv nfvjehyuf rienv fbfdjfir nfjhgio4rj aaaaaa aadcbdvb hfvbhrv ndv nfvjehyu frienv fbfdjfir nfjhgio4rj',
                       style: GoogleFonts.poppins(
                         fontSize: 12,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                       textAlign: TextAlign.justify,
                     )),
@@ -266,7 +266,10 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Image(
-                    image: AssetImage('assets/free_content.png'),
+                    image: AssetImage(
+                      'assets/free_content.png',
+                    ),
+                    color: Colors.black,
                     height: 60,
                   ),
                 ),
@@ -325,7 +328,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    FaIcon(FontAwesomeIcons.crown,color: Colors.white,size: 14,),
+                    FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
                     Divider(
                       height: 10,
                       thickness: .01,
@@ -333,6 +336,7 @@ class _HomePageState extends State<HomePage> {
                     Image(
                       image: AssetImage('assets/learning.png'),
                       height: 60,
+                      color: Colors.black,
                     ),
                     Divider(
                       height: 10,
@@ -410,7 +414,6 @@ class _HomePageState extends State<HomePage> {
           height: 60,
           width: 60,
           decoration: BoxDecoration(
-
               borderRadius: BorderRadius.circular(30),
               color: Colors.green.shade500
           ),
@@ -422,13 +425,13 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.teal.shade400, Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-            )
-        ),
+        // decoration: BoxDecoration(
+        //     gradient: LinearGradient(
+        //         begin: Alignment.topCenter,
+        //         end: Alignment.bottomCenter,
+        //         colors: [Colors.teal.shade400, Colors.teal.shade500, Colors.teal.shade500, Colors.black]
+        //     )
+        // ),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
