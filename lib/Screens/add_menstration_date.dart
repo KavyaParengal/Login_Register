@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:login_register/Api_services/add_menstruation_api.dart';
 
 import '../Utilities/colors.dart';
 
@@ -61,7 +62,7 @@ class _AddMenstrationDateState extends State<AddMenstrationDate> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(onPressed: (){
-
+                AddMenstruationDateApi.addMenstruationDate(context, dateController.text.trim());
               },
                   style: ElevatedButton.styleFrom(primary: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
                   child: const Text("Add",style: TextStyle(fontSize: 17),)),
