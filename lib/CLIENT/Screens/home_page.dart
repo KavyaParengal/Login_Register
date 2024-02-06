@@ -21,7 +21,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  late SharedPreferences localStorage;
   late String data ;
   DashbordDataModel? dashbordDataModel = DashbordDataModel();
   bool isLoading = true;
@@ -35,12 +34,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<DashbordDataModel?> fetchUserDetails() async {
-    String token = (localStorage.getString('token') ?? '' );
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    String? token = localStorage.getString('token');
     try {
-      final details = await ViewDashboardData().getDashboardData(token);
+      final details = await ViewDashboardData().getDashboardData(token!);
       userDetails=details;
       setState(() {
-        print(userDetails);
+        print(token);
+        print('userDetails--$userDetails');
       });
     }
     catch(e){
@@ -49,66 +50,8 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // getData() async {
-  //   String token = (localStorage.getString('token') ?? '' );
-  //   String url = ClientAPI.url + ClientAPI.dashboard;
-  //   try {
-  //     if (token != null) {
-  //       var response = await http.get(Uri.parse(url), headers: {
-  //         'Authorization': "Token $token",
-  //       });
-  //       if (response.statusCode == 200) {
-  //         log(response.body, name: "response");
-  //         data = response.body;
-  //
-  //         // if (dashbordDataModel!.clientDetails!.subscribed != null &&
-  //         //     dashbordDataModel!.clientDetails!.subscribed == false) {
-  //         //   Navigator.push(
-  //         //     context,
-  //         //     MaterialPageRoute(builder: (context) => HomePage()),
-  //         //   );
-  //         // }
-  //         print(data);
-  //         setState(() {
-  //           isLoading = false;
-  //           data = response.body;
-  //           dashbordDataModel =
-  //               DashbordDataModel.fromJson(json.decode(response.body ?? ""));
-  //           log(dashbordDataModel!.clientDetails!.firstName.toString(), name: "firstnamevv");
-  //           id = jsonDecode(data)['client_details']['id'];
-  //           firstname = jsonDecode(data)['client_details']['first_name'];
-  //           lastname = jsonDecode(data)['client_details']['last_name'];
-  //           date = jsonDecode(data)['client_details']['date'];
-  //           // daysLeft = jsonDecode(data)['daysLeft'];
-  //           // description = jsonDecode(data)['babyDetails']['description'];
-  //           // length = jsonDecode(data)['babyDetails']['length'];
-  //           // weigth = jsonDecode(data)['babyDetails']['weigth'];
-  //           // size = jsonDecode(data)['babyDetails']['size'];
-  //           // // video = jsonDecode(data)['video']['link'];
-  //           // log(image.toString(), name: "image name veeraaaa");
-  //         });
-  //       }
-  //     }
-  //     // else {
-  //     //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //     //     content: Text(
-  //     //         'Login Details not found. You will be rerouted to the login page'),
-  //     //     backgroundColor: Colors.red,
-  //     //   ));
-  //     //   Future.delayed(Duration(seconds: 2), () {
-  //     //     Navigator.push(
-  //     //       context,
-  //     //       MaterialPageRoute(builder: (context) => Login()),
-  //     //     );
-  //     //   });
-  //     // }
-  //   } catch (e) {
-  //     log(e.toString(), name: "getDataError");
-  //   }
-  // }
-
   Widget _buildName() {
-    return Column(
+    return userDetails != null ?Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -128,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     TextSpan(
-                      text: dashbordDataModel!.clientDetails!.firstName.toString().toUpperCase(),
+                      text: '${userDetails!.clientDetails!.firstName.toString().toUpperCase()} ${userDetails!.clientDetails!.lastName.toString().toUpperCase()}',
                       style: GoogleFonts.poppins(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -170,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextSpan(
-                  text: '7',
+                  text: userDetails!.date![0].toString(),
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -186,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextSpan(
-                  text: '160',
+                  text: userDetails!.date![1].toString(),
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -214,7 +157,8 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ],
-    );
+    ) :
+    Container();
   }
 
   Widget _buildImage() {
@@ -226,7 +170,7 @@ class _HomePageState extends State<HomePage> {
           height: 320,
           width: 285,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(10),
             color: Colors.black.withOpacity(0.1),
           ),
           child: SingleChildScrollView(
@@ -351,7 +295,11 @@ class _HomePageState extends State<HomePage> {
             //     minHeight: 125,
             //     maxHeight: 150
             // ),
-            color: Colors.black.withOpacity(0.05),
+            //color: Colors.black.withOpacity(0.05),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(10)
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -416,7 +364,11 @@ class _HomePageState extends State<HomePage> {
                 //     maxWidth: 150,
                 //     minHeight: 125,
                 //     maxHeight: 150),
-                color: Colors.black.withOpacity(0.05),
+                // color: Colors.black.withOpacity(0.05),
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.05),
+                    borderRadius: BorderRadius.circular(10)
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

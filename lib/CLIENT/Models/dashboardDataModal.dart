@@ -12,7 +12,7 @@ class DashbordDataModel {
         ? new ClientDetails.fromJson(json['client_details'])
         : null;
     currentMonth = json['current_month'];
-    date = json['date'].cast<int>();
+    date = json['date'].cast<int>()==null ? 0 : json['date'].cast<int>();
     dashbordDetails = json['dashbord_details'];
   }
 
@@ -49,9 +49,9 @@ class ClientDetails {
         this.subscribed});
 
   ClientDetails.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
+    id = json['id']==null ? 0 : json['id'];
+    firstName = json['first_name']==null ? '' :firstName = json['first_name'];
+    lastName = json['last_name']==null ? '': json['last_name'];
     location = json['location'];
     age = json['age'];
     mobile = json['mobile'];

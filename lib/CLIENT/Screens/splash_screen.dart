@@ -2,8 +2,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:login_register/Client_Part/Screens/home_page.dart';
-import 'package:login_register/Client_Part/Screens/login_page.dart';
+import 'package:login_register/CLIENT/Routes/route_names.dart';
+import 'package:login_register/CLIENT/Screens/home_page.dart';
+import 'package:login_register/CLIENT/Screens/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -18,17 +19,17 @@ class _SplashScreenState extends State<SplashScreen> {
 
   late SharedPreferences localStorage;
   String token = '';
+  String check = '';
 
   Future<void> checkRoleAndNavigate() async {
     localStorage = await SharedPreferences.getInstance();
     token = (localStorage.getString("token") ?? '');
 
-    if (token == null) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => LoginPage()));
+    if (token != check) {
+      Navigator.pushNamed(context, RouteName.home);
     } else {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => HomePage()));
+      Navigator.pushNamed(context, RouteName.login);
+
     }
   }
 
