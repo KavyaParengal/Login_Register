@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Navigator.pushNamed(context, RouteName.home);
     }
     else if(token != check && role == 2){
-      Navigator.pushNamed(context, RouteName.add_video);
+      Navigator.pushNamed(context, RouteName.admin_home);
     }
     else {
       Navigator.pushNamed(context, RouteName.login);

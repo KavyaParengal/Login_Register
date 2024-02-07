@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/ADMIN/Api_services/add_video_api.dart';
 
 import '../../CLIENT/Utilities/colors.dart';
 
@@ -35,7 +36,7 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
           ),
           elevation: 0,
           title: Text(
-            'Add Videos',
+            'Add Free Content',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -140,7 +141,11 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(onPressed: (){
                   if (_formKey.currentState!.validate()) {
-
+                    AddFreeContentApi.addFreeContent(context,
+                        videoController.text.trim(),
+                        titleController.text.trim(),
+                        descriptionController.text.trim(),
+                        monthController.text.trim());
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

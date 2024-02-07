@@ -13,5 +13,6 @@ class RouteName{
 
 // Admin Pages
 
-  static const add_video = '/add_video';
+  static const add_free_content = '/add_free_content';
+  static const admin_home = '/admin_home';
 }

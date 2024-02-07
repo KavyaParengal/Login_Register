@@ -17,7 +17,7 @@ class LoginApi {
         "password": password,
       };
 
-      final urls = ClientAPI.url + ClientAPI.clientLogin;
+      final urls = ClientAPI.url + ClientAPI.login;
       var response = await http.post(Uri.parse(urls), body: data);
       var body = json.decode(response.body);
 
@@ -46,7 +46,7 @@ class LoginApi {
         Navigator.pushNamed(context, RouteName.add_menstration);
         break;
       case 2:
-        Navigator.pushNamed(context, RouteName.add_video);
+        Navigator.pushNamed(context, RouteName.admin_home);
         break;
       default:
         showErrorMessage(context, 'Invalid Role: $role');

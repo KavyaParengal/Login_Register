@@ -81,14 +81,27 @@ class Detail {
   int? month;
   String? description;
   String? image;
+  String? length;
+  String? size;
+  String? weight;
 
-  Detail({this.id, this.month, this.description, this.image});
+  Detail(
+      {this.id,
+        this.month,
+        this.description,
+        this.image,
+        this.length,
+        this.size,
+        this.weight});
 
   Detail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     month = json['month'];
     description = json['description'];
     image = json['image'];
+    length = json['length'];
+    size = json['size'];
+    weight = json['weight'];
   }
 
   Map<String, dynamic> toJson() {
@@ -97,6 +110,9 @@ class Detail {
     data['month'] = this.month;
     data['description'] = this.description;
     data['image'] = this.image;
+    data['length'] = this.length;
+    data['size'] = this.size;
+    data['weight'] = this.weight;
     return data;
   }
 }
