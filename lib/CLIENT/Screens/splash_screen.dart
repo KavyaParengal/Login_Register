@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:login_register/CLIENT/Screens/home_page.dart';
 import 'package:login_register/CLIENT/Screens/login_page.dart';
+import 'package:login_register/CLIENT/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
@@ -47,8 +48,15 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Image.asset('assets/logo.jpg'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: Image.asset('assets/logo.png'),
+          ),
+          SizedBox(height: 30,),
+          CircularProgressIndicator(color: primary,)
+        ],
       ),
     );
   }

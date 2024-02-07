@@ -1,6 +1,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/CLIENT/Routes/route_names.dart';
+import 'package:login_register/CLIENT/Utilities/colors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../Utilities/global.dart';
@@ -16,26 +19,29 @@ class FreeNavigationDrawer extends StatefulWidget {
 class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
   @override
   Widget build(BuildContext context) {
+
     Future<dynamic> exitDialog() {
       return showDialog(
         context: context,
-        builder: (context) => new AlertDialog(
-          title: Text('Are you Sure?'),
-          content: Text('Do You want to Logout?'),
+        builder: (context) => AlertDialog(
+          title: const Text('Are you Sure?'),
+          content: const Text('Do You want to Logout?'),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                // Global().onLogout(context: context);
-
+                SharedPreferences localStorage = await  SharedPreferences.getInstance();
+                localStorage.setString('token', '');
+                Navigator.pushNamed(context, RouteName.login);
               },
-              child: Text("Logout"),
+              child: const Text("Logout"),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
 
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
           ],
         ),
@@ -43,13 +49,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
     }
 
     return Drawer(
-      child: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: Image.asset('assets/Background.png').image,
-              fit: BoxFit.cover),
-        ),
-        child: ListView(
+      child: ListView(
           children: <Widget>[
             DrawerHeader(
               child: Padding(
@@ -58,8 +58,8 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                   height: 100,
                   width: 300,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Color(0xffe14589),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: button,
                   ),
                   child: Column(
                     children: [
@@ -71,7 +71,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      Divider(
+                      const Divider(
                         height: 10,
                         thickness: .01,
                       ),
@@ -104,7 +104,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
               ),
             ),
             ListTile(
-                leading: Icon(Icons.apps, color: Colors.white),
+                leading: const Icon(Icons.apps, color: Colors.white),
                 title: Text(
                   "Packages",
                   style: GoogleFonts.poppins(
@@ -279,12 +279,12 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
             //       );
             //     }),
             ListTile(
-                leading: Icon(Icons.logout, color: Colors.white),
+                leading: const Icon(Icons.logout, color: Colors.white),
                 title: Text(
                   "Logout",
                   style: GoogleFonts.poppins(
                     fontSize: 12,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
                 onTap: () {
@@ -292,7 +292,6 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                 }),
           ],
         ),
-      ),
     );
   }
 }

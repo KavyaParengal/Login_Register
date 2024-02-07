@@ -16,7 +16,7 @@ class ViewFreeContentDataAPI{
     print(response);
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      //print(body);
+      print(body);
       List<FreeContentDataModel> data =  body.map<FreeContentDataModel>((e) => FreeContentDataModel.fromJson(e)).toList();
       //print(data);
       return data;

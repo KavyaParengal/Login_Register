@@ -12,6 +12,7 @@ import '../Models/dashboardDataModal.dart';
 import '../Utilities/colors.dart';
 import '../Utilities/constants.dart';
 import '../Utilities/global.dart';
+import '../Widgets/free_package_drawer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                   //   image:NetworkImage(image.toString()),
                   //   height: 60,
                   // ),
-                  child: Image.asset('assets/logo.jpg'),
+                  child: Image.asset('assets/logo.png'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -422,6 +423,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: FreeNavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
