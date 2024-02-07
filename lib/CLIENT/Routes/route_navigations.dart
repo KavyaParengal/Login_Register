@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:login_register/ADMIN/Screens/add_videos.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:login_register/CLIENT/Screens/freecontent.dart';
+import 'package:login_register/CLIENT/Screens/premiumcontent.dart';
 
 import '../Screens/add_menstration_date.dart';
 import '../Screens/home_page.dart';
@@ -31,6 +32,9 @@ class RouteNavigation{
 
       case RouteName.free_content:
         return MaterialPageRoute(builder: (context)=> FreeContent());
+
+      case RouteName.premium_content:
+        return MaterialPageRoute(builder: (context)=> PremiumContent());
 
 
 ///////////////// ADMIN PORT /////////////////////

@@ -7,7 +7,8 @@ class RouteName{
   static const add_menstration = '/add_menstration';
   static const signUp = '/signup';
   static const home = '/home';
-  static const free_content = 'free_content';
+  static const free_content = '/free_content';
+  static const premium_content = '/premium_content';
 
 
 // Admin Pages

@@ -381,12 +381,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => ClientDailyTracker(),
-                        //   ),
-                        // );
+                        Navigator.pushNamed(context, RouteName.premium_content);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: button, // foreground (text) color
@@ -406,12 +401,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => ClientDailyTracker(),
-                //   ),
-                // );
+                Navigator.pushNamed(context, RouteName.premium_content);
               },
             ),
           ],
