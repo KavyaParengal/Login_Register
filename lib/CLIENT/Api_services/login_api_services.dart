@@ -9,7 +9,6 @@ import '../Utilities/constants.dart';
 class LoginApi {
   static Future<void> loginUser(
       BuildContext context, String email, String password) async {
-
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
     try {
@@ -17,35 +16,46 @@ class LoginApi {
         "email": email,
         "password": password,
       };
-      //print(data);
-      final urls = ClientAPI.url + ClientAPI.clientLogin;
-      //print(urls);
-      var response = await http.post(Uri.parse(urls), body: data);
-      var body = response.body;
 
-      try {
-        var decodedBody = json.decode(body);
-        //print(decodedBody);
-        if (decodedBody['token'] != null) {
-          localStorage.setString('token', decodedBody['token']);
-          //print(localStorage.getString('token'));
+      final urls = ClientAPI.url + ClientAPI.clientLogin;
+      var response = await http.post(Uri.parse(urls), body: data);
+      var body = json.decode(response.body);
+
+      if (response.statusCode == 200) {
+        if (body['token'] != null) {
+          localStorage.setString('token', body['token']);
+          localStorage.setInt('role', body['role']);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login Successfully !')),
+            SnackBar(content: Text('Login Successful!')),
           );
-          Navigator.pushNamed(context, RouteName.add_menstration);
+          redirectToRoute(context, body['role']);
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Invalid User Name or Password')),
-          );
+          showErrorMessage(context, 'Invalid User Name or Password');
         }
-      } catch (e) {
-        //print(body);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Invalid User Name or Password')),
-        );
+      } else {
+        showErrorMessage(context, 'Error: ${response.statusCode}');
       }
     } catch (e) {
-      throw e.toString();
+      showErrorMessage(context, 'An error occurred: $e');
     }
+  }
+
+  static void redirectToRoute(BuildContext context, int role) {
+    switch (role) {
+      case 1:
+        Navigator.pushNamed(context, RouteName.add_menstration);
+        break;
+      case 2:
+        Navigator.pushNamed(context, RouteName.add_video);
+        break;
+      default:
+        showErrorMessage(context, 'Invalid Role: $role');
+    }
+  }
+
+  static void showErrorMessage(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 }

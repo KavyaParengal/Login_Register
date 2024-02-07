@@ -1,5 +1,6 @@
 
 import 'dart:async';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
@@ -21,14 +22,20 @@ class _SplashScreenState extends State<SplashScreen> {
   late SharedPreferences localStorage;
   String token = '';
   String check = '';
+  int role = 0;
 
   Future<void> checkRoleAndNavigate() async {
     localStorage = await SharedPreferences.getInstance();
     token = (localStorage.getString("token") ?? '');
+    role = (localStorage.getInt("role") ?? 0);
 
-    if (token != check) {
+    if (token != check && role == 1) {
       Navigator.pushNamed(context, RouteName.home);
-    } else {
+    }
+    else if(token != check && role == 2){
+      Navigator.pushNamed(context, RouteName.add_video);
+    }
+    else {
       Navigator.pushNamed(context, RouteName.login);
 
     }

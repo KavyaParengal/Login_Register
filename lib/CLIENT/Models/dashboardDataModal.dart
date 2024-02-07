@@ -1,19 +1,20 @@
 class DashbordDataModel {
   ClientDetails? clientDetails;
   int? currentMonth;
+  Detail? detail;
   List<int>? date;
-  Null? dashbordDetails;
 
   DashbordDataModel(
-      {this.clientDetails, this.currentMonth, this.date, this.dashbordDetails});
+      {this.clientDetails, this.currentMonth, this.detail, this.date});
 
   DashbordDataModel.fromJson(Map<String, dynamic> json) {
     clientDetails = json['client_details'] != null
         ? new ClientDetails.fromJson(json['client_details'])
         : null;
     currentMonth = json['current_month'];
-    date = json['date'].cast<int>()==null ? 0 : json['date'].cast<int>();
-    dashbordDetails = json['dashbord_details'];
+    detail =
+    json['detail'] != null ? new Detail.fromJson(json['detail']) : null;
+    date = json['date'].cast<int>();
   }
 
   Map<String, dynamic> toJson() {
@@ -22,8 +23,10 @@ class DashbordDataModel {
       data['client_details'] = this.clientDetails!.toJson();
     }
     data['current_month'] = this.currentMonth;
+    if (this.detail != null) {
+      data['detail'] = this.detail!.toJson();
+    }
     data['date'] = this.date;
-    data['dashbord_details'] = this.dashbordDetails;
     return data;
   }
 }
@@ -49,9 +52,9 @@ class ClientDetails {
         this.subscribed});
 
   ClientDetails.fromJson(Map<String, dynamic> json) {
-    id = json['id']==null ? 0 : json['id'];
-    firstName = json['first_name']==null ? '' :firstName = json['first_name'];
-    lastName = json['last_name']==null ? '': json['last_name'];
+    id = json['id'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     location = json['location'];
     age = json['age'];
     mobile = json['mobile'];
@@ -69,6 +72,31 @@ class ClientDetails {
     data['mobile'] = this.mobile;
     data['email'] = this.email;
     data['subscribed'] = this.subscribed;
+    return data;
+  }
+}
+
+class Detail {
+  int? id;
+  int? month;
+  String? description;
+  String? image;
+
+  Detail({this.id, this.month, this.description, this.image});
+
+  Detail.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    month = json['month'];
+    description = json['description'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['month'] = this.month;
+    data['description'] = this.description;
+    data['image'] = this.image;
     return data;
   }
 }

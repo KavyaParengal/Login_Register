@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildName() {
-    return userDetails != null ?Column(
+    return userDetails != null ? Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -181,11 +181,11 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  // child: image==null? Container():Image(
-                  //   image:NetworkImage(image.toString()),
-                  //   height: 60,
-                  // ),
-                  child: Image.asset('assets/logo.png'),
+                  child: userDetails!.detail!.image==null? Container():Image(
+                    image:NetworkImage(ClientAPI.url+'${userDetails!.detail!.image.toString()}'),
+                    height: 60,
+                  ),
+                  //child: Image.asset('assets/logo.png'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -269,8 +269,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(8.0),
-                    // child: Text(description==null?"" :utf8.decode(description.codeUnits),
-                      child: Text('aaaaaa aadcbdvb hfvbhrv ndv nfvjehyuf rienv fbfdjfir nfjhgio4rj aaaaaa aadcbdvb hfvbhrv ndv nfvjehyu frienv fbfdjfir nfjhgio4rj',
+                    // child: Text(description==null?"" :utf8.decode(description.codeUnits,
+                      child: Text(userDetails!.detail!.description == null ? "":utf8.decode(userDetails!.detail!.description!.codeUnits),
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: Colors.black,
