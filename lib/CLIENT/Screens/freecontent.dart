@@ -37,13 +37,6 @@ class _FreeContentState extends State<FreeContent> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<FreeContentDataProvider>(context, listen: false).getFreeContents();
     });
-    _controller = YoutubePlayerController(
-      initialVideoId: '',
-      flags: YoutubePlayerFlags(
-        autoPlay: true,
-        mute: false,
-      ),
-    );
   }
 
   List<Citation> citations = [
@@ -233,14 +226,15 @@ class _FreeContentState extends State<FreeContent> {
                 itemBuilder: (context, index) {
                   final freeContent = freeDatas[index];
                   String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
-                  // setState(() {
-                  //   _controller = YoutubePlayerController(
-                  //     initialVideoId: videoId,
-                  //     flags: YoutubePlayerFlags(
-                  //       autoPlay: true,
-                  //       mute: false,
-                  //     ),);
-                  // });
+
+
+                    _controller = YoutubePlayerController(
+                      initialVideoId: videoId,
+                      flags: YoutubePlayerFlags(
+                        autoPlay: true,
+                        mute: false,
+                      ),);
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
