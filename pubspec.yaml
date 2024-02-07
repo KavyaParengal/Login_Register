@@ -40,6 +40,9 @@ dependencies:
   google_fonts: ^6.1.0
   font_awesome_flutter: ^10.7.0
   shared_preferences: ^2.2.2
+  youtube_player_flutter: ^8.1.2
+  provider: ^6.1.1
+
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +71,7 @@ flutter:
     - assets/
     - assets/free_content.png
     - assets/learning.png
+    - assets/background.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

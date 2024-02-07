@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../Api_services/viewDashbordDataApi.dart';
@@ -320,15 +321,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => LearnIt(),
-                    //   ),
-                    // );
+                    Navigator.pushNamed(context, RouteName.free_content);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: button, // foreground (text) color
+                    backgroundColor: button, // foreground (text) color
                   ),
                   child: Text(
                     "Knowledge Base",
@@ -344,12 +340,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           onTap: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => LearnIt(),
-            //   ),
-            // );
+            Navigator.pushNamed(context, RouteName.free_content);
           },
         ),
         const Divider(
@@ -397,7 +388,8 @@ class _HomePageState extends State<HomePage> {
                         // );
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: button, // foreground (text) color
+                        backgroundColor: button, // foreground (text) color
+                        shape: RoundedRectangleBorder()
                       ),
                       child: Text(
                         " Premium Content ",

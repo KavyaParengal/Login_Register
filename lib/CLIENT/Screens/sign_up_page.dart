@@ -222,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             locationController.text.trim());
                       }
                     },
-                        style: ElevatedButton.styleFrom(primary: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
+                        style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
                         child: const Text("Sign Up",style: TextStyle(fontSize: 17),)),
                   ),
                 ),

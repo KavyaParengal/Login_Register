@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
+import 'package:login_register/ADMIN/Screens/add_videos.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
+import 'package:login_register/CLIENT/Screens/freecontent.dart';
 
 import '../Screens/add_menstration_date.dart';
 import '../Screens/home_page.dart';
@@ -26,6 +28,15 @@ class RouteNavigation{
 
       case RouteName.home:
         return MaterialPageRoute(builder: (context)=>const HomePage());
+
+      case RouteName.free_content:
+        return MaterialPageRoute(builder: (context)=> FreeContent());
+
+
+///////////////// ADMIN PORT /////////////////////
+
+      case RouteName.add_video:
+        return MaterialPageRoute(builder: (context)=>const AdminAddVideos());
 
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
