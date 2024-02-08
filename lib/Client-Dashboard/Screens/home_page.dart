@@ -420,14 +420,11 @@ class _HomePageState extends State<HomePage> {
   _launchEmail() async {
     final Uri _emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'kavyakavya3108@gmail.com',
-      //query: 'subject=Hello&body=Hello, this is the body of the email!',
+      path: 'kavyaparengal3108@gmail.com',
+      query: 'subject=Subject%20Here&body=Body%20of%20the%20email%20here',
     );
-    if (await canLaunch(_emailLaunchUri.toString())) {
-      await launch(_emailLaunchUri.toString());
-    } else {
-      throw 'Could not launch email';
-    }
+
+    await launch(_emailLaunchUri.toString());
   }
 
   @override
