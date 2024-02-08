@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/add_week_wise_content_api.dart';
 import 'package:path/path.dart';
 
 import '../../Client-Dashboard/Utilities/colors.dart';
@@ -30,6 +31,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
 
   XFile? image;
   final ImagePicker picker = ImagePicker();
+  String? imageName;
 
   Future<void> getImage(ImageSource source) async {
     try {
@@ -37,6 +39,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
       if (pickedImage != null) {
         setState(() {
           image = pickedImage;
+          imageName = basename(image!.path);
         });
       }
     } catch (e) {
@@ -162,7 +165,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        image.toString() != null ? Text('Select Image'): Text(image.toString()),
+                        image.toString() == null ? Text('Select Image'): Text(image.toString()),
                         Icon(Icons.upload,color: primary,)
                       ],
                     ),
@@ -263,7 +266,15 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(onPressed: (){
                   if (_formKey.currentState!.validate()) {
-
+                    AddWeekWiseContentApi.addWeekWiseContent(context,
+                        monthController.text.trim(),
+                        imageName.toString() ?? '',
+                        sizeController.text.trim(),
+                        descriptionController.text.trim(),
+                        lengthController.text.trim(),
+                        weightController.text.trim()
+                    );
+                    print('--------${basename(image!.path)}');
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

@@ -9,6 +9,7 @@ class RouteName{
   static const home = '/home';
   static const free_content = '/free_content';
   static const premium_content = '/premium_content';
+  static const profileDetails = '/profileDetails';
 
 
 // Admin Pages

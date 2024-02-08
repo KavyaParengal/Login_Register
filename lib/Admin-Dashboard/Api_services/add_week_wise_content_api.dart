@@ -6,9 +6,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Client-Dashboard/Routes/route_names.dart';
 import '../../Client-Dashboard/Utilities/constants.dart';
 
-
-
-
 class AddWeekWiseContentApi {
   static Future<void> addWeekWiseContent(
       BuildContext context,String month,String image, String size ,String description, String length ,String weight) async {
@@ -32,6 +29,7 @@ class AddWeekWiseContentApi {
       print(token);
       var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
+      print(response.statusCode);
       if (response.statusCode == 200) {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),

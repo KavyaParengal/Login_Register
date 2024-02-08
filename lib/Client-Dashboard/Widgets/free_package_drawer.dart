@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
 import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,6 +63,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                     color: button,
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         "Hi, Super Mom",
@@ -104,23 +106,24 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
               ),
             ),
             ListTile(
-                leading: const Icon(Icons.apps, color: Colors.white),
+                leading: Icon(Icons.person, color: button),
                 title: Text(
-                  "Packages",
+                  "Profile",
                   style: GoogleFonts.poppins(
-                    fontSize: 12,
-                    color: Colors.white,
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
-                // onTap: () {
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => Package(),
-                //     ),
-                //   );
-                // }
-                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileDetails(),
+                    ),
+                  );
+                }
+            ),
             // ListTile(
             //     leading:
             //     Icon(Icons.calendar_today_rounded, color: Colors.white),
@@ -279,12 +282,13 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
             //       );
             //     }),
             ListTile(
-                leading: const Icon(Icons.logout, color: Colors.white),
+                leading: Icon(Icons.logout, color: button),
                 title: Text(
                   "Logout",
                   style: GoogleFonts.poppins(
-                    fontSize: 12,
+                    fontSize: 15,
                     color: Colors.black,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
                 onTap: () {

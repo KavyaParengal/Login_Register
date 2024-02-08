@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   late String data ;
   bool isLoading = true;
   DashbordDataModel? userDetails;
+  String? token;
 
   final _key = GlobalKey<ExpandableFabState>();
 
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<DashbordDataModel?> fetchUserDetails() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    String? token = localStorage.getString('token');
+    token = localStorage.getString('token');
     try {
       final details = await ViewDashboardData().getDashboardData(token!);
       userDetails=details;
@@ -420,10 +421,9 @@ class _HomePageState extends State<HomePage> {
   _launchEmail() async {
     final Uri _emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'kavyaparengal3108@gmail.com',
+      path: 'kavyakavya3108@gmail.com',
       query: 'subject=Subject%20Here&body=Body%20of%20the%20email%20here',
     );
-
     await launch(_emailLaunchUri.toString());
   }
 
@@ -512,37 +512,38 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
 
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        // decoration: BoxDecoration(
-        //     gradient: LinearGradient(
-        //         begin: Alignment.topCenter,
-        //         end: Alignment.bottomCenter,
-        //         colors: [Colors.teal.shade400, Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-        //     )
-        // ),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _buildName(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _buildImage(),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: _buildOptions(),
-              )
-            ],
+      body: token ==  null ? Center(child: CircularProgressIndicator(color: primary,),) :
+        Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          // decoration: BoxDecoration(
+          //     gradient: LinearGradient(
+          //         begin: Alignment.topCenter,
+          //         end: Alignment.bottomCenter,
+          //         colors: [Colors.teal.shade400, Colors.teal.shade500, Colors.teal.shade500, Colors.black]
+          //     )
+          // ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: _buildName(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: _buildImage(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: _buildOptions(),
+                )
+              ],
+            ),
           ),
         ),
-      ),
     );
   }
 }
