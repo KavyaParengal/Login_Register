@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:login_register/Client-Dashboard/Models/premiumContentModel.dart';
+import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-
-import '../Models/freecontentmodel.dart';
-import '../Provider/free_content_provider.dart';
 import '../Routes/route_names.dart';
 import '../Screens/login_page.dart';
 import '../Utilities/aboutscreen.dart';
@@ -27,7 +26,7 @@ class PremiumContent extends StatefulWidget {
 class _PremiumContentState extends State<PremiumContent> {
   bool isLoading = true;
   late YoutubePlayerController _controller;
-  List<FreeContentDataModel> _freeContent = [];
+  List<PremiumContentDataModel> _premiumContent = [];
   late PlayerState  _playerState;
   late YoutubeMetaData  _videoMetaData;
   bool _isPlayerReady = true;
@@ -36,7 +35,7 @@ class _PremiumContentState extends State<PremiumContent> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<FreeContentDataProvider>(context, listen: false).getFreeContents();
+      Provider.of<PremiumContentDataProvider>(context, listen: false).getPremiumContents();
     });
   }
 
@@ -211,21 +210,21 @@ class _PremiumContentState extends State<PremiumContent> {
               ],
             ),
           ),
-          body: Consumer<FreeContentDataProvider>(
+          body: Consumer<PremiumContentDataProvider>(
             builder: (context, value, child){
               if (value.isLoading) {
                 return const Center(
                     child: LoadingIcon()
                 );
               }
-              final freeDatas = value.freeDatas;
+              final premiumDatas = value.premiumDatas;
               return  Container(
                 child: ListView.builder(
                   padding: const EdgeInsets.only(bottom: 100),
-                  itemCount: freeDatas.length ?? 0,
+                  itemCount: premiumDatas.length ?? 0,
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    final freeContent = freeDatas[index];
+                    final freeContent = premiumDatas[index];
                     String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
 
 

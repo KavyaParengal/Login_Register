@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     TextSpan(
-                      text: '${userDetails!.clientDetails!.firstName.toString().toUpperCase()} ${userDetails!.clientDetails!.lastName.toString().toUpperCase()}',
+                      text: userDetails!.clientDetails!.firstName.toString()==null?'':'${userDetails!.clientDetails!.firstName.toString().toUpperCase()} ${userDetails!.clientDetails!.lastName.toString().toUpperCase()}',
                       style: GoogleFonts.poppins(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextSpan(
-                  text: userDetails!.date![0].toString(),
+                  text: userDetails!.date![0].toString()==null?'0':userDetails!.date![0].toString(),
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 TextSpan(
-                  text: userDetails!.date![1].toString(),
+                  text: userDetails!.date![1].toString()==null?'0':userDetails!.date![1].toString(),
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -206,7 +206,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Text(
-                            '22',
+                            userDetails!.detail!.length.toString(),
                             style: GoogleFonts.poppins(
                                 color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,
@@ -231,7 +231,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Text(
-                            '4',
+                            userDetails!.detail!.weight.toString(),
                             style: GoogleFonts.poppins(
                                 color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,
@@ -256,7 +256,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           Text(
-                            '55',
+                            userDetails!.detail!.size.toString(),
                             style: GoogleFonts.poppins(
                                 color: Colors.black, fontSize: 10),
                             textAlign: TextAlign.center,

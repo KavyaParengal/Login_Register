@@ -5,6 +5,7 @@ class ClientAPI{
   static const add_menstrual_date = '/home/add_date/';
   static const dashboard = '/home/dashboard-details/';
   static const get_video_free = '/home/get_video_free/';
+  static const get_video_premium = '/home/get_video/';
 
   ////////// Admin //////////
 
