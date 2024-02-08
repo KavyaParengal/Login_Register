@@ -24,7 +24,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
 
   late String data ;
-  DashbordDataModel? dashbordDataModel = DashbordDataModel();
   bool isLoading = true;
   DashbordDataModel? userDetails;
 

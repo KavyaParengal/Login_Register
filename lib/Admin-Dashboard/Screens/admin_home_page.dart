@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../CLIENT/Utilities/global.dart';
 
@@ -21,7 +22,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
     'assets/payment.png',
     'assets/clients.png'];
   List title = [ 'Free Content', 'Premium Content', 'Dashboard Details', 'Payment', 'Client List'];
-  List navigation = [RouteName.add_free_content, RouteName.admin_home];
+  List navigation = [
+    RouteName.add_free_content,
+    RouteName.view_client,
+    RouteName.view_client,
+    RouteName.view_client,
+    RouteName.view_client];
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +53,19 @@ class _AdminHomePageState extends State<AdminHomePage> {
               textAlign: TextAlign.start,
             ),
             centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: IconButton(
+                  onPressed: () async {
+                    SharedPreferences localStorage = await  SharedPreferences.getInstance();
+                    localStorage.setString('token', '');
+                    Navigator.pushNamed(context, RouteName.login);
+                  },
+                  icon: Icon(Icons.logout,color: Colors.white,),
+                ),
+              ),
+            ]
           ),
         ),
         body: SafeArea(

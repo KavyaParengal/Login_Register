@@ -9,4 +9,5 @@ class ClientAPI{
   ////////// Admin //////////
 
   static const add_free_content = '/home/add_video_free/';
+  static const client_list = '/home/client_list';
 }

@@ -15,4 +15,5 @@ class RouteName{
 
   static const add_free_content = '/add_free_content';
   static const admin_home = '/admin_home';
+  static const view_client = '/view_clients';
 }

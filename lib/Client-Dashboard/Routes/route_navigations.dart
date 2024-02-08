@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_register/ADMIN/Screens/add_videos.dart';
 import 'package:login_register/ADMIN/Screens/admin_home_page.dart';
+import 'package:login_register/ADMIN/Screens/view_clients.dart';
 import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:login_register/CLIENT/Screens/freecontent.dart';
 import 'package:login_register/CLIENT/Screens/premiumcontent.dart';
@@ -45,6 +46,9 @@ class RouteNavigation{
 
       case RouteName.add_free_content:
         return MaterialPageRoute(builder: (context)=>const AdminAddVideos());
+
+      case RouteName.view_client:
+        return MaterialPageRoute(builder: (context)=>const ViewClients());
 
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(
