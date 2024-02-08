@@ -17,7 +17,7 @@ class ViewClientListAPI{
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       print(body);
-      List<ClientModel> data =  body['data'].map<ClientModel>((e) => ClientModel.fromJson(e)).toList();
+      List<ClientModel> data =  body.map<ClientModel>((e) => ClientModel.fromJson(e)).toList();
       //print(data);
       return data;
 

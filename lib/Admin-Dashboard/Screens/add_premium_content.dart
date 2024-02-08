@@ -1,18 +1,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/add_premium_content_api.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/add_video_api.dart';
 
 import '../../Client-Dashboard/Utilities/colors.dart';
-import '../Api_services/add_video_api.dart';
 
-class AdminAddVideos extends StatefulWidget {
-  const AdminAddVideos({super.key});
+class AddPremiumContent extends StatefulWidget {
+  const AddPremiumContent({super.key});
 
   @override
-  State<AdminAddVideos> createState() => _AdminAddVideosState();
+  State<AddPremiumContent> createState() => _AddPremiumContentState();
 }
 
-class _AdminAddVideosState extends State<AdminAddVideos> {
+class _AddPremiumContentState extends State<AddPremiumContent> {
 
   TextEditingController videoController=TextEditingController();
   TextEditingController titleController=TextEditingController();
@@ -36,7 +37,7 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
           ),
           elevation: 0,
           title: Text(
-            'Add Free Content',
+            'Add Premium Content',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -141,7 +142,7 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(onPressed: (){
                   if (_formKey.currentState!.validate()) {
-                    AddFreeContentApi.addFreeContent(context,
+                    AddPremiumContentApi.addPremiumContent(context,
                         videoController.text.trim(),
                         titleController.text.trim(),
                         descriptionController.text.trim(),
@@ -149,7 +150,7 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                    child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
               ),
             ),
           ],

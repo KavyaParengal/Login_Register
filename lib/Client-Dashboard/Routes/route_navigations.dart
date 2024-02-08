@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_premium_content.dart';
 import 'package:login_register/Admin-Dashboard/Screens/add_videos.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_week_wise_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_add_price.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
 import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
@@ -48,8 +51,17 @@ class RouteNavigation{
       case RouteName.add_free_content:
         return MaterialPageRoute(builder: (context)=>const AdminAddVideos());
 
+      case RouteName.add_premium_content:
+        return MaterialPageRoute(builder: (context)=>const AddPremiumContent());
+
       case RouteName.view_client:
         return MaterialPageRoute(builder: (context)=>const ViewClients());
+
+      case RouteName.add_price:
+        return MaterialPageRoute(builder: (context)=>const AddPremiumPrice());
+
+      case RouteName.add_week_wise_content:
+        return MaterialPageRoute(builder: (context)=>const AddWeekWiseContent());
 
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(

@@ -21,12 +21,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
     'assets/dashBoard_details.png',
     'assets/payment.png',
     'assets/clients.png'];
-  List title = [ 'Free Content', 'Premium Content', 'Dashboard Details', 'Payment', 'Client List'];
+  List title = [ 'Free Content', 'Premium Content', 'Week Wise \nContent', 'Payment', 'Client List'];
   List navigation = [
     RouteName.add_free_content,
-    RouteName.view_client,
-    RouteName.view_client,
-    RouteName.view_client,
+    RouteName.add_premium_content,
+    RouteName.add_week_wise_content,
+    RouteName.add_price,
     RouteName.view_client];
 
   @override
@@ -97,6 +97,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Image.asset(image[index], width: 66,),
@@ -104,7 +105,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
-                            ),),
+                            ),textAlign: TextAlign.center,),
                           ],
                         ),
                       )

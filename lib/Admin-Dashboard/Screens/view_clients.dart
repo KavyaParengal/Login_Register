@@ -85,6 +85,7 @@ class _ViewClientsState extends State<ViewClients> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Row(
@@ -94,6 +95,7 @@ class _ViewClientsState extends State<ViewClients> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),),
+                                SizedBox(width: 8,),
                                 Text(clientList[index].lastName.toString(),style: GoogleFonts.poppins(
                                   fontSize: 15,
                                   fontWeight: FontWeight.bold,
@@ -102,17 +104,17 @@ class _ViewClientsState extends State<ViewClients> {
                               ],
                             ),
                             Text(clientList[index].location.toString(),style: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),),
                             Text(clientList[index].mobile.toString(),style: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 14,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),),
                             Text(clientList[index].email.toString(),style: GoogleFonts.poppins(
-                              fontSize: 15,
+                              fontSize: 13,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),),

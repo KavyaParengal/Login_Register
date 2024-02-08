@@ -9,5 +9,8 @@ class ClientAPI{
   ////////// Admin //////////
 
   static const add_free_content = '/home/add_video_free/';
-  static const client_list = '/home/client_list';
+  static const client_list = '/home/clients_list/';
+  static const add_price = '/home/add_payment/';
+  static const add_week_wise_content = '/home/add_dashboard_data/';
+  static const add_premium_content = '/home/add_video/';
 }
