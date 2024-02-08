@@ -1,8 +1,8 @@
 
 import 'dart:convert';
 
-import 'package:login_register/CLIENT/Models/freecontentmodel.dart';
 import 'package:http/http.dart' as http;
+import '../Models/freecontentmodel.dart';
 import '../Utilities/constants.dart';
 
 class ViewFreeContentDataAPI{

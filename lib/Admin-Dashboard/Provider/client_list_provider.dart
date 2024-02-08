@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:login_register/ADMIN/Api_services/client_list_api.dart';
-import 'package:login_register/ADMIN/Model/client_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../Api_services/client_list_api.dart';
+import '../Model/client_model.dart';
 
 class ClientListProvider extends ChangeNotifier{
   final _service = ViewClientListAPI();

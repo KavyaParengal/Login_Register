@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../CLIENT/Utilities/constants.dart';
+import '../../Client-Dashboard/Routes/route_names.dart';
+import '../../Client-Dashboard/Utilities/constants.dart';
+
 
 
 

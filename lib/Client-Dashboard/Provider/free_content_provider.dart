@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:login_register/CLIENT/Api_services/free_content_data_view.dart';
-import 'package:login_register/CLIENT/Models/freecontentmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+
+import '../Api_services/free_content_data_view.dart';
+import '../Models/freecontentmodel.dart';
 
 class FreeContentDataProvider extends ChangeNotifier{
 

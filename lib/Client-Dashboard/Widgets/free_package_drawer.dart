@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/CLIENT/Routes/route_names.dart';
-import 'package:login_register/CLIENT/Utilities/colors.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

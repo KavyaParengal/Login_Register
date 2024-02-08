@@ -1,14 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/ADMIN/Api_services/client_list_api.dart';
-import 'package:login_register/ADMIN/Model/client_model.dart';
-import 'package:login_register/ADMIN/Provider/client_list_provider.dart';
-import 'package:login_register/CLIENT/Utilities/colors.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../CLIENT/Widgets/loading_icon.dart';
+import '../../Client-Dashboard/Utilities/colors.dart';
+import '../Provider/client_list_provider.dart';
 
 class ViewClients extends StatefulWidget {
   const ViewClients({super.key});

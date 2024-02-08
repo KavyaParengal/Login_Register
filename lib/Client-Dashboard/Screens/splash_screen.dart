@@ -3,10 +3,10 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:login_register/CLIENT/Routes/route_names.dart';
-import 'package:login_register/CLIENT/Screens/home_page.dart';
-import 'package:login_register/CLIENT/Screens/login_page.dart';
-import 'package:login_register/CLIENT/Utilities/colors.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/login_page.dart';
+import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 

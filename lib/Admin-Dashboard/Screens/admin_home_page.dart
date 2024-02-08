@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/CLIENT/Routes/route_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../CLIENT/Utilities/global.dart';
+import '../../Client-Dashboard/Routes/route_names.dart';
+import '../../Client-Dashboard/Utilities/global.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});

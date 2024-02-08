@@ -1,9 +1,9 @@
 
 import 'dart:convert';
 
-import 'package:login_register/ADMIN/Model/client_model.dart';
 import 'package:http/http.dart' as http;
-import '../../CLIENT/Utilities/constants.dart';
+import '../../Client-Dashboard/Utilities/constants.dart';
+import '../Model/client_model.dart';
 
 class ViewClientListAPI{
   Future<List<ClientModel>> getClientList(String token) async {

@@ -1,11 +1,12 @@
 
 import 'package:flutter/material.dart';
-import 'package:login_register/ADMIN/Screens/add_videos.dart';
-import 'package:login_register/ADMIN/Screens/admin_home_page.dart';
-import 'package:login_register/ADMIN/Screens/view_clients.dart';
-import 'package:login_register/CLIENT/Routes/route_names.dart';
-import 'package:login_register/CLIENT/Screens/freecontent.dart';
-import 'package:login_register/CLIENT/Screens/premiumcontent.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_videos.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
+import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
+import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 
 import '../Screens/add_menstration_date.dart';
 import '../Screens/home_page.dart';

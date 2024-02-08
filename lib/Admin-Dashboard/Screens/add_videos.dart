@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/ADMIN/Api_services/add_video_api.dart';
 
-import '../../CLIENT/Utilities/colors.dart';
+import '../../Client-Dashboard/Utilities/colors.dart';
+import '../Api_services/add_video_api.dart';
 
 class AdminAddVideos extends StatefulWidget {
   const AdminAddVideos({super.key});
