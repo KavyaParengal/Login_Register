@@ -53,8 +53,8 @@ class ClientDetails {
 
   ClientDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['first_name'];
-    lastName = json['last_name'];
+    firstName = json['first_name'] == null ? '': json['first_name'];
+    lastName = json['last_name'] ==null ? '' : json['last_name'];
     location = json['location'];
     age = json['age'];
     mobile = json['mobile'];

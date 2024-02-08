@@ -16,7 +16,7 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
 
   List image = [
-    'assets/free_content.png',
+    'assets/free_content1.png',
     'assets/premium.png',
     'assets/dashBoard_details.png',
     'assets/payment.png',

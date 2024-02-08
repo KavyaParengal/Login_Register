@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(onPressed: (){
                     if (_formKey.currentState!.validate()) {
-                      //LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
+                      LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
                     }
                   },
                       style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

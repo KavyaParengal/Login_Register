@@ -2,11 +2,13 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 import '../Api_services/viewDashbordDataApi.dart';
 import '../Models/dashboardDataModal.dart';
 import '../Utilities/colors.dart';
@@ -26,6 +28,8 @@ class _HomePageState extends State<HomePage> {
   late String data ;
   bool isLoading = true;
   DashbordDataModel? userDetails;
+
+  final _key = GlobalKey<ExpandableFabState>();
 
   @override
   void initState() {
@@ -409,6 +413,23 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  _launchWhatsapp() async {
+    await launch("https://wa.me/919645713419", forceSafariVC: false);
+  }
+
+  _launchEmail() async {
+    final Uri _emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'kavyakavya3108@gmail.com',
+      //query: 'subject=Hello&body=Hello, this is the body of the email!',
+    );
+    if (await canLaunch(_emailLaunchUri.toString())) {
+      await launch(_emailLaunchUri.toString());
+    } else {
+      throw 'Could not launch email';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -435,21 +456,65 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){},
-        elevation: 5,
-        backgroundColor: Colors.transparent,
-        child: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.green.shade500
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     setState(() {
+      //       _isExpanded = !_isExpanded;
+      //     });
+      //   },
+      //   elevation: 5,
+      //   backgroundColor: Colors.transparent,
+      //   child: Container(
+      //     height: 60,
+      //     width: 60,
+      //     decoration: BoxDecoration(
+      //         borderRadius: BorderRadius.circular(30),
+      //         color: Colors.green.shade500
+      //     ),
+      //     child: Column(
+      //       children: [
+      //         IconButton(onPressed: (){
+      //           // _launchWhatsapp();
+      //         },
+      //             icon: const FaIcon(FontAwesomeIcons.whatsapp,color: Colors.white,)),
+      //       ],
+      //     ),
+      //   ),),
+
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: ExpandableFab(
+        openButtonBuilder: RotateFloatingActionButtonBuilder(
+          child: const FaIcon(FontAwesomeIcons.thumbsUp),
+          //fabSize: ExpandableFabSize.regular,
+          foregroundColor: Colors.white,
+          backgroundColor: button,
+          shape: const CircleBorder(),
+          angle: 58
+        ),
+        closeButtonBuilder: RotateFloatingActionButtonBuilder(
+            child: const FaIcon(FontAwesomeIcons.multiply),
+            //fabSize: ExpandableFabSize.regular,
+            foregroundColor: Colors.white,
+            backgroundColor: button,
+            shape: const CircleBorder(),
+            angle: 58
+        ),
+        children: [
+          InkWell(
+            onTap: (){
+              _launchEmail();
+            },
+              child: Image.asset('assets/gmail.png', width: 50,)
           ),
-          child: IconButton(onPressed: (){
-            // _launchWhatsapp();
-          },
-              icon: const FaIcon(FontAwesomeIcons.whatsapp,color: Colors.white,)),
-        ),),
+          InkWell(
+            onTap: (){
+              _launchWhatsapp();
+            },
+              child: Image.asset('assets/whatsapp.png', width: 50,)
+          ),
+        ],
+      ),
+
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
