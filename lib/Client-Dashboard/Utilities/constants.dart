@@ -6,6 +6,7 @@ class ClientAPI{
   static const dashboard = '/home/dashboard-details/';
   static const get_video_free = '/home/get_video_free/';
   static const get_video_premium = '/home/get_video/';
+  static const plan_list = '/home/plans_list';
 
   ////////// Admin //////////
 

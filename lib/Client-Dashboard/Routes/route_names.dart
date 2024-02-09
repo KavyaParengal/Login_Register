@@ -10,6 +10,7 @@ class RouteName{
   static const free_content = '/free_content';
   static const premium_content = '/premium_content';
   static const profileDetails = '/profileDetails';
+  static const premium_plan = '/premium_plan';
 
 
 // Admin Pages

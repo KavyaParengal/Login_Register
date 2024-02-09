@@ -9,6 +9,7 @@ import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
 import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
+import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
 import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 
@@ -45,6 +46,9 @@ class RouteNavigation{
 
       case RouteName.profileDetails:
         return MaterialPageRoute(builder: (context)=> ProfileDetails());
+
+      case RouteName.premium_plan:
+        return MaterialPageRoute(builder: (context)=> PremiumPlanPage());
 
 
 ///////////////// ADMIN PORT /////////////////////

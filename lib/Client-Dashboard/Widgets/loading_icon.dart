@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
 
 class LoadingIcon extends StatelessWidget {
   const LoadingIcon({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class LoadingIcon extends StatelessWidget {
       // alignment: Alignment.topCenter,
       child: ConstrainedBox(
         child: CircularProgressIndicator(
-          color: Colors.white,
+          color: primary,
           strokeWidth: 4,
         ),
         constraints: const BoxConstraints.tightFor(height: 50, width: 50),

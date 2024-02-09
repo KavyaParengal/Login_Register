@@ -30,7 +30,7 @@ class AddWeekWiseContentApi {
       var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       print(response.statusCode);
-      if (response.statusCode == 200) {
+      if (response.statusCode == 400) {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));

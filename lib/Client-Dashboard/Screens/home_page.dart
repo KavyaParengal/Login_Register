@@ -385,7 +385,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, RouteName.premium_content);
+                        //Navigator.pushNamed(context, RouteName.premium_content);
+                        if(userDetails!.clientDetails!.subscribed == true)
+                          Navigator.pushNamed(context, RouteName.premium_content);
+                        else{
+                          _premiumAlert();
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: button, // foreground (text) color
@@ -405,12 +410,39 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onTap: () {
-                Navigator.pushNamed(context, RouteName.premium_content);
+                if(userDetails!.clientDetails!.subscribed == true)
+                  Navigator.pushNamed(context, RouteName.premium_content);
+                else{
+                  _premiumAlert();
+                }
               },
             ),
           ],
         ),
       ],
+    );
+  }
+
+  Future<dynamic> _premiumAlert() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Are you Subscribed?'),
+        content: const Text('Only Subcribed Users Can Access This !'),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pushNamed(context, RouteName.premium_plan);
+            },
+            child: Text("OK",
+              style: TextStyle(
+                color: button,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:login_register/Admin-Dashboard/Provider/client_list_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/free_content_provider.dart';
+import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_navigations.dart';
@@ -17,7 +18,8 @@ void main() async {
         [
           ChangeNotifierProvider(create:  (context) => FreeContentDataProvider(),),
           ChangeNotifierProvider(create:  (context) => ClientListProvider(),),
-          ChangeNotifierProvider(create:  (context) => PremiumContentDataProvider())
+          ChangeNotifierProvider(create:  (context) => PremiumContentDataProvider()),
+          ChangeNotifierProvider(create:  (context) => PlanListProvider())
         ],
         child: MaterialApp(
           // theme: ThemeData(
