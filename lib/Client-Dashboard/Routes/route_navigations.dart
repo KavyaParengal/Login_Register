@@ -1,10 +1,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:login_register/Admin-Dashboard/Screens/add_premium_content.dart';
-import 'package:login_register/Admin-Dashboard/Screens/add_videos.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_free_videos.dart';
 import 'package:login_register/Admin-Dashboard/Screens/add_week_wise_content.dart';
-import 'package:login_register/Admin-Dashboard/Screens/admin_add_price.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_price.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_free_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_premium_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_price_plan.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_free_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_premium_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_price_plan.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_week_wise_content.dart';
 import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
@@ -13,6 +20,7 @@ import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
 import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
 import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 
+import '../../Admin-Dashboard/Screens/admin_view_week_wise_content.dart';
 import '../Screens/add_menstration_date.dart';
 import '../Screens/home_page.dart';
 import '../Screens/login_page.dart';
@@ -70,6 +78,30 @@ class RouteNavigation{
 
       case RouteName.add_week_wise_content:
         return MaterialPageRoute(builder: (context)=>const AddWeekWiseContent());
+
+      case RouteName.edit_free_content:
+        return MaterialPageRoute(builder: (context)=>const EditFreeContent());
+
+      case RouteName.edit_premium_content:
+        return MaterialPageRoute(builder: (context)=>const EditPremiumContent());
+
+      case RouteName.edit_price:
+        return MaterialPageRoute(builder: (context)=>const EditPricePlan());
+
+      case RouteName.edit_week_wise_content:
+        return MaterialPageRoute(builder: (context)=>const EditWeekWiseContent());
+
+      case RouteName.admin_view_price_plan:
+        return MaterialPageRoute(builder: (context)=>const AdminViewPricePlan());
+
+      case RouteName.admin_view_week_wise_content:
+        return MaterialPageRoute(builder: (context)=> AdminViewWeekWiseContent());
+
+      case RouteName.admin_view_free_content:
+        return MaterialPageRoute(builder: (context)=> AdminViewFreeContent());
+
+      case RouteName.admin_view_premium_content:
+        return MaterialPageRoute(builder: (context)=> AdminViewPremiumContent());
 
       default:
         return MaterialPageRoute(builder: (context)=>Scaffold(

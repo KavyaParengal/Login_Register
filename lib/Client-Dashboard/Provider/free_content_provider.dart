@@ -13,7 +13,7 @@ class FreeContentDataProvider extends ChangeNotifier{
   List<FreeContentDataModel> _freeDatas = [];
   List<FreeContentDataModel> get freeDatas => _freeDatas;
 
-  Future<void> getFreeContents() async {
+  Future getFreeContents() async {
     isLoading = true;
     notifyListeners();
 
@@ -27,3 +27,4 @@ class FreeContentDataProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
+

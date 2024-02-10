@@ -58,15 +58,29 @@ class _ProfileDetailsState extends State<ProfileDetails> {
             ])),
           ),
           elevation: 0,
-          title: Text(
-            'Profile Details',
-            style: GoogleFonts.poppins(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.start,
+          title: Column(
+            children: [
+              // Text(
+              //   'Gentle Birth',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 20,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.white,
+              //   ),
+              //   textAlign: TextAlign.start,
+              // ),
+              Text(
+                'Gentle Birth Method',
+                style: GoogleFonts.poppins(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.start,
+              ),
+            ],
           ),
+          centerTitle: true,
           leading: IconButton(
               onPressed: (){
                 Navigator.pop(context);
@@ -87,142 +101,228 @@ class _ProfileDetailsState extends State<ProfileDetails> {
       //     color: Colors.black,
       //   ),
       // ),
-      body: token == null ? Center(child: CircularProgressIndicator(color: primary,),):
-      Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "${userDetails!.clientDetails!.firstName!.toUpperCase()}",
-                    hintStyle: TextStyle(
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        // decoration: BoxDecoration(
+        //     image: DecorationImage(
+        //       image: AssetImage('assets/logo.png',),
+        //       opacity: 0.3,
+        //     )
+        // ),
+        child: token == null ? Center(child: CircularProgressIndicator(color: primary,),):
+        Center(
+          child: SingleChildScrollView(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Profile',
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("First Name",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.clientDetails!.firstName!.toUpperCase()[0]}${userDetails!.clientDetails!.firstName!.toUpperCase().substring(1).toLowerCase()}",
+                      hintStyle: TextStyle(
+                          color: Colors.black
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // SizedBox(
+                //   height: 10,
+                // ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Last Name",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.clientDetails!.lastName!.toUpperCase()[0]}${userDetails!.clientDetails!.lastName!.toUpperCase().substring(1).toLowerCase()}",
+                      hintStyle: TextStyle(
+                          color: Colors.black
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Email ID",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.clientDetails!.email}",
+                      hintStyle: TextStyle(
+                          color: Colors.black
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Mobile Number",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.clientDetails!.mobile}",
+                      hintStyle: TextStyle(
+                          color: Colors.black
+                      ),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Location",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.clientDetails!.location!.toUpperCase()[0]}${userDetails!.clientDetails!.location!.toUpperCase().substring(1).toLowerCase()}",
+                      hintStyle: TextStyle(
                         color: Colors.black
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "${userDetails!.clientDetails!.lastName!.toUpperCase()}",
-                    hintStyle: TextStyle(
-                        color: Colors.black
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "${userDetails!.clientDetails!.email}",
-                    hintStyle: TextStyle(
-                        color: Colors.black
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text("Menstruation Date",style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.teal.shade800
+                  ),),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    readOnly: true,
+                    style: const TextStyle(color: Colors.black),
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      hintText: "${userDetails!.mensturationDate}",
+                      hintStyle: TextStyle(
+                          color: Colors.black
                       ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "${userDetails!.clientDetails!.mobile}",
-                    hintStyle: TextStyle(
-                        color: Colors.black
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  readOnly: true,
-                  style: const TextStyle(color: Colors.black),
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    hintText: "${userDetails!.clientDetails!.location!.toUpperCase()}",
-                    hintStyle: TextStyle(
-                      color: Colors.black
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Colors.black,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

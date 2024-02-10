@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 
 class Global {
 
-  String appName = 'Gentle Birth';
+  String appName = 'Gentle Birth Method';
 
   String capitalizeAllWord(String? value) {
     var result = "";
