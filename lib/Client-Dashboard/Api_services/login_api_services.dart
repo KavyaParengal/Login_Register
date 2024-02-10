@@ -25,48 +25,25 @@ class LoginApi {
         if (body['token'] != null) {
           localStorage.setString('token', body['token']);
           localStorage.setInt('role', body['role']);
-          // localStorage.setString('date', body['date']);
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful!')),
           );
-          if(body['role'] == 1 && body['date'] == true){
-            Navigator.pushNamed(context, RouteName.home);
-          }
-          else if(body['role'] == 1 && body['date'] == false){
-            Navigator.pushNamed(context, RouteName.add_menstration);
-          }
-          else if(body['role'] == 2){
-            Navigator.pushNamed(context, RouteName.admin_home);
-          }
-          else {
-            showErrorMessage(context, 'User not registered');
-          }
-          //redirectToRoute(context, body['role'], body['date']);
-          print(body['role']);
+          redirectToRoute(context, body['role']);
         } else {
-          if(body['error'] == "User matching query does not exist.") {
-            showErrorMessage(context, 'Invalid email or password');
-          } else {
-            showErrorMessage(context, 'User not registered');
-          }
+          showErrorMessage(context, 'Invalid User Name or Password');
         }
       } else {
         showErrorMessage(context, 'Error: ${response.statusCode}');
       }
     } catch (e) {
-      showErrorMessage(context, 'Invalid username or password');
+      showErrorMessage(context, 'An error occurred: $e');
     }
   }
 
-  static void redirectToRoute(BuildContext context, int role, bool date) {
-    print("Redirecting with role: $role");
+  static void redirectToRoute(BuildContext context, int role) {
     switch (role) {
       case 1:
-        if (date) {
-          Navigator.pushNamed(context, RouteName.home);
-        } else {
-          Navigator.pushNamed(context, RouteName.add_menstration);
-        }
+        Navigator.pushNamed(context, RouteName.add_menstration);
         break;
       case 2:
         Navigator.pushNamed(context, RouteName.admin_home);
@@ -75,8 +52,6 @@ class LoginApi {
         showErrorMessage(context, 'Invalid Role: $role');
     }
   }
-
-
 
   static void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
