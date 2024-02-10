@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildName() {
     return userDetails != null ? Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Row(
           children: [
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     TextSpan(
-                      text: userDetails!.clientDetails!.firstName.toString()==null?'':'${userDetails!.clientDetails!.firstName.toString().toUpperCase()} ${userDetails!.clientDetails!.lastName.toString().toUpperCase()}',
+                      text: userDetails!.clientDetails!.firstName.toString()==null?'':'${userDetails!.clientDetails!.firstName.toString().toUpperCase()} ',
                       style: GoogleFonts.poppins(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -98,69 +98,68 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        Wrap(
-          children: [
-            RichText(
-              text: TextSpan(children: [
-                TextSpan(
-                  text: 'You Are in ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: RichText(
+            text: TextSpan(children: [
+              TextSpan(
+                text: 'You Are in ',
+                style: GoogleFonts.poppins(
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-                TextSpan(
-                  text: 'Week ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+              ),
+              TextSpan(
+                text: 'Week ',
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-                TextSpan(
-                  text: userDetails!.date![0].toString()==null?'0':userDetails!.date![0].toString(),
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+              ),
+              TextSpan(
+                text: userDetails!.date![0] ==null ? '0' : userDetails!.date![0].toString(),
+                style: GoogleFonts.poppins(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
                 ),
-                TextSpan(
-                  text: ' and ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                TextSpan(
-                  text: userDetails!.date![1].toString()==null?'0':userDetails!.date![1].toString(),
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                TextSpan(
-                  text: ' Days ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                TextSpan(
-                  text: 'Left',
-                  style: GoogleFonts.poppins(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-              ]),
-            ),
-          ],
+              ),
+              // TextSpan(
+              //   text: ' and ',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 15,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // TextSpan(
+              //   text: userDetails!.date![1] ==null ? '0' : userDetails!.date![1].toString(),
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 22,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // TextSpan(
+              //   text: ' Days ',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 22,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.black,
+              //   ),
+              // ),
+              // TextSpan(
+              //   text: 'Left',
+              //   style: GoogleFonts.poppins(
+              //     fontSize: 15,
+              //     fontWeight: FontWeight.bold,
+              //     color: Colors.black,
+              //   ),
+              // ),
+            ]),
+          ),
         ),
       ],
     ) :
@@ -177,113 +176,121 @@ class _HomePageState extends State<HomePage> {
           width: 285,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.teal.shade400.withOpacity(0.2),
           ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: userDetails!.detail!.image==null? Container():Image(
-                    image:NetworkImage(ClientAPI.url+'${userDetails!.detail!.image.toString()}'),
-                    height: 60,
-                  ),
-                  //child: Image.asset('assets/logo.png'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      height: 75,
-                      width: 75,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Length",
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black, fontSize: 10),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Text(
-                            userDetails!.detail!.length.toString(),
-                            style: GoogleFonts.poppins(
-                                color: Colors.black, fontSize: 10),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 75,
-                      width: 75,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              'Weight',
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black, fontSize: 10),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Text(
-                            userDetails!.detail!.weight.toString(),
-                            style: GoogleFonts.poppins(
-                                color: Colors.black, fontSize: 10),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 75,
-                      width: 75,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              "Size",
-                              style: GoogleFonts.poppins(
-                                  color: Colors.black, fontSize: 10),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                          Text(
-                            userDetails!.detail!.size.toString(),
-                            style: GoogleFonts.poppins(
-                                color: Colors.black, fontSize: 10),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
+          child:
+          userDetails!.dashbordDetails == null ? Center(
+            child: Text(
+              'No Data Found',style: TextStyle(
+                color: Colors.teal.shade800,
+                fontWeight: FontWeight.bold
+              ),
+            ),) :
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
-                    // child: Text(description==null?"" :utf8.decode(description.codeUnits,
-                      child: Text(userDetails!.detail!.description == null ? "":utf8.decode(userDetails!.detail!.description!.codeUnits),
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        color: Colors.black,
+                    child: userDetails!.dashbordDetails!.image==null? Container():Image(
+                      image:NetworkImage(ClientAPI.url+'${userDetails!.dashbordDetails!.image.toString()}'),
+                      height: 60,
+                    ),
+                    //child: Image.asset('assets/logo.png'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        height: 75,
+                        width: 75,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Length",
+                                style: GoogleFonts.poppins(
+                                    color: Colors.black, fontSize: 10),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Text(
+                              userDetails!.dashbordDetails!.length.toString(),
+                              style: GoogleFonts.poppins(
+                                  color: Colors.black, fontSize: 10),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
-                      textAlign: TextAlign.justify,
-                    )),
-              ],
+                      Container(
+                        height: 75,
+                        width: 75,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                'Weight',
+                                style: GoogleFonts.poppins(
+                                    color: Colors.black, fontSize: 10),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Text(
+                              userDetails!.dashbordDetails!.weight.toString(),
+                              style: GoogleFonts.poppins(
+                                  color: Colors.black, fontSize: 10),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 75,
+                        width: 75,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Size",
+                                style: GoogleFonts.poppins(
+                                    color: Colors.black, fontSize: 10),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Text(
+                              userDetails!.dashbordDetails!.size.toString(),
+                              style: GoogleFonts.poppins(
+                                  color: Colors.black, fontSize: 10),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      // child: Text(description==null?"" :utf8.decode(description.codeUnits,
+                        child: Text(userDetails!.dashbordDetails!.description == null ? "":utf8.decode(userDetails!.dashbordDetails!.description!.codeUnits),
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.justify,
+                      )),
+                ],
+              ),
             ),
-          ),
         ),
       ],
     );
@@ -303,18 +310,19 @@ class _HomePageState extends State<HomePage> {
             // ),
             //color: Colors.black.withOpacity(0.05),
             decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.teal.shade500.withOpacity(0.2),
               borderRadius: BorderRadius.circular(10)
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                const FaIcon(FontAwesomeIcons.crown,color: Colors.transparent,size: 14,),
                 const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Image(
                     image: AssetImage(
-                      'assets/free_content.png',
+                      'assets/learning1.png',
                     ),
                     color: Colors.black,
                     height: 60,
@@ -351,73 +359,68 @@ class _HomePageState extends State<HomePage> {
         const Divider(
           height: 25,
         ),
-        Column(
-          children: [
-            InkWell(
-              child: Container(
-                // constraints: BoxConstraints(
-                //     minWidth: 125,
-                //     maxWidth: 150,
-                //     minHeight: 125,
-                //     maxHeight: 150),
-                // color: Colors.black.withOpacity(0.05),
-                decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.05),
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    const FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/learning.png'),
-                      height: 60,
-                      color: Colors.black,
-                    ),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        //Navigator.pushNamed(context, RouteName.premium_content);
-                        if(userDetails!.clientDetails!.subscribed == true)
-                          Navigator.pushNamed(context, RouteName.premium_content);
-                        else{
-                          _premiumAlert();
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: button, // foreground (text) color
-                        shape: RoundedRectangleBorder()
-                      ),
-                      child: Text(
-                        " Premium Content ",
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.pushNamed(context, RouteName.premium_content);
-                else{
-                  _premiumAlert();
-                }
-              },
+        InkWell(
+          child: Container(
+            // constraints: BoxConstraints(
+            //     minWidth: 125,
+            //     maxWidth: 150,
+            //     minHeight: 125,
+            //     maxHeight: 150),
+            // color: Colors.black.withOpacity(0.05),
+            decoration: BoxDecoration(
+                color: Colors.teal.shade500.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(10)
             ),
-          ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                const FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Image(
+                    image: AssetImage('assets/free_content.png'),
+                    height: 60,
+                    color: Colors.black,
+                  ),
+                ),
+                const Divider(
+                  height: 10,
+                  thickness: .01,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    //Navigator.pushNamed(context, RouteName.premium_content);
+                    if(userDetails!.clientDetails!.subscribed == true)
+                      Navigator.pushNamed(context, RouteName.premium_content);
+                    else{
+                      await _premiumAlert();
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: button, // foreground (text) color
+                    //shape: RoundedRectangleBorder()
+                  ),
+                  child: Text(
+                    "Premium Content",
+                    style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          onTap: () {
+            if(userDetails!.clientDetails!.subscribed == true)
+              Navigator.pushNamed(context, RouteName.premium_content);
+            else{
+              _premiumAlert();
+            }
+          },
         ),
       ],
     );
@@ -447,13 +450,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   _launchWhatsapp() async {
-    await launch("https://wa.me/919645713419", forceSafariVC: false);
+    await launch("https://wa.me/919710841234", forceSafariVC: false);
   }
 
   _launchEmail() async {
     final Uri _emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'kavyakavya3108@gmail.com',
+      path: 'gentlebirthmethodltd@gmail.com',
       query: 'subject=Subject%20Here&body=Body%20of%20the%20email%20here',
     );
     await launch(_emailLaunchUri.toString());
@@ -462,6 +465,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawerScrimColor: Colors.white,
       drawer: FreeNavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
@@ -483,6 +487,7 @@ class _HomePageState extends State<HomePage> {
             ),
             textAlign: TextAlign.start,
           ),
+          // centerTitle: true,
         ),
       ),
       // floatingActionButton: FloatingActionButton(
@@ -513,7 +518,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
         openButtonBuilder: RotateFloatingActionButtonBuilder(
-          child: const FaIcon(FontAwesomeIcons.thumbsUp),
+          child: const FaIcon(FontAwesomeIcons.phone),
           //fabSize: ExpandableFabSize.regular,
           foregroundColor: Colors.white,
           backgroundColor: button,
@@ -548,13 +553,12 @@ class _HomePageState extends State<HomePage> {
         Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          // decoration: BoxDecoration(
-          //     gradient: LinearGradient(
-          //         begin: Alignment.topCenter,
-          //         end: Alignment.bottomCenter,
-          //         colors: [Colors.teal.shade400, Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-          //     )
-          // ),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/logo.png',),
+                    opacity: 0.3,
+              )
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

@@ -1,19 +1,26 @@
 class DashbordDataModel {
   ClientDetails? clientDetails;
   int? currentMonth;
-  Detail? detail;
+  String? mensturationDate;
+  DashbordDetails? dashbordDetails;
   List<int>? date;
 
   DashbordDataModel(
-      {this.clientDetails, this.currentMonth, this.detail, this.date});
+      {this.clientDetails,
+        this.currentMonth,
+        this.mensturationDate,
+        this.dashbordDetails,
+        this.date});
 
   DashbordDataModel.fromJson(Map<String, dynamic> json) {
     clientDetails = json['client_details'] != null
         ? new ClientDetails.fromJson(json['client_details'])
         : null;
     currentMonth = json['current_month'];
-    detail =
-    json['detail'] != null ? new Detail.fromJson(json['detail']) : null;
+    mensturationDate = json['mensturation_date'];
+    dashbordDetails = json['dashbord_details'] != null
+        ? new DashbordDetails.fromJson(json['dashbord_details'])
+        : null;
     date = json['date'].cast<int>();
   }
 
@@ -23,8 +30,9 @@ class DashbordDataModel {
       data['client_details'] = this.clientDetails!.toJson();
     }
     data['current_month'] = this.currentMonth;
-    if (this.detail != null) {
-      data['detail'] = this.detail!.toJson();
+    data['mensturation_date'] = this.mensturationDate;
+    if (this.dashbordDetails != null) {
+      data['dashbord_details'] = this.dashbordDetails!.toJson();
     }
     data['date'] = this.date;
     return data;
@@ -53,8 +61,8 @@ class ClientDetails {
 
   ClientDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    firstName = json['first_name'] == null ? '': json['first_name'];
-    lastName = json['last_name'] ==null ? '' : json['last_name'];
+    firstName = json['first_name'];
+    lastName = json['last_name'];
     location = json['location'];
     age = json['age'];
     mobile = json['mobile'];
@@ -76,7 +84,7 @@ class ClientDetails {
   }
 }
 
-class Detail {
+class DashbordDetails {
   int? id;
   int? month;
   String? description;
@@ -85,7 +93,7 @@ class Detail {
   String? size;
   String? weight;
 
-  Detail(
+  DashbordDetails(
       {this.id,
         this.month,
         this.description,
@@ -94,7 +102,7 @@ class Detail {
         this.size,
         this.weight});
 
-  Detail.fromJson(Map<String, dynamic> json) {
+  DashbordDetails.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     month = json['month'];
     description = json['description'];

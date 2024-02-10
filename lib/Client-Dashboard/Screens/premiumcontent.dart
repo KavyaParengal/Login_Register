@@ -166,7 +166,7 @@ class _PremiumContentState extends State<PremiumContent> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          drawer: FreeNavigationDrawer(),
+          //drawer: FreeNavigationDrawer(),
           appBar: PreferredSize(
             preferredSize: const Size.fromHeight(60),
             child: AppBar(
@@ -190,8 +190,8 @@ class _PremiumContentState extends State<PremiumContent> {
               //     onPressed: () {
               //       Get.back();
               //     }),
-              title: const Text(
-                "Premium Content",
+              title: Text(
+                Global().appName,
                 maxLines: 1,
                 style: TextStyle(
                   //fontSize: 18.5,
@@ -210,100 +210,140 @@ class _PremiumContentState extends State<PremiumContent> {
               ],
             ),
           ),
-          body: Consumer<PremiumContentDataProvider>(
-            builder: (context, value, child){
-              if (value.isLoading) {
-                return const Center(
-                    child: LoadingIcon()
-                );
-              }
-              final premiumDatas = value.premiumDatas;
-              return  Container(
-                child: ListView.builder(
-                  padding: const EdgeInsets.only(bottom: 100),
-                  itemCount: premiumDatas.length ?? 0,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final freeContent = premiumDatas[index];
-                    String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
-
-
-                    _controller = YoutubePlayerController(
-                      initialVideoId: videoId,
-                      flags: YoutubePlayerFlags(
-                        autoPlay: true,
-                        mute: false,
-                      ),);
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            Global().capitalizeAllWord(
-                                freeContent.title ?? ""),
-                            style: GoogleFonts.poppins(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
-                          ),
+          body: Container(
+            // width: MediaQuery.of(context).size.width,
+            // height: MediaQuery.of(context).size.height,
+            // decoration: BoxDecoration(
+            //     image: DecorationImage(
+            //       image: AssetImage('assets/logo.png',),
+            //       opacity: 0.3,
+            //     )
+            // ),
+            child: SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
+                      child: Text(
+                        'Premium Content',
+                        style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal.shade800,
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              top: 10,
-                              bottom: 10,
-                              left: 2,
-                              right: 2,
-                            ),
-                            child: YoutubePlayerBuilder(
-                                player: YoutubePlayer(
-                                    onReady: () {
-                                      _controller.addListener(listener);
-                                    },
-                                    aspectRatio: 16 / 9,
-                                    bottomActions: [],
-                                    topActions: [],
-                                    showVideoProgressIndicator: false,
-                                    controller: _controller),
-                                builder: (context, player) {
-                                  return Container(
-                                    child: player,
-                                  );
-                                })
-
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.all(8.0),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  Consumer<PremiumContentDataProvider>(
+                    builder: (context, value, child){
+                      if (value.isLoading) {
+                        return const Center(
+                            child: LoadingIcon()
+                        );
+                      }
+                      final premiumDatas = value.premiumDatas;
+                      return
+                        // premiumDatas == null ? Center(
                         //   child: Text(
-                        //     utf8.decode(Global()
-                        //         .capitalizeAllWord(
-                        //             currFreeContentData.crew ?? "")
-                        //         .codeUnits),
-                        //     style: GoogleFonts.poppins(
-                        //         color: Colors.black),
-                        //   ),
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.all(9),
-                          child: referenceInfo(),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              );
-            },
+                        //     'No Data Found',style: TextStyle(
+                        //       color: Colors.teal.shade800,
+                        //       fontWeight: FontWeight.bold
+                        //   ),),
+                        // ) :
+                        Container(
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsets.only(bottom: 100),
+                            itemCount: premiumDatas.length ?? 0,
+                            shrinkWrap: true,
+                            itemBuilder: (context, index) {
+                              final freeContent = premiumDatas[index];
+                              String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
+
+                              _controller = YoutubePlayerController(
+                                initialVideoId: videoId,
+                                flags: YoutubePlayerFlags(
+                                  autoPlay: true,
+                                  mute: false,
+                                ),);
+
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      Global().capitalizeAllWord(
+                                          freeContent.title ?? ""),
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 10,
+                                        bottom: 10,
+                                        left: 2,
+                                        right: 2,
+                                      ),
+                                      child: YoutubePlayerBuilder(
+                                          player: YoutubePlayer(
+                                              onReady: () {
+                                                _controller.addListener(listener);
+                                              },
+                                              aspectRatio: 16 / 9,
+                                              bottomActions: [],
+                                              topActions: [],
+                                              showVideoProgressIndicator: false,
+                                              controller: _controller),
+                                          builder: (context, player) {
+                                            return Container(
+                                              child: player,
+                                            );
+                                          })
+
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(8.0),
+                                  //   child: Text(
+                                  //     utf8.decode(Global()
+                                  //         .capitalizeAllWord(
+                                  //             currFreeContentData.crew ?? "")
+                                  //         .codeUnits),
+                                  //     style: GoogleFonts.poppins(
+                                  //         color: Colors.black),
+                                  //   ),
+                                  // ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(9),
+                                    child: referenceInfo(),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                        );
+                    },
+                  ),
+                ],
+              ),
+            ),
           )
       ),
     );

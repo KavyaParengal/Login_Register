@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 
 import '../Utilities/colors.dart';
@@ -49,6 +50,14 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                 ),
                 textAlign: TextAlign.start,
               ),
+            leading: IconButton(
+                onPressed: (){
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back
+                )
+            ),
           )),
       body: Consumer<PlanListProvider>(
         builder: (context, value, child) {

@@ -7,6 +7,8 @@ import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
+import '../Api_services/viewDashbordDataApi.dart';
+import '../Models/dashboardDataModal.dart';
 import '../Utilities/global.dart';
 
 
@@ -18,6 +20,34 @@ class FreeNavigationDrawer extends StatefulWidget {
 }
 
 class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
+
+  DashbordDataModel? userDetails;
+  String? token;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchUserDetails();
+  }
+
+  Future<DashbordDataModel?> fetchUserDetails() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    token = localStorage.getString('token');
+    try {
+      final details = await ViewDashboardData().getDashboardData(token!);
+      userDetails=details;
+      setState(() {
+        print(token);
+        print('userDetails--$userDetails');
+      });
+    }
+    catch(e){
+      print('Failed to fetch user details: $e');
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,14 +65,18 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                 localStorage.setString('token', '');
                 Navigator.pushNamed(context, RouteName.login);
               },
-              child: const Text("Logout"),
+              child: Text("Logout",style: TextStyle(
+                color: Colors.teal.shade800
+              ),),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
 
               },
-              child: const Text("Cancel"),
+              child: Text("Cancel",style: TextStyle(
+                  color: Colors.teal.shade800
+              ),),
             ),
           ],
         ),
@@ -62,12 +96,19 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     color: button,
                   ),
-                  child: Column(
+                  child: token==null? Container() :Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "Hi, Super Mom",
+                      userDetails!.clientDetails!.firstName ==null ? Text(
+                        "Hi, ",
                         style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
+                      ) : Text(
+                        "Hi, ${Global().capitalizeAllWord(userDetails!.clientDetails!.firstName)}",style: GoogleFonts.poppins(
                           fontSize: 22,
                           color: Colors.white,
                         ),
@@ -81,7 +122,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            onPressed: () {  },
+                            onPressed: () {},
                             child: Text(
                               "Profile & Other Setting",
                               style: GoogleFonts.poppins(

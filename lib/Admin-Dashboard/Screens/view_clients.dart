@@ -64,64 +64,72 @@ class _ViewClientsState extends State<ViewClients> {
               );
             }
             final clientList = value.clientList;
-            return GridView.builder(
+            return ListView.builder(
               shrinkWrap: true,
               itemCount: clientList.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-              ),
               itemBuilder: (BuildContext context, int index) {
-                return GridTile(
-                  child: Container(
-                      margin: const EdgeInsets.all(12.0),
-                      decoration: ShapeDecoration(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        gradient: RadialGradient(
-                          colors: <Color>[ Colors.white, Colors.teal.shade100],
-                        ),
+                return Container(
+                    height: MediaQuery.of(context).size.height/5,
+                    margin: const EdgeInsets.all(12.0),
+                    decoration: ShapeDecoration(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Row(
-                              children: [
-                                Text(clientList[index].firstName.toString(),style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),),
-                                SizedBox(width: 8,),
-                                Text(clientList[index].lastName.toString(),style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),),
-                              ],
-                            ),
-                            Text(clientList[index].location.toString(),style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),),
-                            Text(clientList[index].mobile.toString(),style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),),
-                            Text(clientList[index].email.toString(),style: GoogleFonts.poppins(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),),
-                          ],
-                        ),
-                      )
-                  ),
+                      gradient: RadialGradient(
+                        colors: <Color>[ Colors.white, Colors.teal.shade100],
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Align(
+                            alignment: Alignment.topRight,
+                            child: Text('${(index+1)}',
+                              style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),),
+                          ),
+                          Row(
+                            children: [
+                              Text('${clientList[index].firstName.toString()[0].toUpperCase()}${clientList[index].firstName.toString().substring(1).toLowerCase()}',
+                                style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),),
+                              SizedBox(width: 8,),
+                              Text('${clientList[index].lastName.toString()[0].toUpperCase()}${clientList[index].lastName.toString().substring(1).toLowerCase()}',
+                                style: GoogleFonts.poppins(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),),
+                            ],
+                          ),
+                          Text('${clientList[index].location.toString()[0].toUpperCase()}${clientList[index].location.toString().substring(1).toLowerCase()}',
+                            style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),),
+                          Text(clientList[index].mobile.toString(),style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),),
+                          Text(clientList[index].email.toString(),style: GoogleFonts.poppins(
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),),
+                        ],
+                      ),
+                    )
                 );
               },
             );

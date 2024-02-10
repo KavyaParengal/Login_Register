@@ -36,7 +36,7 @@ class LoginApi {
         showErrorMessage(context, 'Error: ${response.statusCode}');
       }
     } catch (e) {
-      showErrorMessage(context, 'An error occurred: $e');
+      showErrorMessage(context, 'Invalid User Name or Password');
     }
   }
 
