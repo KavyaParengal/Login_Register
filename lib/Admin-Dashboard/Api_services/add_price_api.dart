@@ -8,7 +8,7 @@ import '../../Client-Dashboard/Utilities/constants.dart';
 
 class AddPremiumPriceApi {
   static Future<void> addPremiumPrice(
-      BuildContext context, String title ,String price) async {
+      BuildContext context, String title ,String price, String description) async {
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
@@ -16,9 +16,10 @@ class AddPremiumPriceApi {
       var data = {
         "title": title,
         "price": price,
+        "description": description,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.add_price;
+      final urls = APIConstants.url + APIConstants.add_price;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
@@ -29,7 +30,7 @@ class AddPremiumPriceApi {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));
-        Navigator.pushNamed(context, RouteName.admin_home);
+        Navigator.pushNamed(context, RouteName.admin_view_price_plan);
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

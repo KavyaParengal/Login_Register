@@ -96,7 +96,7 @@ class _EditFreeContentState extends State<EditFreeContent> {
             child: TextFormField(
               controller: monthController,
               decoration: InputDecoration(
-                  hintText: "Month",
+                  hintText: "Week",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)
                   )
@@ -120,7 +120,7 @@ class _EditFreeContentState extends State<EditFreeContent> {
                 // }
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                  child: const Text("Edit",style: TextStyle(fontSize: 17,  color: Colors.white),)),
             ),
           ),
         ],

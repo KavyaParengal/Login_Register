@@ -25,7 +25,7 @@ class RegisterApi{
         "location" : location,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.register;
+      final urls = APIConstants.url + APIConstants.register;
       print(urls);
       var response = await http.post(Uri.parse(urls),body: data);
       var body = json.decode(response.body);

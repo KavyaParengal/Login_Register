@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_premium_content.dart';
 
 class AdminViewPremiumContent extends StatefulWidget {
   @override
@@ -91,7 +92,7 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RichText(text: TextSpan(children:[
-                    TextSpan(text: "Month : ",style: TextStyle(
+                    TextSpan(text: "Week : ",style: TextStyle(
                         color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
                     TextSpan(text: 'ashd',style: TextStyle(
                         color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)
@@ -106,7 +107,9 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal.shade500),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditPremiumContent()));
+                          },
                           child: Text(
                             "Edit",
                             style: TextStyle(color: Colors.white),

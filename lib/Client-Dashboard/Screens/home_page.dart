@@ -191,7 +191,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: userDetails!.dashbordDetails!.image==null? Container():Image(
-                    image:NetworkImage(ClientAPI.url+'${userDetails!.dashbordDetails!.image.toString()}'),
+                    image:NetworkImage(APIConstants.url+'${userDetails!.dashbordDetails!.image.toString()}'),
                     height: 60,
                   ),
                   //child: Image.asset('assets/logo.png'),

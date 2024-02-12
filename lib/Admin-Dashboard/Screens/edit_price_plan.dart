@@ -16,6 +16,7 @@ class _EditPricePlanState extends State<EditPricePlan> {
 
   TextEditingController priceController=TextEditingController();
   TextEditingController titleController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +86,27 @@ class _EditPricePlanState extends State<EditPricePlan> {
             ),
           ),
 
+          const SizedBox(height: 10,),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: priceController,
+              decoration: InputDecoration(
+                  hintText: "Description",
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)
+                  )
+              ),
+              validator: (value) {
+                if (value == null || value.trim().isEmpty) {
+                  return 'This field is required';
+                }
+                return null;
+              },
+            ),
+          ),
+
           const SizedBox(height: 36,),
 
           Padding(
@@ -97,7 +119,7 @@ class _EditPricePlanState extends State<EditPricePlan> {
                 // }
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

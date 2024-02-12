@@ -1,4 +1,4 @@
-class ClientAPI{
+class APIConstants{
   static const url = 'https://shebirth.pythonanywhere.com';
   static const register = '/home/client_signup/';
   static const login = '/home/client_login/';
@@ -15,4 +15,6 @@ class ClientAPI{
   static const add_price = '/home/add_payment/';
   static const add_week_wise_content = '/home/add_dashboard_data/';
   static const add_premium_content = '/home/add_video/';
+
+  static const delete_plan_item = '/home/plan_del/';
 }

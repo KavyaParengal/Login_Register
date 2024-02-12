@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_week_wise_content.dart';
 
 class AdminViewWeekWiseContent extends StatefulWidget {
   @override
@@ -24,7 +25,7 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
           ),
           elevation: 0,
           title: Text(
-            'Add Free Content',
+            'View Week Wise Content',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -119,32 +120,34 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
                     )
                   ])),
                 ),
-
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 70),
-                      child: ElevatedButton(
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal.shade500),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditWeekWiseContent()));
+                          },
                           child: Text(
                             "Edit",
                             style: TextStyle(color: Colors.white),
                           )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 50),
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red),
-                          onPressed: () {},
-                          child: Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.white),
-                          )),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 50),
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red),
+                            onPressed: () {},
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

@@ -8,7 +8,7 @@ import '../Utilities/constants.dart';
 class PlanListAPI{
 
   Future<List<PlanListModel>> getFreeContentData(String token) async {
-    final url = ClientAPI.url + ClientAPI.plan_list;
+    final url = APIConstants.url + APIConstants.plan_list;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

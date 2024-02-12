@@ -18,7 +18,7 @@ class AddMenstruationDateApi {
         "menstration": date,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.add_menstrual_date;
+      final urls = APIConstants.url + APIConstants.add_menstrual_date;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';

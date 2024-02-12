@@ -16,6 +16,7 @@ class _AddPremiumPriceState extends State<AddPremiumPrice> {
 
   TextEditingController priceController=TextEditingController();
   TextEditingController titleController=TextEditingController();
+  TextEditingController descriptionController=TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
@@ -89,6 +90,27 @@ class _AddPremiumPriceState extends State<AddPremiumPrice> {
                   ),
                 ),
 
+                const SizedBox(height: 10,),
+
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    controller: descriptionController,
+                    decoration: InputDecoration(
+                        hintText: "Description",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12)
+                        )
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'This field is required';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+
                 const SizedBox(height: 36,),
 
                 Padding(
@@ -97,7 +119,7 @@ class _AddPremiumPriceState extends State<AddPremiumPrice> {
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(onPressed: (){
                       if (_formKey.currentState!.validate()) {
-                        AddPremiumPriceApi.addPremiumPrice(context, titleController.text.trim(), priceController.text.trim());
+                        AddPremiumPriceApi.addPremiumPrice(context, titleController.text.trim(), priceController.text.trim(), descriptionController.text);
                       }
                     },
                         style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

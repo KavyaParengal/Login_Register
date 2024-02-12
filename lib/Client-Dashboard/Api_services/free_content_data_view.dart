@@ -8,7 +8,7 @@ import '../Utilities/constants.dart';
 class ViewFreeContentDataAPI{
 
    Future<List<FreeContentDataModel>> getFreeContentData(String token) async {
-    final url = ClientAPI.url + ClientAPI.get_video_free;
+    final url = APIConstants.url + APIConstants.get_video_free;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

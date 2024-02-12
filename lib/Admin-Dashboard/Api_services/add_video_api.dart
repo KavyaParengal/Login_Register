@@ -23,7 +23,7 @@ class AddFreeContentApi {
         "month": month,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.add_free_content;
+      final urls = APIConstants.url + APIConstants.add_free_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';

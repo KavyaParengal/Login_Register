@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Screens/edit_free_content.dart';
 
 class AdminViewFreeContent extends StatelessWidget {
   @override
@@ -103,7 +104,7 @@ class AdminViewFreeContent extends StatelessWidget {
                   child: RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                        text: "Month : ",
+                        text: "Week : ",
                         style: TextStyle(
                             color: Colors.teal.shade700,
                             fontWeight: FontWeight.bold,
@@ -123,7 +124,9 @@ class AdminViewFreeContent extends StatelessWidget {
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.teal.shade500),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => EditFreeContent()));
+                          },
                           child: Text(
                             "Edit",
                             style: TextStyle(color: Colors.white),

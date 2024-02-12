@@ -22,7 +22,7 @@ class AddWeekWiseContentApi {
         "weight": weight,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.add_week_wise_content;
+      final urls = APIConstants.url + APIConstants.add_week_wise_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';

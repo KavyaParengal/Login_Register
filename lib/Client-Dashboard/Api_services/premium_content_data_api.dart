@@ -8,7 +8,7 @@ import '../Utilities/constants.dart';
 class ViewPremiumContentDataAPI{
 
   Future<List<PremiumContentDataModel>> getFreeContentData(String token) async {
-    final url = ClientAPI.url + ClientAPI.get_video_premium;
+    final url = APIConstants.url + APIConstants.get_video_premium;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

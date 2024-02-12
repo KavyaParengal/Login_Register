@@ -102,7 +102,7 @@ class EditPremiumContent extends StatefulWidget {
              child: TextFormField(
                controller: monthController,
                decoration: InputDecoration(
-                   hintText: "Month",
+                   hintText: "Week",
                    border: OutlineInputBorder(
                        borderRadius: BorderRadius.circular(12)
                    )

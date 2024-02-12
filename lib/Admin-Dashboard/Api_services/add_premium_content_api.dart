@@ -23,12 +23,12 @@ class AddPremiumContentApi {
         "month": month,
       };
       print(data);
-      final urls = ClientAPI.url + ClientAPI.add_premium_content;
+      final urls = APIConstants.url + APIConstants.add_premium_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-      var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+        var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
         // ScaffoldMessenger.of(context).showSnackBar(

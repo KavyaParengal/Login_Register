@@ -31,7 +31,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
 
   XFile? image;
   final ImagePicker picker = ImagePicker();
-  String? imageName;
+  String imageName = 'Select Image';
 
   Future<void> getImage(ImageSource source) async {
     try {
@@ -47,52 +47,52 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
     }
   }
 
-  void myAlert(BuildContext context) {
-    showDialog( context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-            title: Text('Please choose media to select'),
-            content: Container(
-              height: MediaQuery.of(context).size.height / 6,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.gallery);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.image),
-                        SizedBox(width: 8,),
-                        Text('From Gallery'),
-                      ],
-                    ),
-                    style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                      getImage(ImageSource.camera);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.camera),
-                        SizedBox(width: 8,),
-                        Text('From Camera'),
-                      ],
-                    ),
-                      style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  ),
-                ],
-              ),
-            ),
-          );
-        });
-  }
+  // void myAlert(BuildContext context) {
+  //   showDialog( context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           shape:
+  //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+  //           title: Text('Please choose media to select'),
+  //           content: Container(
+  //             height: MediaQuery.of(context).size.height / 6,
+  //             child: Column(
+  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //               children: [
+  //                 ElevatedButton(
+  //                   onPressed: () {
+  //                     Navigator.pop(context);
+  //                     getImage(ImageSource.gallery);
+  //                   },
+  //                   child: Row(
+  //                     children: [
+  //                       Icon(Icons.image),
+  //                       SizedBox(width: 8,),
+  //                       Text('From Gallery'),
+  //                     ],
+  //                   ),
+  //                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
+  //                 ),
+  //                 ElevatedButton(
+  //                   onPressed: () {
+  //                     Navigator.pop(context);
+  //                     getImage(ImageSource.camera);
+  //                   },
+  //                   child: Row(
+  //                     children: [
+  //                       Icon(Icons.camera),
+  //                       SizedBox(width: 8,),
+  //                       Text('From Camera'),
+  //                     ],
+  //                   ),
+  //                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
+  //                 ),
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       });
+  // }
 
 
 
@@ -165,7 +165,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        image.toString() == null ? Text('Select Image'): Text(image.toString()),
+                        Text(imageName),
                         Icon(Icons.upload,color: primary,)
                       ],
                     ),
@@ -268,7 +268,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
                   if (_formKey.currentState!.validate()) {
                     AddWeekWiseContentApi.addWeekWiseContent(context,
                         monthController.text.trim(),
-                        imageName.toString() ?? '',
+                        imageName.toString(),
                         sizeController.text.trim(),
                         descriptionController.text.trim(),
                         lengthController.text.trim(),

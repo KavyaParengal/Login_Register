@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 import '../../Client-Dashboard/Utilities/colors.dart';
 
@@ -14,11 +16,30 @@ class EditWeekWiseContent extends StatefulWidget {
 class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
 
   TextEditingController monthController=TextEditingController();
-  TextEditingController imageController=TextEditingController();
+  //TextEditingController imageController=TextEditingController();
   TextEditingController sizeController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   TextEditingController lengthController=TextEditingController();
   TextEditingController weightController=TextEditingController();
+
+  XFile? image;
+  final ImagePicker picker = ImagePicker();
+  String imageName = 'Select Image';
+
+  Future<void> getImage(ImageSource source) async {
+    try {
+      XFile? pickedImage = await picker.pickImage(source: source);
+      if (pickedImage != null) {
+        setState(() {
+          image = pickedImage;
+          imageName = basename(image!.path);
+        });
+      }
+    } catch (e) {
+      print('Error picking image: $e');
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +57,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
           ),
           elevation: 0,
           title: Text(
-            'Add Week Wise Content',
+            'Edit Week Wise Content',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -87,7 +108,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        //image.toString() == null ? Text('Select Image'): Text(image.toString()),
+                        Text(imageName),
                         Icon(Icons.upload,color: primary,)
                       ],
                     ),
@@ -200,7 +221,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                 // }
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],
@@ -219,7 +240,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
-                    // getImage(ImageSource.gallery);
+                    getImage(ImageSource.gallery);
                   },
                   child: Text("Gallery"),
                 ),
@@ -227,7 +248,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                 GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
-                    // getImage(ImageSource.camera);
+                    getImage(ImageSource.camera);
                   },
                   child: Text("Camera"),
                 ),

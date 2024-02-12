@@ -7,7 +7,7 @@ import '../Model/client_model.dart';
 
 class ViewClientListAPI{
   Future<List<ClientModel>> getClientList(String token) async {
-    final url = ClientAPI.url + ClientAPI.client_list;
+    final url = APIConstants.url + APIConstants.client_list;
     print('------$url');
     print('------$token');
     var response = await http.get(Uri.parse(url), headers: {

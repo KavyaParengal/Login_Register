@@ -7,7 +7,7 @@ import '../Utilities/constants.dart';
 
 class ViewDashboardData{
   Future<DashbordDataModel> getDashboardData(String token) async {
-    final url = ClientAPI.url + ClientAPI.dashboard;
+    final url = APIConstants.url + APIConstants.dashboard;
           var response = await http.get(Uri.parse(url), headers: {
             'Authorization': "Token $token",
           });
