@@ -19,12 +19,14 @@ class _AddPremiumContentState extends State<AddPremiumContent> {
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   TextEditingController monthController=TextEditingController();
+  TextEditingController adviceController=TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -134,6 +136,27 @@ class _AddPremiumContentState extends State<AddPremiumContent> {
               ),
             ),
 
+            const SizedBox(height: 10,),
+
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: adviceController,
+                decoration: InputDecoration(
+                    hintText: "Advice",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'This field is required';
+                  }
+                  return null;
+                },
+              ),
+            ),
+
             const SizedBox(height: 36,),
 
             Padding(
@@ -145,8 +168,10 @@ class _AddPremiumContentState extends State<AddPremiumContent> {
                     AddPremiumContentApi.addPremiumContent(context,
                         videoController.text.trim(),
                         titleController.text.trim(),
-                        descriptionController.text.trim(),
-                        monthController.text.trim());
+                        descriptionController.text,
+                        monthController.text.trim(),
+                        adviceController.text,
+                    );
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

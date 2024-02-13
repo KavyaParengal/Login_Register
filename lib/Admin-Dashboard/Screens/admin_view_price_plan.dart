@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/delete_plan_list.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_price_plan.dart';
 import 'package:login_register/Client-Dashboard/Utilities/global.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,14 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                     Icons.arrow_back
                 )
             ),
+            actions: [
+              IconButton(
+                  onPressed: (){
+                    Navigator.pushNamed(context, RouteName.admin_home);
+                  },
+                  icon: Icon(Icons.home,color: Colors.white,)
+              )
+            ],
           )),
       body: Consumer<PlanListProvider>(
           builder: (context, value, child) {
@@ -222,7 +231,9 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.red),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        DeletePlanItem.deletePlanItem(context, planList[index].id.toString());
+                                      },
                                       child: Text(
                                         "Delete",
                                         style: TextStyle(color: Colors.white),

@@ -6,24 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Client-Dashboard/Routes/route_names.dart';
 import '../../Client-Dashboard/Utilities/constants.dart';
 
-
-
-
-class AddFreeContentApi {
-  static Future<void> addFreeContent(
-      BuildContext context,String video,String title, String description ,String month) async {
-
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-
+class DeleteFreeContent {
+  static Future<void> deleteFreeContent(BuildContext context, String freeContentId) async {
     try {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
       var data = {
-        "video": video,
-        "title": title,
-        "description": description,
-        "month": month,
+        "id": freeContentId,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_free_content;
+      final urls = APIConstants.url + APIConstants.delete_free_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
@@ -31,9 +22,9 @@ class AddFreeContentApi {
       var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text(body['message']),
-        //     ));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Delete successfully !'),
+            ));
         Navigator.pushNamed(context, RouteName.admin_view_free_content);
       }
       else {
@@ -42,7 +33,12 @@ class AddFreeContentApi {
             ));
       }
     } catch (e) {
-      throw e.toString();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred while deleting item: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }

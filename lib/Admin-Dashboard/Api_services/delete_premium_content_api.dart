@@ -6,35 +6,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Client-Dashboard/Routes/route_names.dart';
 import '../../Client-Dashboard/Utilities/constants.dart';
 
-
-
-
-class AddPremiumContentApi {
-  static Future<void> addPremiumContent(
-      BuildContext context,String video,String title, String description ,String month, String advice) async {
-
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-
+class DeletePaidContent {
+  static Future<void> deletePaidContent(BuildContext context, String paidContentId) async {
     try {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
       var data = {
-        "video": video,
-        "title": title,
-        "discription": description,
-        "month": month,
-        "advice": advice
+        "id": paidContentId,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_premium_content;
+      final urls = APIConstants.url + APIConstants.delete_paid_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-        var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text(body['message']),
-        //     ));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Delete successfully !'),
+            ));
         Navigator.pushNamed(context, RouteName.admin_view_premium_content);
       }
       else {
@@ -43,7 +33,12 @@ class AddPremiumContentApi {
             ));
       }
     } catch (e) {
-      throw e.toString();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('An error occurred while deleting item: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }

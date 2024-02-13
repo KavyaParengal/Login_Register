@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Utilities/global.dart';
 import 'package:provider/provider.dart';
 import '../../Client-Dashboard/Utilities/colors.dart';
@@ -54,6 +55,14 @@ class _ViewClientsState extends State<ViewClients> {
               }, 
               icon: Icon(Icons.arrow_back)
           ),
+          actions: [
+            IconButton(
+                onPressed: (){
+                  Navigator.pushNamed(context, RouteName.admin_home);
+                },
+                icon: Icon(Icons.home)
+            )
+          ],
         ),
       ),
       body: SingleChildScrollView(
