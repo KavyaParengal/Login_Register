@@ -2,7 +2,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import '../../Client-Dashboard/Utilities/constants.dart';
+import '../../Utilities/constants.dart';
 import '../Model/client_model.dart';
 
 class ViewClientListAPI{

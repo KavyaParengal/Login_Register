@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/dashboardDataModal.dart';
-import '../Utilities/constants.dart';
+import '../../Utilities/constants.dart';
 
 class ViewDashboardData{
   Future<DashbordDataModel> getDashboardData(String token) async {

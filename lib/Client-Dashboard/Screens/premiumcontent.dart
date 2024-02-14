@@ -11,10 +11,10 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../Routes/route_names.dart';
+import '../../Routes/route_names.dart';
 import '../Screens/login_page.dart';
-import '../Utilities/aboutscreen.dart';
-import '../Utilities/global.dart';
+import '../../Utilities/aboutscreen.dart';
+import '../../Utilities/global.dart';
 import '../Widgets/free_package_drawer.dart';
 import '../Widgets/loading_icon.dart';
 

@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../Client-Dashboard/Utilities/constants.dart';
-import '../Model/admin_view_week_wise_content.dart';
+import '../../Utilities/constants.dart';
+import '../Model/week_wise_content_model.dart';
 
 class AdminViewWeekWiseAPI{
   Future<List<AdminViewWeekWiseModel>> getWeekWiseContent(String token) async {

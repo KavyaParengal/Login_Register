@@ -1,14 +1,12 @@
 import 'dart:convert';
 
+import 'package:login_register/Admin-Dashboard/Model/workshop_video_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_register/Client-Dashboard/Models/planListModel.dart';
-
 import '../../Utilities/constants.dart';
 
-class PlanListAPI{
-
-  Future<List<PlanListModel>> getFreeContentData(String token) async {
-    final url = APIConstants.url + APIConstants.plan_list;
+class AdminViewWorkshopVideoAPI{
+  Future<List<WorkshopModel>> getWorkshopVideo(String token) async {
+    final url = APIConstants.url + APIConstants.admin_view_workshop_video;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",
@@ -17,12 +15,12 @@ class PlanListAPI{
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       print(body);
-      List<PlanListModel> data =  body.map<PlanListModel>((e) => PlanListModel.fromJson(e)).toList();
+      List<WorkshopModel> data =  body['data'].map<WorkshopModel>((e) => WorkshopModel.fromJson(e)).toList();
       //print(data);
       return data;
 
     } else {
-      List<PlanListModel> data = [];
+      List<WorkshopModel> data = [];
       return data;
     }
   }

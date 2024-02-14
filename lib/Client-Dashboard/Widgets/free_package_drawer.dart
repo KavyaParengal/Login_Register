@@ -1,15 +1,15 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
-import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
+import 'package:login_register/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
 import '../Api_services/viewDashbordDataApi.dart';
 import '../Models/dashboardDataModal.dart';
-import '../Utilities/global.dart';
+import '../../Utilities/global.dart';
 
 
 class FreeNavigationDrawer extends StatefulWidget {

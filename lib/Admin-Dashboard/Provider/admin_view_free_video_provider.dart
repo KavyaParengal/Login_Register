@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/admin_view_free_video_api.dart';
-import 'package:login_register/Admin-Dashboard/Model/admin_view_free_video.dart';
+import 'package:login_register/Admin-Dashboard/Model/free_video_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminViewFreeVideoProvider extends ChangeNotifier{

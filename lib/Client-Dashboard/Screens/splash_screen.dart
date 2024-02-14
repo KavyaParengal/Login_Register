@@ -3,11 +3,14 @@ import 'dart:async';
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
-import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Client-Dashboard/Screens/login_page.dart';
-import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
+import 'package:login_register/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../Utilities/global.dart';
+import '../Widgets/loading_icon.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -23,6 +26,16 @@ class _SplashScreenState extends State<SplashScreen> {
   String token = '';
   String check = '';
   int role = 0;
+  bool aniCon = false;
+
+  animateFun(){
+    Timer mytimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+
+        aniCon = !aniCon;
+      });
+    });
+  }
 
   Future<void> checkRoleAndNavigate() async {
     localStorage = await SharedPreferences.getInstance();
@@ -43,6 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
+    animateFun();
     super.initState();
     startTime();
   }
@@ -55,15 +69,60 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: Image.asset('assets/logo.png'),
-          ),
-          SizedBox(height: 30,),
-          CircularProgressIndicator(color: primary,)
-        ],
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+            // image: DecorationImage(
+            //     image: Image.asset('assets/Background.png').image,
+            //     fit: BoxFit.cover)
+          color: Colors.white
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Center(
+                  child: AnimatedContainer(
+                    height: aniCon?130:70,
+                    duration: Duration(seconds: 1)
+                    ,child: Image.asset("assets/logo.png")
+                    ,),
+                ),
+                Divider(
+                  //height: 100,
+                  color: Colors.transparent,
+                  thickness: .1,
+                ),
+                Text(
+                  "${Global().appName.toUpperCase()}",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.teal.shade500,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40.0,
+                  ),
+                ),
+                // Text(
+                //   "An Initiative By Shebirth",
+                //   textAlign: TextAlign.center,
+                //   style: TextStyle(
+                //     color: Colors.teal.shade700,
+                //     fontWeight: FontWeight.bold,
+                //     fontSize: 18.0,
+                //   ),
+                // ),
+                Divider(
+                  thickness: .1,
+                  color: Colors.transparent,
+                ),
+                LoadingIcon()
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

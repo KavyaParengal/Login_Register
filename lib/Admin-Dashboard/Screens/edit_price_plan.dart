@@ -2,16 +2,40 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Utilities/colors.dart';
+import '../Api_services/edit_plan_list_api.dart';
 
 class EditPricePlan extends StatefulWidget {
-  const EditPricePlan({super.key});
+  final int id;
+  final String paymentType;
+  final int price;
+  final String description;
+  EditPricePlan({
+    required this.id,
+    required this.paymentType,
+    required this.price,
+    required this.description
+  });
 
   @override
   State<EditPricePlan> createState() => _EditPricePlanState();
 }
 
 class _EditPricePlanState extends State<EditPricePlan> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print(widget.id);
+    print(widget.price);
+    print(widget.paymentType);
+    print(widget.description);
+
+    priceController.text = widget.price.toString();
+    titleController.text = widget.paymentType;
+    descriptionController.text = widget.description;
+  }
 
   TextEditingController priceController=TextEditingController();
   TextEditingController titleController=TextEditingController();
@@ -44,23 +68,48 @@ class _EditPricePlanState extends State<EditPricePlan> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Payment Type",style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.teal.shade800
+            ),),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
               controller: titleController,
               decoration: InputDecoration(
-                  hintText: "Payment Type",
+                  hintText: 'Payment Type',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)
                   )
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
+            ),
+          ),
+
+          const SizedBox(height: 10,),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("Amount",style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.teal.shade800
+            ),),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextFormField(
+              controller: priceController,
+              decoration: InputDecoration(
+                  hintText: 'Price',
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12)
+                  )
+              ),
             ),
           ),
 
@@ -68,41 +117,22 @@ class _EditPricePlanState extends State<EditPricePlan> {
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: priceController,
-              decoration: InputDecoration(
-                  hintText: "Amount",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
-              ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
-            ),
+            child: Text("Description",style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.teal.shade800
+            ),),
           ),
-
-          const SizedBox(height: 10,),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: priceController,
+              controller: descriptionController,
               decoration: InputDecoration(
-                  hintText: "Description",
+                  hintText: 'Description',
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12)
                   )
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
             ),
           ),
 
@@ -114,7 +144,13 @@ class _EditPricePlanState extends State<EditPricePlan> {
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(onPressed: (){
                 // if (_formKey.currentState!.validate()) {
-                //   AddPremiumPriceApi.addPremiumPrice(context, titleController.text.trim(), priceController.text.trim());
+                EditPremiumPriceApi.editPremiumPrice(
+                    context,
+                    titleController.text,
+                    priceController.text,
+                    descriptionController.text,
+                    widget.id
+                );
                 // }
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

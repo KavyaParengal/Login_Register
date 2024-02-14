@@ -10,19 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class AddWeekWiseContentApi {
-  static Future<void> addWeekWiseContent(
+class AddBannerAPI {
+  static Future<void> addBanner(
       BuildContext context,
-      String month,
+      String order,
       String imagePath,
-      String size,
-      String description,
-      String length,
-      String weight,
       ) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     try {
-      var uri = Uri.parse(APIConstants.url + APIConstants.add_week_wise_content);
+      var uri = Uri.parse(APIConstants.url + APIConstants.add_banners);
       var request = http.MultipartRequest('POST', uri);
 
       // Add authorization token to headers
@@ -32,11 +28,7 @@ class AddWeekWiseContentApi {
       }
 
       // Add fields
-      request.fields['month'] = month;
-      request.fields['size'] = size;
-      request.fields['description'] = description;
-      request.fields['length'] = length;
-      request.fields['weight'] = weight;
+      request.fields['order'] = order;
 
       // Add image file
       final imageFile = File(imagePath);
@@ -44,25 +36,25 @@ class AddWeekWiseContentApi {
       final imageLength = await imageFile.length();
 
       final multipartFile = http.MultipartFile(
-        'image',
+        'banners',
         imageStream,
         imageLength,
         filename: basename(imagePath),
         contentType: MediaType('image', 'jpeg'), // Change this according to your image type
       );
       request.files.add(multipartFile);
-
+      print('URL --- ${APIConstants.url + APIConstants.add_banners}');
       // Send request and handle response
       var response = await request.send();
 
       if (response.statusCode == 200) {
-        print('Week Wise Content added successfully');
-        Navigator.pushNamed(context, RouteName.admin_view_week_wise_content);
+        print('Banners added successfully');
+        Navigator.pushNamed(context, RouteName.admin_view_banners);
       } else {
-        print('Error Adding Week Wise Content. Status code: ${response.statusCode}');
+        print('Error Adding Banners. Status code: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error Adding Week Wise Content: $e');
+      print('Error Adding Banners: $e');
     }
   }
 }

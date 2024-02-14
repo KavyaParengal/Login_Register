@@ -4,11 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/delete_week_wise_content_api.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_wee_wise_provider.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_week_wise_content.dart';
-import 'package:login_register/Client-Dashboard/Utilities/constants.dart';
-import 'package:login_register/Client-Dashboard/Utilities/global.dart';
+import 'package:login_register/Utilities/constants.dart';
+import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 
-import '../../Client-Dashboard/Routes/route_names.dart';
+import '../../Routes/route_names.dart';
 import '../../Client-Dashboard/Widgets/loading_icon.dart';
 
 class AdminViewWeekWiseContent extends StatefulWidget {
@@ -170,7 +170,15 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.teal.shade500),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditWeekWiseContent()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditWeekWiseContent(
+                                  id: weekWiseList[index].id??0,
+                                  image: weekWiseList[index].image??'',
+                                  week: weekWiseList[index].month??0,
+                                  size: weekWiseList[index].size??'',
+                                  description: weekWiseList[index].description??'',
+                                  lenght: weekWiseList[index].length??'',
+                                  weight: weekWiseList[index].weight??"",
+                                )));
                               },
                               child: Text(
                                 "Edit",

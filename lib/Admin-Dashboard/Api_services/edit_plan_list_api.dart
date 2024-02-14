@@ -6,33 +6,32 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class AddPremiumContentApi {
-  static Future<void> addPremiumContent(
-      BuildContext context,String video,String title, String description ,String month, String advice) async {
+class EditPremiumPriceApi {
+  static Future<void> editPremiumPrice(
+      BuildContext context, String title ,String price, String description, int planId) async {
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
     try {
       var data = {
-        "video": video,
         "title": title,
-        "discription": description,
-        "month": month,
-        "advice": advice
+        "price": price,
+        "description": description,
+        "id": planId.toString()
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_premium_content;
+      final urls = APIConstants.url + APIConstants.edit_plan_item;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-        var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      var response = await http.patch(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));
-        Navigator.pushNamed(context, RouteName.admin_view_premium_content);
+        Navigator.pushNamed(context, RouteName.admin_view_price_plan);
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

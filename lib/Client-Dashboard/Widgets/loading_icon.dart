@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_register/Client-Dashboard/Utilities/colors.dart';
+import 'package:login_register/Utilities/colors.dart';
 
 class LoadingIcon extends StatelessWidget {
   const LoadingIcon({Key? key}) : super(key: key);

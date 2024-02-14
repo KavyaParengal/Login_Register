@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Api_services/admin_view_week_wise_content_api.dart';
-import '../Model/admin_view_week_wise_content.dart';
+import '../Model/week_wise_content_model.dart';
 
 class AdminViewWeekWiseProvider extends ChangeNotifier{
   final _service = AdminViewWeekWiseAPI();

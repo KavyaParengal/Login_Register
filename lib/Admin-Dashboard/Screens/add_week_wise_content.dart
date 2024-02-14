@@ -8,8 +8,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/add_week_wise_content_api.dart';
 import 'package:path/path.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
-import '../Api_services/add_video_api.dart';
+import '../../Utilities/colors.dart';
+import '../Api_services/add_free_video_api.dart';
 
 class AddWeekWiseContent extends StatefulWidget {
   const AddWeekWiseContent({super.key});
@@ -46,55 +46,6 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
       print('Error picking image: $e');
     }
   }
-
-  // void myAlert(BuildContext context) {
-  //   showDialog( context: context,
-  //       builder: (BuildContext context) {
-  //         return AlertDialog(
-  //           shape:
-  //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-  //           title: Text('Please choose media to select'),
-  //           content: Container(
-  //             height: MediaQuery.of(context).size.height / 6,
-  //             child: Column(
-  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //               children: [
-  //                 ElevatedButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     getImage(ImageSource.gallery);
-  //                   },
-  //                   child: Row(
-  //                     children: [
-  //                       Icon(Icons.image),
-  //                       SizedBox(width: 8,),
-  //                       Text('From Gallery'),
-  //                     ],
-  //                   ),
-  //                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-  //                 ),
-  //                 ElevatedButton(
-  //                   onPressed: () {
-  //                     Navigator.pop(context);
-  //                     getImage(ImageSource.camera);
-  //                   },
-  //                   child: Row(
-  //                     children: [
-  //                       Icon(Icons.camera),
-  //                       SizedBox(width: 8,),
-  //                       Text('From Camera'),
-  //                     ],
-  //                   ),
-  //                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-  //                 ),
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       });
-  // }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -268,7 +219,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
                   if (_formKey.currentState!.validate()) {
                     AddWeekWiseContentApi.addWeekWiseContent(context,
                         monthController.text.trim(),
-                        imageName.toString(),
+                        image!.path,
                         sizeController.text.trim(),
                         descriptionController.text.trim(),
                         lengthController.text.trim(),

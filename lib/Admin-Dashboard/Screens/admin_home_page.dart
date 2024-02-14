@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Client-Dashboard/Routes/route_names.dart';
-import '../../Client-Dashboard/Utilities/global.dart';
+import '../../Routes/route_names.dart';
+import '../../Utilities/global.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -19,19 +19,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
     'assets/free_content1.png',
     'assets/premium.png',
     'assets/dashBoard_details.png',
-    'assets/payment.png',];
-  List title = [ 'Free Content', 'Premium Content', 'Week Wise Content', 'Payment', 'Client List'];
+    'assets/payment.png',
+    'assets/banner.png',
+    'assets/workshop.png'
+  ];
+  List title = [ 'Free Content', 'Premium Content', 'Week Wise Content', 'Payment', 'Banners', 'Workshop Videos'];
   List navigationAdd = [
     RouteName.add_free_content,
     RouteName.add_premium_content,
     RouteName.add_week_wise_content,
-    RouteName.add_price,];
+    RouteName.add_price,
+    RouteName.add_banners,
+    RouteName.add_workshop_videos
+  ];
 
   List navigationView = [
     RouteName.admin_view_free_content,
     RouteName.admin_view_premium_content,
     RouteName.admin_view_week_wise_content,
-    RouteName.admin_view_price_plan,];
+    RouteName.admin_view_price_plan,
+    RouteName.admin_view_banners,
+    RouteName.admin_view_workshop_videos
+  ];
 
   @override
   Widget build(BuildContext context) {

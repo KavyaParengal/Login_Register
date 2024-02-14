@@ -6,14 +6,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class AddPremiumContentApi {
-  static Future<void> addPremiumContent(
-      BuildContext context,String video,String title, String description ,String month, String advice) async {
+class EditPremiumContentApi {
+  static Future<void> editPremiumContent(
+      BuildContext context,String video,String title, String description ,String month, String advice, int videoId) async {
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
     try {
       var data = {
+        "id": videoId.toString(),
         "video": video,
         "title": title,
         "discription": description,
@@ -21,12 +22,12 @@ class AddPremiumContentApi {
         "advice": advice
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_premium_content;
+      final urls = APIConstants.url + APIConstants.edit_paid_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-        var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      var response = await http.patch(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
         // ScaffoldMessenger.of(context).showSnackBar(

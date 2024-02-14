@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:login_register/Admin-Dashboard/Model/admin_view_free_video.dart';
+import 'package:login_register/Admin-Dashboard/Model/free_video_model.dart';
 import 'package:http/http.dart' as http;
-import '../../Client-Dashboard/Utilities/constants.dart';
+import '../../Utilities/constants.dart';
 
 class AdminViewFreeVideoAPI{
   Future<List<AdminViewFreeVideoModel>> getFreeVideo(String token) async {

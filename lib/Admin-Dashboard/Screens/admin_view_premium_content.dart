@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/delete_premium_content_api.dart';
-import 'package:login_register/Admin-Dashboard/Model/admin_view_paid_video.dart';
+import 'package:login_register/Admin-Dashboard/Model/paid_video_model.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_free_video_provider.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_premium_content.dart';
-import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -199,7 +199,14 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.teal.shade500),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditPremiumContent()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditPremiumContent(
+                                  id: paidContent.id??0,
+                                  videoLink: paidContent.video??'',
+                                  week: paidContent.month??0,
+                                  title: paidContent.title??'',
+                                  description: paidContent.discription??'Not given',
+                                  advice: paidContent.advice??'Not given'
+                                )));
                               },
                               child: Text(
                                 "Edit",

@@ -2,25 +2,52 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/edit_week_wise_content_api.dart';
 import 'package:path/path.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Utilities/colors.dart';
 
 class EditWeekWiseContent extends StatefulWidget {
-  const EditWeekWiseContent({super.key});
+  final int id;
+  final String image;
+  final int week;
+  final String size;
+  final String description;
+  final String lenght;
+  final String weight;
 
   @override
   State<EditWeekWiseContent> createState() => _EditWeekWiseContentState();
+
+  EditWeekWiseContent(
+      {required this.id,
+        required this.image,
+        required this.week,
+        required this.size,
+        required this.description,
+        required this.lenght,
+        required this.weight});
 }
 
 class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
 
   TextEditingController monthController=TextEditingController();
-  //TextEditingController imageController=TextEditingController();
   TextEditingController sizeController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
   TextEditingController lengthController=TextEditingController();
   TextEditingController weightController=TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    monthController.text = widget.week.toString();
+    sizeController.text = widget.size;
+    descriptionController.text = widget.description;
+    lengthController.text = widget.lenght;
+    weightController.text = widget.weight;
+    // imageName = widget.image;
+  }
 
   XFile? image;
   final ImagePicker picker = ImagePicker();
@@ -67,164 +94,174 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
           ),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: monthController,
-              decoration: InputDecoration(
-                  hintText: "Month",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
-              ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Month",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal.shade800
+              ),),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: monthController,
+                decoration: InputDecoration(
+                    hintText: 'Week',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
+              ),
+            ),
 
-          const SizedBox(height: 10,),
+            const SizedBox(height: 10,),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              onTap: (){
-                _showImageSourceDialog(context);
-              },
-              child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Colors.grey.shade500)
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(imageName),
-                        Icon(Icons.upload,color: primary,)
-                      ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: (){
+                  _showImageSourceDialog(context);
+                },
+                child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(color: Colors.grey.shade500)
                     ),
-                  )
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(imageName),
+                          Icon(Icons.upload,color: primary,)
+                        ],
+                      ),
+                    )
+                ),
               ),
             ),
-          ),
 
-          const SizedBox(height: 10,),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: sizeController,
-              decoration: InputDecoration(
-                  hintText: "Size",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Size",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal.shade800
+              ),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: sizeController,
+                decoration: InputDecoration(
+                    hintText: 'Size',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
             ),
-          ),
 
-          const SizedBox(height: 10,),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: descriptionController,
-              decoration: InputDecoration(
-                  hintText: "Description",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Description",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal.shade800
+              ),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: descriptionController,
+                decoration: InputDecoration(
+                    hintText: 'Description',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
             ),
-          ),
 
-          const SizedBox(height: 10,),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: lengthController,
-              decoration: InputDecoration(
-                  hintText: "Length (CM)",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Lenght (CM)",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal.shade800
+              ),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: lengthController,
+                decoration: InputDecoration(
+                    hintText: 'Length',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
             ),
-          ),
 
-          const SizedBox(height: 10,),
-
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              controller: weightController,
-              decoration: InputDecoration(
-                  hintText: "Weight (GRAM)",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12)
-                  )
+            const SizedBox(height: 10,),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("Weight (GRAM)",style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.teal.shade800
+              ),),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: weightController,
+                decoration: InputDecoration(
+                    hintText: 'Weight',
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12)
+                    )
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'This field is required';
-                }
-                return null;
-              },
             ),
-          ),
 
-          const SizedBox(height: 36,),
+            const SizedBox(height: 36,),
 
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(onPressed: (){
-                // if (_formKey.currentState!.validate()) {
-                //   AddWeekWiseContentApi.addWeekWiseContent(context,
-                //       monthController.text.trim(),
-                //       imageName.toString() ?? '',
-                //       sizeController.text.trim(),
-                //       descriptionController.text.trim(),
-                //       lengthController.text.trim(),
-                //       weightController.text.trim()
-                //   );
-                //   print('--------${basename(image!.path)}');
-                // }
-              },
-                  style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                child: ElevatedButton(onPressed: (){
+                  // if (_formKey.currentState!.validate()) {
+                    EditWeekWiseContentApi.editWeekWiseContent(context,
+                        monthController.text.trim(),
+                        image!.path,
+                        sizeController.text.trim(),
+                        descriptionController.text.trim(),
+                        lengthController.text.trim(),
+                        weightController.text.trim(),
+                        widget.id,
+                    );
+                  //   print('--------${basename(image!.path)}');
+                  // }
+                },
+                    style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
+                    child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );;
   }

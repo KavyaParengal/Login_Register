@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import '../Models/freecontentmodel.dart';
-import '../Utilities/constants.dart';
+import '../../Utilities/constants.dart';
 
 class ViewFreeContentDataAPI{
 

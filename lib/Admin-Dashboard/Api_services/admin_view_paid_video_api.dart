@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:login_register/Admin-Dashboard/Model/admin_view_paid_video.dart';
-import '../../Client-Dashboard/Utilities/constants.dart';
+import 'package:login_register/Admin-Dashboard/Model/paid_video_model.dart';
+import '../../Utilities/constants.dart';
 
 class AdminViewPaidVideoAPI{
   Future<List<AdminViewPaidVideoModel>> getPaidVideo(String token) async {

@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
-import '../Api_services/add_video_api.dart';
+import '../../Utilities/colors.dart';
+import '../Api_services/add_free_video_api.dart';
 
 class AdminAddVideos extends StatefulWidget {
   const AdminAddVideos({super.key});
@@ -141,11 +141,13 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(onPressed: (){
                   if (_formKey.currentState!.validate()) {
-                    AddFreeContentApi.addFreeContent(context,
+                    AddFreeContentApi.addFreeContent(
+                        context,
                         videoController.text.trim(),
                         titleController.text.trim(),
                         descriptionController.text.trim(),
-                        monthController.text.trim());
+                        monthController.text.trim()
+                    );
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),

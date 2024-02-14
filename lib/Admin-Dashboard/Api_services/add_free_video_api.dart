@@ -6,26 +6,35 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class DeletePlanItem {
-  static Future<void> deletePlanItem(BuildContext context, String planId) async {
+
+
+
+class AddFreeContentApi {
+  static Future<void> addFreeContent(
+      BuildContext context,String video,String title,String description ,String month) async {
+
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+
     try {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
       var data = {
-        "id": planId,
+        "video": video,
+        "title": title,
+        "description": description,
+        "month": month,
       };
-      //print(data);
-      final urls = APIConstants.url + APIConstants.delete_plan_item;
-      //print(urls);
+      print(data);
+      final urls = APIConstants.url + APIConstants.add_free_content;
+      print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
-      //print(token);
+      print(token);
       var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Delete successfully !'),
-            ));
-        Navigator.pushNamed(context, RouteName.admin_view_price_plan);
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(content: Text(body['message']),
+        //     ));
+        Navigator.pushNamed(context, RouteName.admin_view_free_content);
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -33,12 +42,7 @@ class DeletePlanItem {
             ));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('An error occurred while deleting item: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      throw e.toString();
     }
   }
 }

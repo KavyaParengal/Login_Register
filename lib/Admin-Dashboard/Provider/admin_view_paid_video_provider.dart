@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:login_register/Admin-Dashboard/Model/admin_view_paid_video.dart';
+import 'package:login_register/Admin-Dashboard/Model/paid_video_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Api_services/admin_view_paid_video_api.dart';

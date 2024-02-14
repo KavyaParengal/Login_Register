@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../Routes/route_names.dart';
-import '../Utilities/constants.dart';
+import '../../Routes/route_names.dart';
+import '../../Utilities/constants.dart';
 
 class RegisterApi{
   static Future<void> registerUser(BuildContext context,

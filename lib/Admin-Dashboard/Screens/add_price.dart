@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Utilities/colors.dart';
 import '../Api_services/add_price_api.dart';
 
 class AddPremiumPrice extends StatefulWidget {

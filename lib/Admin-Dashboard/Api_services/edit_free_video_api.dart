@@ -6,25 +6,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class DeleteFreeContent {
-  static Future<void> deleteFreeContent(BuildContext context, String freeContentId) async {
+
+
+
+class EditFreeContentApi {
+  static Future<void> editFreeContent(
+      BuildContext context,String video,String title ,String month, int videoId) async {
+
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+
     try {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
       var data = {
-        "id": freeContentId,
+        "id": videoId.toString(),
+        "video": video,
+        "title": title,
+        // "description": description,
+        "month": month,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.delete_free_content;
+      final urls = APIConstants.url + APIConstants.edit_free_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-      var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      var response = await http.patch(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      print(response.statusCode);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Delete successfully !'),
-            ));
+        // ScaffoldMessenger.of(context).showSnackBar(
+        //     SnackBar(content: Text(body['message']),
+        //     ));
         Navigator.pushNamed(context, RouteName.admin_view_free_content);
       }
       else {
@@ -33,12 +44,7 @@ class DeleteFreeContent {
             ));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('An error occurred while deleting item: $e'),
-          backgroundColor: Colors.red,
-        ),
-      );
+      throw e.toString();
     }
   }
 }

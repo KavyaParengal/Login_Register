@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
+import 'package:login_register/Routes/route_names.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import '../Api_services/viewDashbordDataApi.dart';
 import '../Models/dashboardDataModal.dart';
-import '../Utilities/colors.dart';
-import '../Utilities/constants.dart';
-import '../Utilities/global.dart';
+import '../../Utilities/colors.dart';
+import '../../Utilities/constants.dart';
+import '../../Utilities/global.dart';
 import '../Widgets/free_package_drawer.dart';
 
 class HomePage extends StatefulWidget {

@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 
 import '../../Client-Dashboard/Api_services/login_api_services.dart';
-import '../../Client-Dashboard/Routes/route_names.dart';
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Routes/route_names.dart';
+import '../../Utilities/colors.dart';
 
 
 class LoginPage extends StatefulWidget {

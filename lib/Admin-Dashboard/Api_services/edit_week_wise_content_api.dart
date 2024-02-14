@@ -10,8 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
-class AddWeekWiseContentApi {
-  static Future<void> addWeekWiseContent(
+class EditWeekWiseContentApi {
+  static Future<void> editWeekWiseContent(
       BuildContext context,
       String month,
       String imagePath,
@@ -19,11 +19,12 @@ class AddWeekWiseContentApi {
       String description,
       String length,
       String weight,
+      int contentId
       ) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     try {
-      var uri = Uri.parse(APIConstants.url + APIConstants.add_week_wise_content);
-      var request = http.MultipartRequest('POST', uri);
+      var uri = Uri.parse(APIConstants.url + APIConstants.edit_week_wise_content);
+      var request = http.MultipartRequest('PATCH', uri);
 
       // Add authorization token to headers
       String? token = localStorage.getString('token');
@@ -31,7 +32,7 @@ class AddWeekWiseContentApi {
         request.headers['Authorization'] = 'token $token';
       }
 
-      // Add fields
+      request.fields['id'] = contentId.toString();
       request.fields['month'] = month;
       request.fields['size'] = size;
       request.fields['description'] = description;
@@ -56,13 +57,13 @@ class AddWeekWiseContentApi {
       var response = await request.send();
 
       if (response.statusCode == 200) {
-        print('Week Wise Content added successfully');
+        print('Week Wise Content Edit successfully');
         Navigator.pushNamed(context, RouteName.admin_view_week_wise_content);
       } else {
-        print('Error Adding Week Wise Content. Status code: ${response.statusCode}');
+        print('Error Editing Week Wise Content. Status code: ${response.statusCode}');
       }
     } catch (e) {
-      print('Error Adding Week Wise Content: $e');
+      print('Error Editing Week Wise Content: $e');
     }
   }
 }

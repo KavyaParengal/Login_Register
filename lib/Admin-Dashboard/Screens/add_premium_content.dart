@@ -2,9 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/add_premium_content_api.dart';
-import 'package:login_register/Admin-Dashboard/Api_services/add_video_api.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/add_free_video_api.dart';
 
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Utilities/colors.dart';
 
 class AddPremiumContent extends StatefulWidget {
   const AddPremiumContent({super.key});

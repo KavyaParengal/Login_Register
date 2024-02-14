@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/delete_plan_list.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_price_plan.dart';
-import 'package:login_register/Client-Dashboard/Utilities/global.dart';
+import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 
 import '../../Client-Dashboard/Provider/plan_list_provider.dart';
-import '../../Client-Dashboard/Routes/route_names.dart';
-import '../../Client-Dashboard/Utilities/colors.dart';
+import '../../Routes/route_names.dart';
+import '../../Utilities/colors.dart';
 import '../../Client-Dashboard/Widgets/loading_icon.dart';
 
 class AdminViewPricePlan extends StatefulWidget {
@@ -220,7 +220,12 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                                     style: ElevatedButton.styleFrom(
                                         backgroundColor: Colors.teal.shade500),
                                     onPressed: () {
-                                      Navigator.push(context, MaterialPageRoute(builder: (context) => EditPricePlan()));
+                                      Navigator.push(context, MaterialPageRoute(builder: (context) => EditPricePlan(
+                                        id: planList[index].id??0,
+                                        paymentType: planList[index].plan??'',
+                                        price: planList[index].price??0,
+                                        description: planList[index].description??'Not given'
+                                      )));
                                     },
                                     child: Text(
                                       "Edit",

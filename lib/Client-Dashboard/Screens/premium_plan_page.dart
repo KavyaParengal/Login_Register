@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
-import 'package:login_register/Client-Dashboard/Routes/route_names.dart';
-import 'package:login_register/Client-Dashboard/Utilities/global.dart';
+import 'package:login_register/Routes/route_names.dart';
+import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 
-import '../Utilities/colors.dart';
+import '../../Utilities/colors.dart';
 import '../Widgets/loading_icon.dart';
 
 class PremiumPlanPage extends StatefulWidget {
