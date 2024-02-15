@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provider.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_free_video_provider.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_paid_video_provider.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_video_provider.dart';
@@ -28,7 +29,8 @@ void main() async {
           ChangeNotifierProvider(create:  (context) => AdminViewFreeVideoProvider()),
           ChangeNotifierProvider(create:  (context) => AdminViewPaidVideoProvider()),
           ChangeNotifierProvider(create:  (context) => AdminViewWeekWiseProvider()),
-          ChangeNotifierProvider(create:  (context) => AdminViewWorkshopVideoProvider())
+          ChangeNotifierProvider(create:  (context) => AdminViewWorkshopVideoProvider()),
+          ChangeNotifierProvider(create:  (context) => AdminViewBannerProvider())
         ],
         child: MaterialApp(
           // theme: ThemeData(

@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Routes/route_names.dart';
-import '../../Utilities/constants.dart';
 
 class LoginApi {
   static Future<void> loginUser(
@@ -16,11 +16,12 @@ class LoginApi {
         "email": email,
         "password": password,
       };
-
+      print(data);
       final urls = APIConstants.url + APIConstants.login;
+      print(urls);
       var response = await http.post(Uri.parse(urls), body: data);
       var body = json.decode(response.body);
-
+      print('Response body: $body');
       if (response.statusCode == 200) {
         if (body['token'] != null) {
           localStorage.setString('token', body['token']);
@@ -28,30 +29,48 @@ class LoginApi {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Login Successful!')),
           );
-          redirectToRoute(context, body['role']);
+          print('Role: ${body['role']}, Date: ${body['date']}');
+          if (body['role'] == 1) {
+            if (body['date'] == true) {
+              Navigator.pushNamed(context, RouteName.home);
+            } else {
+              Navigator.pushNamed(context, RouteName.add_menstration);
+            }
+          } else if (body['role'] == 2) {
+            Navigator.pushNamed(context, RouteName.admin_home);
+          }
         } else {
-          showErrorMessage(context, 'Invalid User Name or Password');
+          if (body['message'] == "Invalid credentials") {
+            showErrorMessage(context, 'Invalid email or password');
+          } else {
+            showErrorMessage(context, 'User not registered');
+          }
         }
       } else {
         showErrorMessage(context, 'Error: ${response.statusCode}');
       }
     } catch (e) {
-      showErrorMessage(context, 'An error occurred: $e');
+      print('Exception: $e');
+      showErrorMessage(context, 'Error: Invalid username or password');
     }
   }
 
-  static void redirectToRoute(BuildContext context, int role) {
-    switch (role) {
-      case 1:
-        Navigator.pushNamed(context, RouteName.add_menstration);
-        break;
-      case 2:
-        Navigator.pushNamed(context, RouteName.admin_home);
-        break;
-      default:
-        showErrorMessage(context, 'Invalid Role: $role');
-    }
-  }
+  // static void redirectToRoute(BuildContext context, int role, bool date) {
+  //   switch (role) {
+  //     case 1:
+  //       if (date == true) {
+  //         Navigator.pushNamed(context, RouteName.home);
+  //       } else {
+  //         Navigator.pushNamed(context, RouteName.add_menstration);
+  //       }
+  //       break;
+  //     case 2:
+  //       Navigator.pushNamed(context, RouteName.admin_home);
+  //       break;
+  //     default:
+  //       showErrorMessage(context, 'Invalid Role: $role');
+  //   }
+  // }
 
   static void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(

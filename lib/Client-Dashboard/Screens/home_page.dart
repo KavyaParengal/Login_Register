@@ -1,20 +1,26 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provider.dart';
+import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_video_provider.dart';
 import 'package:login_register/Routes/route_names.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../Api_services/viewDashbordDataApi.dart';
 import '../Models/dashboardDataModal.dart';
 import '../../Utilities/colors.dart';
 import '../../Utilities/constants.dart';
 import '../../Utilities/global.dart';
+import '../Models/freecontentmodel.dart';
 import '../Widgets/free_package_drawer.dart';
+import '../Widgets/loading_icon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,6 +35,14 @@ class _HomePageState extends State<HomePage> {
   bool isLoading = true;
   DashbordDataModel? userDetails;
   String? token;
+  int _currentIndexBanner = 0;
+  int _currentIndexWorkshop = 0;
+
+  late YoutubePlayerController _controller;
+  late PlayerState _playerState;
+  late YoutubeMetaData _videoMetaData;
+  bool _isPlayerReady = true;
+
 
   final _key = GlobalKey<ExpandableFabState>();
 
@@ -37,6 +51,19 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
     fetchUserDetails();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AdminViewBannerProvider>(context, listen: false).getBanners();
+      Provider.of<AdminViewWorkshopVideoProvider>(context, listen: false).getWorkshopVideoList();
+    });
+  }
+
+  void listener() {
+    if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
+      setState(() {
+        _playerState = _controller.value.playerState;
+        _videoMetaData = _controller.metadata;
+      });
+    }
   }
 
   Future<DashbordDataModel?> fetchUserDetails() async {
@@ -64,7 +91,7 @@ class _HomePageState extends State<HomePage> {
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
               child: RichText(
                 text: TextSpan(
                   children: [
@@ -439,6 +466,84 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  Widget _buildBannerSlide() {
+    return Consumer<AdminViewBannerProvider>(
+      builder: (context, value, child){
+        if (value.isLoading) {
+          return const Center(
+              child: LoadingIcon()
+          );
+        }
+        final banners = value.bannerList;
+
+        List<Widget> images = banners.map((banner) {
+          return Image.network(
+            APIConstants.url + '${banner.banners}',
+            fit: BoxFit.contain,
+          );
+        }).toList();
+
+        return Container(
+          margin: EdgeInsets.only(bottom: 8),
+          // decoration: BoxDecoration(
+          //   // borderRadius: BorderRadius.circular(10),
+          //   color: Colors.teal.withOpacity(0.2),
+          // ),
+          child: ImageSlideshow(
+            height: MediaQuery.of(context).size.height/3,
+            indicatorColor: Colors.teal.shade500,
+            indicatorBackgroundColor: Colors.grey,
+            autoPlayInterval: 4500,
+            indicatorRadius: 3,
+            //indicatorBottomPadding: 2,
+            //indicatorPadding: 8,
+            isLoop: true,
+            children: images,
+            onPageChanged: (value) {
+              setState(() {
+                _currentIndexBanner = value;
+              });
+            },
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildWorkshopVideo() {
+    return Consumer<AdminViewWorkshopVideoProvider>(
+      builder: (context, value, child) {
+        if (value.isLoading) {
+          return const Center(child: LoadingIcon());
+        }
+        final workshop = value.workshopVideoList;
+        return Container(
+          height: 200, // Adjust the height as needed
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: workshop.length,
+            itemBuilder: (context, index) {
+              print('--------- $workshop');
+              final video = workshop[index];
+              String videoId = YoutubePlayer.convertUrlToId(video.video.toString())!;
+              return YoutubePlayer(
+                controller: YoutubePlayerController(
+                  initialVideoId: videoId,
+                  flags: YoutubePlayerFlags(
+                    autoPlay: true,
+                    mute: false,
+                  ),
+                ),
+                showVideoProgressIndicator: true,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
+
+
   Future<dynamic> _premiumAlert() {
     return showDialog(
       context: context,
@@ -501,31 +606,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     setState(() {
-      //       _isExpanded = !_isExpanded;
-      //     });
-      //   },
-      //   elevation: 5,
-      //   backgroundColor: Colors.transparent,
-      //   child: Container(
-      //     height: 60,
-      //     width: 60,
-      //     decoration: BoxDecoration(
-      //         borderRadius: BorderRadius.circular(30),
-      //         color: Colors.green.shade500
-      //     ),
-      //     child: Column(
-      //       children: [
-      //         IconButton(onPressed: (){
-      //           // _launchWhatsapp();
-      //         },
-      //             icon: const FaIcon(FontAwesomeIcons.whatsapp,color: Colors.white,)),
-      //       ],
-      //     ),
-      //   ),),
-
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
         openButtonBuilder: RotateFloatingActionButtonBuilder(
@@ -567,10 +647,11 @@ class _HomePageState extends State<HomePage> {
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/logo.png'),
-              opacity: 0.5
+              opacity: 0.35
             )
           ),
           child: SingleChildScrollView(
+            physics: ScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -579,6 +660,8 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(10.0),
                   child: _buildName(),
                 ),
+                _buildBannerSlide(),
+                _buildWorkshopVideo(),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: _buildImage(),

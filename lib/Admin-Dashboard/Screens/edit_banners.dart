@@ -2,15 +2,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:login_register/Admin-Dashboard/Api_services/edit_banner_api.dart';
 import 'package:path/path.dart';
 
 import '../../Utilities/colors.dart';
 
 class EditBanners extends StatefulWidget {
-  const EditBanners({super.key});
+
+  final int id;
+  final String banner;
+  final int order;
 
   @override
   State<EditBanners> createState() => _EditBannersState();
+
+  EditBanners({
+    required this.id,
+    required this.banner,
+    required this.order});
 }
 
 class _EditBannersState extends State<EditBanners> {
@@ -20,6 +29,12 @@ class _EditBannersState extends State<EditBanners> {
   XFile? image;
   final ImagePicker picker = ImagePicker();
   String imageName = 'Select Image';
+
+  @override
+  void initState() {
+    super.initState();
+    orderController.text = widget.order.toString();
+  }
 
   Future<void> getImage(ImageSource source) async {
     try {
@@ -133,7 +148,7 @@ class _EditBannersState extends State<EditBanners> {
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                   onPressed: (){
-
+                      EditBannerAPI.editBanner(context, orderController.text, image!.path, widget.id);
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
                   child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),

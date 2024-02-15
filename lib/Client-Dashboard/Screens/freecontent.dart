@@ -20,6 +20,7 @@ class FreeContent extends StatefulWidget {
 }
 
 class _FreeContentState extends State<FreeContent> {
+
   bool isLoading = true;
   late YoutubePlayerController _controller;
   List<FreeContentDataModel> _freeContent = [];

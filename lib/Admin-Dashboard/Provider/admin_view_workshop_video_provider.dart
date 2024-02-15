@@ -15,9 +15,9 @@ class AdminViewWorkshopVideoProvider extends ChangeNotifier{
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     String? token = localStorage.getString('token');
-
-    final response = await _service.getWorkshopVideo(token.toString());
-
+    print('Token ------- $token');
+    final response = await _service.getWorkshopVideo(token??'');
+    print('Response ------- $response');
     _workshopVideoList = response;
     isLoading = false;
     notifyListeners();

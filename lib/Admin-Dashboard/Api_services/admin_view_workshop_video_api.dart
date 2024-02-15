@@ -7,16 +7,16 @@ import '../../Utilities/constants.dart';
 class AdminViewWorkshopVideoAPI{
   Future<List<WorkshopModel>> getWorkshopVideo(String token) async {
     final url = APIConstants.url + APIConstants.admin_view_workshop_video;
-    print(url);
+    print(url + token);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",
     });
     print(response);
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      print(body);
+      print('-----$body');
       List<WorkshopModel> data =  body['data'].map<WorkshopModel>((e) => WorkshopModel.fromJson(e)).toList();
-      //print(data);
+      print('========= $data');
       return data;
 
     } else {
