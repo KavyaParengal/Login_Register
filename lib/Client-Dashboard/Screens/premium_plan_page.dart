@@ -56,7 +56,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                   Navigator.pop(context);
                 },
                 icon: Icon(
-                  Icons.arrow_back
+                  Icons.arrow_back, color: Colors.white,
                 )
             ),
           )),

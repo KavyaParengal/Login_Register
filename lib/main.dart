@@ -35,8 +35,9 @@ void main() async {
         child: MaterialApp(
           // theme: ThemeData(
           //   inputDecorationTheme: InputDecorationTheme(
-          //     focusColor: Colors.teal.shade200
+          //     iconColor: Colors.white
           //   ),
+          //   drawerTheme: DrawerThemeData(scrimColor: Colors.white)
           // ),
           debugShowCheckedModeBanner: false,
           initialRoute: RouteName.splashScreen,

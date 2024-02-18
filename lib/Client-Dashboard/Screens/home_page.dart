@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
@@ -29,7 +30,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage>{
 
   late String data ;
   bool isLoading = true;
@@ -43,12 +44,8 @@ class _HomePageState extends State<HomePage> {
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = true;
 
-
-  final _key = GlobalKey<ExpandableFabState>();
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchUserDetails();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -153,38 +150,6 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.black,
                 ),
               ),
-              // TextSpan(
-              //   text: ' and ',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 15,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              // TextSpan(
-              //   text: userDetails!.date![1].toString()==null?'0':userDetails!.date![1].toString(),
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 22,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              // TextSpan(
-              //   text: ' Days ',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 22,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.black,
-              //   ),
-              // ),
-              // TextSpan(
-              //   text: 'Left',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 15,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.black,
-              //   ),
-              // ),
             ]),
           ),
         ),
@@ -390,7 +355,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         const Divider(
-          height: 25,
+          height: 20,
         ),
         Column(
           children: [
@@ -466,16 +431,59 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // Widget _buildBannerSlide() {
+  //   return Consumer<AdminViewBannerProvider>(
+  //     builder: (context, value, child){
+  //       if (value.isLoading) {
+  //         return const Center(
+  //             child: LoadingIcon()
+  //         );
+  //       }
+  //       final banners = value.bannerList;
+  //
+  //       List<Widget> images = banners.map((banner) {
+  //         return Image.network(
+  //           APIConstants.url + '${banner.banners}',
+  //           fit: BoxFit.contain,
+  //         );
+  //       }).toList();
+  //
+  //       return Container(
+  //         margin: EdgeInsets.only(bottom: 8),
+  //         // decoration: BoxDecoration(
+  //         //   // borderRadius: BorderRadius.circular(10),
+  //         //   color: Colors.teal.withOpacity(0.2),
+  //         // ),
+  //         child: ImageSlideshow(
+  //           height: MediaQuery.of(context).size.height/3,
+  //           indicatorColor: Colors.teal.shade500,
+  //           indicatorBackgroundColor: Colors.grey,
+  //           autoPlayInterval: 4500,
+  //           indicatorRadius: 3,
+  //           //indicatorBottomPadding: 2,
+  //           //indicatorPadding: 8,
+  //           isLoop: true,
+  //           children: images,
+  //           onPageChanged: (value) {
+  //             setState(() {
+  //               _currentIndexBanner = value;
+  //             });
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
+
   Widget _buildBannerSlide() {
     return Consumer<AdminViewBannerProvider>(
-      builder: (context, value, child){
+      builder: (context, value, child) {
         if (value.isLoading) {
           return const Center(
-              child: LoadingIcon()
+            child: LoadingIcon(),
           );
         }
         final banners = value.bannerList;
-
         List<Widget> images = banners.map((banner) {
           return Image.network(
             APIConstants.url + '${banner.banners}',
@@ -484,31 +492,80 @@ class _HomePageState extends State<HomePage> {
         }).toList();
 
         return Container(
-          margin: EdgeInsets.only(bottom: 8),
-          // decoration: BoxDecoration(
-          //   // borderRadius: BorderRadius.circular(10),
-          //   color: Colors.teal.withOpacity(0.2),
-          // ),
-          child: ImageSlideshow(
-            height: MediaQuery.of(context).size.height/3,
-            indicatorColor: Colors.teal.shade500,
-            indicatorBackgroundColor: Colors.grey,
-            autoPlayInterval: 4500,
-            indicatorRadius: 3,
-            //indicatorBottomPadding: 2,
-            //indicatorPadding: 8,
-            isLoop: true,
-            children: images,
-            onPageChanged: (value) {
-              setState(() {
-                _currentIndexBanner = value;
-              });
-            },
+          // margin: EdgeInsets.only(bottom: 8),
+          child: CarouselSlider(
+            options: CarouselOptions(
+              // height: MediaQuery.of(context).size.height / 3,
+              aspectRatio: 16 / 9,
+              autoPlay: true,
+              enlargeCenterPage: true,
+              autoPlayInterval: Duration(milliseconds: 4500),
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentIndexBanner = index;
+                });
+              },
+            ),
+            items: images,
           ),
         );
       },
     );
   }
+
+  // Widget _buildWorkshopVideo() {
+  //   return Consumer<AdminViewWorkshopVideoProvider>(
+  //     builder: (context, value, child) {
+  //       if (value.isLoading) {
+  //         return const Center(child: LoadingIcon());
+  //       }
+  //       final workshop = value.workshopVideoList;
+  //       return Container(
+  //         height: 250,
+  //         child: ListView(
+  //           scrollDirection: Axis.horizontal,
+  //           children: List.generate(workshop.length, (index) {
+  //             final workshops = workshop[index];
+  //             String videoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/embed/EoxGlbnQxQw?si=Tkky52aoG8q0zFAY')!;
+  //             _controller = YoutubePlayerController(
+  //               initialVideoId: videoId,
+  //               flags: YoutubePlayerFlags(
+  //                 autoPlay: true,
+  //                 mute: false,
+  //               ),
+  //             );
+  //             return Padding(
+  //               padding: const EdgeInsets.only(
+  //                 top: 10,
+  //                 bottom: 10,
+  //                 left: 2,
+  //                 right: 2,
+  //               ),
+  //               child: YoutubePlayerBuilder(
+  //                 player: YoutubePlayer(
+  //                   onReady: () {
+  //                     _controller.addListener(listener);
+  //                   },
+  //                   aspectRatio: 16 / 9,
+  //                   bottomActions: [],
+  //                   topActions: [],
+  //                   showVideoProgressIndicator: false,
+  //                   controller: _controller,
+  //                 ),
+  //                 builder: (context, player) {
+  //                   return Container(
+  //                     width: 320, // Adjust width as needed
+  //                     child: player,
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           }),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   Widget _buildWorkshopVideo() {
     return Consumer<AdminViewWorkshopVideoProvider>(
@@ -518,23 +575,49 @@ class _HomePageState extends State<HomePage> {
         }
         final workshop = value.workshopVideoList;
         return Container(
-          height: 200, // Adjust the height as needed
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: workshop.length,
-            itemBuilder: (context, index) {
-              print('--------- $workshop');
-              final video = workshop[index];
-              String videoId = YoutubePlayer.convertUrlToId(video.video.toString())!;
-              return YoutubePlayer(
-                controller: YoutubePlayerController(
-                  initialVideoId: videoId,
-                  flags: YoutubePlayerFlags(
-                    autoPlay: true,
-                    mute: false,
-                  ),
+          height: 250,
+          child: CarouselSlider.builder(
+            // itemCount: workshop.length,
+            itemCount: 4,
+            options: CarouselOptions(
+              //autoPlay: true,
+              aspectRatio: 16 / 9,
+              enlargeCenterPage: true,
+            ),
+            itemBuilder: (context, index, realIndex) {
+              String videoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/embed/EoxGlbnQxQw?si=Tkky52aoG8q0zFAY')!;
+              _controller = YoutubePlayerController(
+                initialVideoId: videoId,
+                flags: YoutubePlayerFlags(
+                  autoPlay: true,
+                  mute: false,
                 ),
-                showVideoProgressIndicator: true,
+              );
+              return Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: 2,
+                  right: 2,
+                ),
+                child: YoutubePlayerBuilder(
+                  player: YoutubePlayer(
+                    onReady: () {
+                      _controller.addListener(listener);
+                    },
+                    aspectRatio: 16 / 9,
+                    bottomActions: [],
+                    topActions: [],
+                    showVideoProgressIndicator: false,
+                    controller: _controller,
+                  ),
+                  builder: (context, player) {
+                    return Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: player,
+                    );
+                  },
+                ),
               );
             },
           ),
@@ -542,7 +625,6 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
-
 
   Future<dynamic> _premiumAlert() {
     return showDialog(
@@ -639,7 +721,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-
       body: token ==  null ? Center(child: CircularProgressIndicator(color: primary,),) :
         Container(
           width: MediaQuery.of(context).size.width,

@@ -206,7 +206,7 @@ class _PremiumContentState extends State<PremiumContent> {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    icon: const Icon(Icons.home))
+                    icon: const Icon(Icons.home,color: Colors.white,))
               ],
             ),
           ),

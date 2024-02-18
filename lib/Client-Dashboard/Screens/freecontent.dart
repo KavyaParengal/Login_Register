@@ -178,15 +178,14 @@ class _FreeContentState extends State<FreeContent> {
             elevation: 0,
             centerTitle: false,
 
-            // leading: IconButton(
-            //     icon: Icon(
-            //       Icons.arrow_back_ios,
-            //       size: 24.0,
-            //       color: Colors.white,
-            //     ),
-            //     onPressed: () {
-            //       Get.back();
-            //}),,
+            leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+            }),
             title: Text(
               Global().appName,
               maxLines: 1,
@@ -203,7 +202,7 @@ class _FreeContentState extends State<FreeContent> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.home))
+                  icon: const Icon(Icons.home, color: Colors.white,))
             ],
           ),
         ),
