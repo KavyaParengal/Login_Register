@@ -12,7 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../Routes/route_names.dart';
-import '../Screens/login_page.dart';
+import '../../Login/login_page.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
 import '../Widgets/free_package_drawer.dart';

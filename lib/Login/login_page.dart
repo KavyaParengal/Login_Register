@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-import '../Api_services/login_api_services.dart';
-import '../../Routes/route_names.dart';
-import '../../Utilities/colors.dart';
+import 'login_api_services.dart';
+import '../Routes/route_names.dart';
+import '../Utilities/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

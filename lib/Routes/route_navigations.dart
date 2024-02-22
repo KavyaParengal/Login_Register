@@ -27,8 +27,8 @@ import 'package:login_register/Routes/route_names.dart';
 import '../../Admin-Dashboard/Screens/admin_view_week_wise_content.dart';
 import '../Client-Dashboard/Screens/add_menstration_date.dart';
 import '../Client-Dashboard/Screens/home_page.dart';
-import '../Client-Dashboard/Screens/login_page.dart';
-import '../Client-Dashboard/Screens/sign_up_page.dart';
+import '../Login/login_page.dart';
+import '../Register/sign_up_page.dart';
 import '../Client-Dashboard/Screens/splash_screen.dart';
 
 

@@ -172,8 +172,8 @@ class _HomePageState extends State<HomePage>{
           ),
           child: userDetails!.dashbordDetails == null ? Center(child: Text(
             'No Data Found', style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.teal.shade800
+              fontWeight: FontWeight.bold,
+              color: Colors.teal.shade800
           ),
           ),):
           SingleChildScrollView(
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage>{
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     // child: Text(description==null?"" :utf8.decode(description.codeUnits,
-                      child: Text(userDetails!.dashbordDetails!.description == null ? "":utf8.decode(userDetails!.dashbordDetails!.description!.codeUnits),
+                    child: Text(userDetails!.dashbordDetails!.description == null ? "":utf8.decode(userDetails!.dashbordDetails!.description!.codeUnits),
                       style: GoogleFonts.poppins(
                         fontSize: 12,
                         color: Colors.black,
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage>{
 
   Widget _buildOptions() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           children: [
@@ -354,7 +354,7 @@ class _HomePageState extends State<HomePage>{
             ),
           ],
         ),
-        const Divider(
+        Divider(
           height: 20,
         ),
         Column(
@@ -399,8 +399,8 @@ class _HomePageState extends State<HomePage>{
                         }
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: button, // foreground (text) color
-                        shape: RoundedRectangleBorder()
+                          backgroundColor: button, // foreground (text) color
+                          shape: RoundedRectangleBorder()
                       ),
                       child: Text(
                         "Premium Content",
@@ -430,50 +430,6 @@ class _HomePageState extends State<HomePage>{
       ],
     );
   }
-
-  // Widget _buildBannerSlide() {
-  //   return Consumer<AdminViewBannerProvider>(
-  //     builder: (context, value, child){
-  //       if (value.isLoading) {
-  //         return const Center(
-  //             child: LoadingIcon()
-  //         );
-  //       }
-  //       final banners = value.bannerList;
-  //
-  //       List<Widget> images = banners.map((banner) {
-  //         return Image.network(
-  //           APIConstants.url + '${banner.banners}',
-  //           fit: BoxFit.contain,
-  //         );
-  //       }).toList();
-  //
-  //       return Container(
-  //         margin: EdgeInsets.only(bottom: 8),
-  //         // decoration: BoxDecoration(
-  //         //   // borderRadius: BorderRadius.circular(10),
-  //         //   color: Colors.teal.withOpacity(0.2),
-  //         // ),
-  //         child: ImageSlideshow(
-  //           height: MediaQuery.of(context).size.height/3,
-  //           indicatorColor: Colors.teal.shade500,
-  //           indicatorBackgroundColor: Colors.grey,
-  //           autoPlayInterval: 4500,
-  //           indicatorRadius: 3,
-  //           //indicatorBottomPadding: 2,
-  //           //indicatorPadding: 8,
-  //           isLoop: true,
-  //           children: images,
-  //           onPageChanged: (value) {
-  //             setState(() {
-  //               _currentIndexBanner = value;
-  //             });
-  //           },
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   Widget _buildBannerSlide() {
     return Consumer<AdminViewBannerProvider>(
@@ -513,60 +469,6 @@ class _HomePageState extends State<HomePage>{
     );
   }
 
-  // Widget _buildWorkshopVideo() {
-  //   return Consumer<AdminViewWorkshopVideoProvider>(
-  //     builder: (context, value, child) {
-  //       if (value.isLoading) {
-  //         return const Center(child: LoadingIcon());
-  //       }
-  //       final workshop = value.workshopVideoList;
-  //       return Container(
-  //         height: 250,
-  //         child: ListView(
-  //           scrollDirection: Axis.horizontal,
-  //           children: List.generate(workshop.length, (index) {
-  //             final workshops = workshop[index];
-  //             String videoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/embed/EoxGlbnQxQw?si=Tkky52aoG8q0zFAY')!;
-  //             _controller = YoutubePlayerController(
-  //               initialVideoId: videoId,
-  //               flags: YoutubePlayerFlags(
-  //                 autoPlay: true,
-  //                 mute: false,
-  //               ),
-  //             );
-  //             return Padding(
-  //               padding: const EdgeInsets.only(
-  //                 top: 10,
-  //                 bottom: 10,
-  //                 left: 2,
-  //                 right: 2,
-  //               ),
-  //               child: YoutubePlayerBuilder(
-  //                 player: YoutubePlayer(
-  //                   onReady: () {
-  //                     _controller.addListener(listener);
-  //                   },
-  //                   aspectRatio: 16 / 9,
-  //                   bottomActions: [],
-  //                   topActions: [],
-  //                   showVideoProgressIndicator: false,
-  //                   controller: _controller,
-  //                 ),
-  //                 builder: (context, player) {
-  //                   return Container(
-  //                     width: 320, // Adjust width as needed
-  //                     child: player,
-  //                   );
-  //                 },
-  //               ),
-  //             );
-  //           }),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
   Widget _buildWorkshopVideo() {
     return Consumer<AdminViewWorkshopVideoProvider>(
       builder: (context, value, child) {
@@ -576,16 +478,12 @@ class _HomePageState extends State<HomePage>{
         final workshop = value.workshopVideoList;
         return Container(
           height: 250,
-          child: CarouselSlider.builder(
-            // itemCount: workshop.length,
-            itemCount: 4,
-            options: CarouselOptions(
-              //autoPlay: true,
-              aspectRatio: 16 / 9,
-              enlargeCenterPage: true,
-            ),
-            itemBuilder: (context, index, realIndex) {
-              String videoId = YoutubePlayer.convertUrlToId('https://www.youtube.com/embed/EoxGlbnQxQw?si=Tkky52aoG8q0zFAY')!;
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            children: List.generate(workshop.length, (index) {
+              final workshops = workshop[index];
+              String videoId = YoutubePlayer.convertUrlToId(workshops.video ?? '')!;
               _controller = YoutubePlayerController(
                 initialVideoId: videoId,
                 flags: YoutubePlayerFlags(
@@ -613,18 +511,77 @@ class _HomePageState extends State<HomePage>{
                   ),
                   builder: (context, player) {
                     return Container(
-                      width: MediaQuery.of(context).size.width,
+                      width: 320, // Adjust width as needed
                       child: player,
                     );
                   },
                 ),
               );
-            },
+            }),
           ),
         );
       },
     );
   }
+
+  // Widget _buildWorkshopVideo() {
+  //   return Consumer<AdminViewWorkshopVideoProvider>(
+  //     builder: (context, value, child) {
+  //       if (value.isLoading) {
+  //         return const Center(child: LoadingIcon());
+  //       }
+  //       final workshop = value.workshopVideoList;
+  //       return Container(
+  //         height: 250,
+  //         child: CarouselSlider.builder(
+  //           itemCount: workshop.length,
+  //           // itemCount: 4,
+  //           options: CarouselOptions(
+  //             //autoPlay: true,
+  //             aspectRatio: 16 / 9,
+  //             enlargeCenterPage: true,
+  //           ),
+  //           itemBuilder: (context, index, realIndex) {
+  //             String videoId = YoutubePlayer.convertUrlToId('${workshop[index].video}')!;
+  //             _controller = YoutubePlayerController(
+  //               initialVideoId: videoId,
+  //               flags: YoutubePlayerFlags(
+  //                 autoPlay: true,
+  //                 mute: false,
+  //               ),
+  //             );
+  //             return Padding(
+  //               padding: const EdgeInsets.only(
+  //                 top: 10,
+  //                 bottom: 10,
+  //                 left: 2,
+  //                 right: 2,
+  //               ),
+  //               child: YoutubePlayerBuilder(
+  //                 player: YoutubePlayer(
+  //                   onReady: () {
+  //                     _controller.addListener(listener);
+  //                   },
+  //                   aspectRatio: 16 / 9,
+  //                   bottomActions: [],
+  //                   topActions: [],
+  //                   showVideoProgressIndicator: false,
+  //                   controller: _controller,
+  //                 ),
+  //                 builder: (context, player) {
+  //                   return Container(
+  //                     width: MediaQuery.of(context).size.width,
+  //                     child: player,
+  //                   );
+  //                 },
+  //               ),
+  //             );
+  //           },
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   Future<dynamic> _premiumAlert() {
     return showDialog(
@@ -639,8 +596,8 @@ class _HomePageState extends State<HomePage>{
             },
             child: Text("OK",
               style: TextStyle(
-                color: button,
-                fontWeight: FontWeight.bold
+                  color: button,
+                  fontWeight: FontWeight.bold
               ),
             ),
           ),
@@ -671,9 +628,9 @@ class _HomePageState extends State<HomePage>{
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-              )
+                gradient: LinearGradient(
+                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
+                )
             ),
           ),
           elevation: 0,
@@ -691,12 +648,12 @@ class _HomePageState extends State<HomePage>{
       floatingActionButtonLocation: ExpandableFab.location,
       floatingActionButton: ExpandableFab(
         openButtonBuilder: RotateFloatingActionButtonBuilder(
-          child: const FaIcon(FontAwesomeIcons.phone),
-          //fabSize: ExpandableFabSize.regular,
-          foregroundColor: Colors.white,
-          backgroundColor: button,
-          shape: const CircleBorder(),
-          angle: 58
+            child: const FaIcon(FontAwesomeIcons.phone),
+            //fabSize: ExpandableFabSize.regular,
+            foregroundColor: Colors.white,
+            backgroundColor: button,
+            shape: const CircleBorder(),
+            angle: 58
         ),
         closeButtonBuilder: RotateFloatingActionButtonBuilder(
             child: const FaIcon(FontAwesomeIcons.multiply),
@@ -708,53 +665,53 @@ class _HomePageState extends State<HomePage>{
         ),
         children: [
           InkWell(
-            onTap: (){
-              _launchEmail();
-            },
+              onTap: (){
+                _launchEmail();
+              },
               child: Image.asset('assets/gmail.png', width: 50,)
           ),
           InkWell(
-            onTap: (){
-              _launchWhatsapp();
-            },
+              onTap: (){
+                _launchWhatsapp();
+              },
               child: Image.asset('assets/whatsapp.png', width: 50,)
           ),
         ],
       ),
       body: token ==  null ? Center(child: CircularProgressIndicator(color: primary,),) :
-        Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(
+      Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage('assets/logo.png'),
-              opacity: 0.35
+                opacity: 0.35
             )
-          ),
-          child: SingleChildScrollView(
-            physics: ScrollPhysics(),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: _buildName(),
-                ),
-                _buildBannerSlide(),
-                _buildWorkshopVideo(),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: _buildImage(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: _buildOptions(),
-                )
-              ],
-            ),
+        ),
+        child: SingleChildScrollView(
+          physics: ScrollPhysics(),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: _buildName(),
+              ),
+              _buildBannerSlide(),
+              _buildWorkshopVideo(),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: _buildImage(),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: _buildOptions(),
+              )
+            ],
           ),
         ),
+      ),
     );
   }
 }

@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:login_register/Utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Routes/route_names.dart';
+import '../Routes/route_names.dart';
 
 class LoginApi {
   static Future<void> loginUser(

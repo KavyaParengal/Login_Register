@@ -33,12 +33,13 @@ void main() async {
           ChangeNotifierProvider(create:  (context) => AdminViewBannerProvider())
         ],
         child: MaterialApp(
-          // theme: ThemeData(
-          //   inputDecorationTheme: InputDecorationTheme(
-          //     iconColor: Colors.white
-          //   ),
-          //   drawerTheme: DrawerThemeData(scrimColor: Colors.white)
-          // ),
+          theme: ThemeData(
+            primaryColor: Colors.teal,
+            inputDecorationTheme: InputDecorationTheme(
+              iconColor: Colors.white,
+            ),
+            // primarySwatch: Colors.grey
+          ),
           debugShowCheckedModeBanner: false,
           initialRoute: RouteName.splashScreen,
           onGenerateRoute: RouteNavigation.generateRoute,
