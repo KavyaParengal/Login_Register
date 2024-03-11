@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "581896556215",
+    "project_id": "gentle-birth",
+    "storage_bucket": "gentle-birth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581896556215:android:0c7c1685b90301a4aa8732",
+        "android_client_info": {
+          "package_name": "com.example.login_register"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCB_B0ZJmgIEMTg-RpQfETo1oab1b1efS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

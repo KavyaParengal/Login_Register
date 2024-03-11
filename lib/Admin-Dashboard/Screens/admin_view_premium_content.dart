@@ -9,7 +9,7 @@ import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 import '../Provider/admin_view_paid_video_provider.dart';
 
 class AdminViewPremiumContent extends StatefulWidget {

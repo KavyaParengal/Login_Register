@@ -10,7 +10,7 @@ import 'package:login_register/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utilities/global.dart';
-import '../Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 
 
 class SplashScreen extends StatefulWidget {

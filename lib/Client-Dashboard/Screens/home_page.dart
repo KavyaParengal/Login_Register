@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provider.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_video_provider.dart';
+import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,8 +21,8 @@ import '../../Utilities/colors.dart';
 import '../../Utilities/constants.dart';
 import '../../Utilities/global.dart';
 import '../Models/freecontentmodel.dart';
-import '../Widgets/free_package_drawer.dart';
-import '../Widgets/loading_icon.dart';
+import '../drawer.dart';
+import '/Widgets/loading_icon.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -294,12 +295,6 @@ class _HomePageState extends State<HomePage>{
           children: [
             InkWell(
               child: Container(
-                // constraints: BoxConstraints(
-                //     minWidth: 125,
-                //     maxWidth: 150,
-                //     minHeight: 125,
-                //     maxHeight: 150),
-                // color: Colors.black.withOpacity(0.05),
                 decoration: BoxDecoration(
                     color: Colors.teal.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10)
@@ -592,7 +587,7 @@ class _HomePageState extends State<HomePage>{
         actions: [
           TextButton(
             onPressed: () async {
-              Navigator.pushNamed(context, RouteName.premium_plan);
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PremiumPlanPage(id: userDetails!.clientDetails!.id)));
             },
             child: Text("OK",
               style: TextStyle(

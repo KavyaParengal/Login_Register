@@ -5,12 +5,14 @@ import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../Utilities/colors.dart';
-import '../Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 
 class PremiumPlanPage extends StatefulWidget {
-  const PremiumPlanPage({super.key});
+  final int? id;
+  const PremiumPlanPage({super.key, this.id});
 
   @override
   State<PremiumPlanPage> createState() => _PremiumPlanPageState();
@@ -26,6 +28,11 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<PlanListProvider>(context, listen: false).getPlanList();
     });
+  }
+
+  _launchPayment(String price) async {
+    await launch("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}", forceSafariVC: false);
+    print("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}");
   }
 
   @override
@@ -137,6 +144,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                             ElevatedButton(
                               onPressed: () {
                                 //Navigator.pushNamed(context, RouteName.premium_content);
+                                _launchPayment(planList[index].price.toString());
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: button, // foreground (text) color

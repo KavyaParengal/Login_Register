@@ -25,34 +25,28 @@ class AddWeekWiseContentApi {
       var uri = Uri.parse(APIConstants.url + APIConstants.add_week_wise_content);
       var request = http.MultipartRequest('POST', uri);
 
-      // Add authorization token to headers
       String? token = localStorage.getString('token');
       if (token != null) {
         request.headers['Authorization'] = 'token $token';
       }
 
-      // Add fields
       request.fields['month'] = month;
       request.fields['size'] = size;
       request.fields['description'] = description;
       request.fields['length'] = length;
       request.fields['weight'] = weight;
 
-      // Add image file
       final imageFile = File(imagePath);
       final imageStream = http.ByteStream(imageFile.openRead());
       final imageLength = await imageFile.length();
-
       final multipartFile = http.MultipartFile(
         'image',
         imageStream,
         imageLength,
         filename: basename(imagePath),
-        contentType: MediaType('image', 'jpeg'), // Change this according to your image type
+        contentType: MediaType('image', 'jpeg'),
       );
       request.files.add(multipartFile);
-
-      // Send request and handle response
       var response = await request.send();
 
       if (response.statusCode == 200) {

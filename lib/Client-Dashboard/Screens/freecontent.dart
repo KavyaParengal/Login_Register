@@ -11,8 +11,8 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../Models/freecontentmodel.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
-import '../Widgets/free_package_drawer.dart';
-import '../Widgets/loading_icon.dart';
+import '../drawer.dart';
+import '/Widgets/loading_icon.dart';
 
 class FreeContent extends StatefulWidget {
   @override

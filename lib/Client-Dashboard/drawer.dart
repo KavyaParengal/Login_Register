@@ -7,9 +7,9 @@ import 'package:login_register/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import '../Api_services/viewDashbordDataApi.dart';
-import '../Models/dashboardDataModal.dart';
-import '../../Utilities/global.dart';
+import 'Api_services/viewDashbordDataApi.dart';
+import 'Models/dashboardDataModal.dart';
+import '../Utilities/global.dart';
 
 
 class FreeNavigationDrawer extends StatefulWidget {
@@ -50,7 +50,6 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
 
   @override
   Widget build(BuildContext context) {
-
     Future<dynamic> exitDialog() {
       return showDialog(
         context: context,
@@ -82,7 +81,6 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
         ),
       );
     }
-
     return Drawer(
       child: ListView(
           children: <Widget>[
@@ -122,7 +120,14 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProfileDetails(),
+                                ),
+                              );
+                            },
                             child: Text(
                               "Profile & Other Setting",
                               style: GoogleFonts.poppins(

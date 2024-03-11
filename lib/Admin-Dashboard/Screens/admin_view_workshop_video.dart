@@ -6,7 +6,7 @@ import 'package:login_register/Admin-Dashboard/Screens/edit_workshop_video.dart'
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 import '../../Routes/route_names.dart';
 
 class AdminViewWorkshopVideo extends StatefulWidget {

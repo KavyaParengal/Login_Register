@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import '../../Client-Dashboard/Provider/plan_list_provider.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/colors.dart';
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 
 class AdminViewPricePlan extends StatefulWidget {
   const AdminViewPricePlan({super.key});

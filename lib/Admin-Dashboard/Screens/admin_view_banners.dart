@@ -6,7 +6,7 @@ import 'package:login_register/Admin-Dashboard/Screens/edit_banners.dart';
 import 'package:login_register/Utilities/constants.dart';
 import 'package:provider/provider.dart';
 
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 import '../../Routes/route_names.dart';
 
 class AdminViewBanners extends StatefulWidget {

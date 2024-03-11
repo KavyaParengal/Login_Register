@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../../Routes/route_names.dart';
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 
 class AdminViewFreeContent extends StatefulWidget {
   @override

@@ -9,7 +9,7 @@ import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 
 import '../../Routes/route_names.dart';
-import '../../Client-Dashboard/Widgets/loading_icon.dart';
+import '/Widgets/loading_icon.dart';
 
 class AdminViewWeekWiseContent extends StatefulWidget {
   @override

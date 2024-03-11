@@ -15,8 +15,8 @@ import '../../Routes/route_names.dart';
 import '../../Login/login_page.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
-import '../Widgets/free_package_drawer.dart';
-import '../Widgets/loading_icon.dart';
+import '../drawer.dart';
+import '/Widgets/loading_icon.dart';
 
 class PremiumContent extends StatefulWidget {
   @override
