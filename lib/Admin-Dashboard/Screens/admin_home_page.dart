@@ -1,10 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Admin-Dashboard/Screens/add_notification.dart';
+import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../Routes/route_names.dart';
 import '../../Utilities/global.dart';
+import 'add_banner.dart';
+import 'add_free_videos.dart';
+import 'add_premium_content.dart';
+import 'add_price.dart';
+import 'add_week_wise_content.dart';
+import 'add_workshop_video.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({super.key});
@@ -21,16 +27,20 @@ class _AdminHomePageState extends State<AdminHomePage> {
     'assets/dashBoard_details.png',
     'assets/payment.png',
     'assets/banner.png',
-    'assets/workshop.png'
+    'assets/workshop.png',
+    'assets/add.png',
+    'assets/clients.png'
   ];
-  List title = [ 'Free Content', 'Premium Content', 'Week Wise Content', 'Payment', 'Banners', 'Workshop Videos'];
+  List title = [ 'Free Content', 'Premium Content', 'Week Wise Content', 'Payment', 'Banners', 'Workshop Videos', 'Notification', 'View Clients'];
   List navigationAdd = [
-    RouteName.add_free_content,
-    RouteName.add_premium_content,
-    RouteName.add_week_wise_content,
-    RouteName.add_price,
-    RouteName.add_banners,
-    RouteName.add_workshop_videos
+    AdminAddVideos(),
+    AddPremiumContent(),
+    AddWeekWiseContent(),
+    AddPremiumPrice(),
+    AddBanners(),
+    AddWorkShopVideos(),
+    AddNotification(),
+    ViewClients()
   ];
 
   List navigationView = [
@@ -100,98 +110,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GridTile(
-                        child: Container(
-                          margin: const EdgeInsets.all(5.0),
-                          decoration: ShapeDecoration(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            gradient: RadialGradient(
-                              colors: <Color>[ Colors.white, Colors.teal.shade100],
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(image[index], width: 66,),
-                                Text(title[index],style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),textAlign: TextAlign.center,),
-                                Align(
-                                  alignment: Alignment.bottomRight,
-                                  child: PopupMenuButton(
-                                      icon: const Icon(Icons.more_vert),
-                                      //color: scaffoldBgColor,
-                                      elevation: 0,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      itemBuilder: (context) {
-                                        return <PopupMenuEntry>[
-                                          PopupMenuItem(
-                                            child: InkWell(
-                                              onTap: (){
-                                                Navigator.pop(context);
-                                                Navigator.pushNamed(context, navigationAdd[index]);
-                                              },
-                                              child: Text("Add",style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.teal.shade800
-                                              ),),
-                                            ),
-                                          ),
-                                          // PopupMenuItem(
-                                          //   child: InkWell(
-                                          //     onTap: (){
-                                          //       Navigator.pop(context);
-                                          //       Navigator.pushNamed(context, navigationEdit[index]);
-                                          //     },
-                                          //     child: Text("Edit",style: TextStyle(
-                                          //         fontWeight: FontWeight.bold,
-                                          //         color: Colors.teal.shade800
-                                          //     ),),
-                                          //   ),
-                                          // ),
-                                          PopupMenuItem(
-                                            child: InkWell(
-                                              onTap: (){
-                                                Navigator.pop(context);
-                                                Navigator.pushNamed(context, navigationView[index]);
-                                              },
-                                              child: Text("View",style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.teal.shade800
-                                              ),),
-                                            ),
-                                          ),
-                                        ];
-                                      }),
-                                )
-                              ],
-                            ),
-                          )
-                        ),
-                      );
-                    },
-                  ),
-                  GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 1,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 3.0,
-                      mainAxisSpacing: 3.0,
-                      //childAspectRatio: MediaQuery.of(context).size.width/5
-                    ),
-                    itemBuilder: (BuildContext context, int index) {
-                      return GridTile(
-                        child: InkWell(
+                        child: image[index]=='assets/clients.png'?InkWell(
                           onTap: (){
                             Navigator.pushNamed(context, RouteName.view_client,);
                           },
@@ -221,10 +140,73 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 ),
                               )
                           ),
+                        ):Container(
+                          margin: const EdgeInsets.all(5.0),
+                          decoration: ShapeDecoration(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                            gradient: RadialGradient(
+                              colors: <Color>[ Colors.white, Colors.teal.shade100],
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(image[index], width: 66,),
+                                Text(title[index],style: GoogleFonts.poppins(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),textAlign: TextAlign.center,),
+                                Align(
+                                      alignment: Alignment.bottomRight,
+                                      child: PopupMenuButton(
+                                          icon: const Icon(Icons.more_vert),
+                                          //color: scaffoldBgColor,
+                                          elevation: 0,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
+                                          itemBuilder: (context) {
+                                            return <PopupMenuEntry>[
+                                              PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: (){
+                                                    Navigator.pop(context);
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>navigationAdd[index]));
+                                                  },
+                                                  child: Text("Add",style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.teal.shade800
+                                                  ),),
+                                                ),
+                                              ),
+                                              PopupMenuItem(
+                                                child: InkWell(
+                                                  onTap: (){
+                                                    Navigator.pop(context);
+                                                    Navigator.pushNamed(context, navigationView[index]);
+                                                  },
+                                                  child: Text("View",style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.teal.shade800
+                                                  ),),
+                                                ),
+                                              ),
+                                            ];
+                                          }),
+                                )
+                              ],
+                            ),
+                          )
                         ),
                       );
                     },
-                  )
+                  ),
                 ],
               ),
             ),

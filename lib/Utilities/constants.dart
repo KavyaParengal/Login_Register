@@ -18,6 +18,7 @@ class APIConstants{
   static const add_premium_content = '/home/add_video/';
   static const add_banners = '/home/add_banner/';
   static const add_workshop_video = '/home/add_workshop_video/';
+  static const add_notification = '/home/pushnotification/';
 
   static const admin_view_free_video = '/home/free_vedio_list/';
   static const admin_view_paid_video = '/home/paid_vedio_list/';

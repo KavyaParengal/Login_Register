@@ -482,7 +482,8 @@ class _HomePageState extends State<HomePage>{
               _controller = YoutubePlayerController(
                 initialVideoId: videoId,
                 flags: YoutubePlayerFlags(
-                  autoPlay: true,
+                  autoPlay: false,
+                  loop: true,
                   mute: false,
                 ),
               );

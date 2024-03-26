@@ -34,6 +34,12 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
                 )
             ),
           ),
+          leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back, color: Colors.white,)
+          ),
           elevation: 0,
           title: Text(
             'Add Free Content',

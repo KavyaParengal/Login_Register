@@ -33,6 +33,12 @@ class _AddPremiumPriceState extends State<AddPremiumPrice> {
                     )
                 ),
               ),
+              leading: IconButton(
+                  onPressed: (){
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(Icons.arrow_back, color: Colors.white,)
+              ),
               elevation: 0,
               title: Text(
                 'Add Premium Price',

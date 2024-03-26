@@ -30,9 +30,9 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
     });
   }
 
-  _launchPayment(String price) async {
-    await launch("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}", forceSafariVC: false);
-    print("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}");
+  _launchPayment(String pId) async {
+    await launch("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}/pid=$pId", forceSafariVC: false);
+    print("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}/pid=$pId");
   }
 
   @override
@@ -131,7 +131,6 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                                   TextSpan(text:planList[index].plan??'not Given',style: TextStyle(
                                       color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16))
                                 ])),
-
                                 RichText(text: TextSpan(children:[
                                   TextSpan(text: "Amount : ",style: TextStyle(
                                       color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
@@ -144,7 +143,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                             ElevatedButton(
                               onPressed: () {
                                 //Navigator.pushNamed(context, RouteName.premium_content);
-                                _launchPayment(planList[index].price.toString());
+                                _launchPayment(planList[index].id.toString());
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: button, // foreground (text) color

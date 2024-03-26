@@ -52,6 +52,12 @@ class _AddBannersState extends State<AddBanners> {
             ),
           ),
           elevation: 0,
+          leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back, color: Colors.white,)
+          ),
           title: Text(
             'Add Banners',
             style: GoogleFonts.poppins(

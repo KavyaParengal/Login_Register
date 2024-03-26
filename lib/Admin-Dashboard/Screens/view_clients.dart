@@ -53,14 +53,14 @@ class _ViewClientsState extends State<ViewClients> {
               onPressed: (){
                 Navigator.pop(context);
               }, 
-              icon: Icon(Icons.arrow_back)
+              icon: Icon(Icons.arrow_back, color: Colors.white,)
           ),
           actions: [
             IconButton(
                 onPressed: (){
                   Navigator.pushNamed(context, RouteName.admin_home);
                 },
-                icon: Icon(Icons.home)
+                icon: Icon(Icons.home, color: Colors.white,)
             )
           ],
         ),

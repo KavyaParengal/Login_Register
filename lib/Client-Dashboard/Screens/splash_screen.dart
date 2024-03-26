@@ -2,11 +2,13 @@
 import 'dart:async';
 import 'dart:ffi';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Login/login_page.dart';
 import 'package:login_register/Utilities/colors.dart';
+import 'package:login_register/firebase_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utilities/global.dart';
@@ -59,7 +61,24 @@ class _SplashScreenState extends State<SplashScreen> {
     animateFun();
     super.initState();
     startTime();
+    // try {
+    //   super.initState();
+    //   // onInit();
+    // } catch (e) {
+    //   //print(e);
+    // }
   }
+
+  // onInit() async {
+  //   try {
+  //     await FirebaseMessaging.instance.setAutoInitEnabled(true);
+  //     await Global().validateToken(null);
+  //     await Global().listenForTokenUpdate();
+  //     await FirebaseApi().initNotifications();
+  //   } catch (e) {
+  //     //print(e);
+  //   }
+  // }
 
   startTime() async {
     var duration = new Duration(seconds: 6);
