@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_banners.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,7 @@ class AddBannerAPI {
       ) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     try {
-      var uri = Uri.parse(APIConstants.url + APIConstants.add_banners);
+      var uri = Uri.parse(APIConstants.add_banners);
       var request = http.MultipartRequest('POST', uri);
 
       // Add authorization token to headers
@@ -43,13 +44,13 @@ class AddBannerAPI {
         contentType: MediaType('image', 'jpeg'), // Change this according to your image type
       );
       request.files.add(multipartFile);
-      print('URL --- ${APIConstants.url + APIConstants.add_banners}');
+      print('URL --- ${APIConstants.add_banners}');
       // Send request and handle response
       var response = await request.send();
 
       if (response.statusCode == 200) {
         print('Banners added successfully');
-        Navigator.pushNamed(context, RouteName.admin_view_banners);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewBanners()));
       } else {
         print('Error Adding Banners. Status code: ${response.statusCode}');
       }

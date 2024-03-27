@@ -10,6 +10,7 @@ import '../../Client-Dashboard/Provider/plan_list_provider.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
+import 'admin_home_page.dart';
 
 class AdminViewPricePlan extends StatefulWidget {
   const AdminViewPricePlan({super.key});
@@ -62,7 +63,7 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
             actions: [
               IconButton(
                   onPressed: (){
-                    Navigator.pushNamed(context, RouteName.admin_home);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                   },
                   icon: Icon(Icons.home,color: Colors.white,)
               )

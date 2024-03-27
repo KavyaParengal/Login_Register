@@ -21,7 +21,7 @@ class FreeContentDataProvider extends ChangeNotifier{
     String? token = localStorage.getString('token');
 
     final response = await _service.getFreeContentData(token.toString());
-
+    print('----$response');
     _freeDatas = response;
     isLoading = false;
     notifyListeners();

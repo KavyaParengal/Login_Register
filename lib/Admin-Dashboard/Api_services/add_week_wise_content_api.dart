@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_week_wise_content.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,7 +23,7 @@ class AddWeekWiseContentApi {
       ) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     try {
-      var uri = Uri.parse(APIConstants.url + APIConstants.add_week_wise_content);
+      var uri = Uri.parse(APIConstants.add_week_wise_content);
       var request = http.MultipartRequest('POST', uri);
 
       String? token = localStorage.getString('token');
@@ -51,7 +52,7 @@ class AddWeekWiseContentApi {
 
       if (response.statusCode == 200) {
         print('Week Wise Content added successfully');
-        Navigator.pushNamed(context, RouteName.admin_view_week_wise_content);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewWeekWiseContent()));
       } else {
         print('Error Adding Week Wise Content. Status code: ${response.statusCode}');
       }

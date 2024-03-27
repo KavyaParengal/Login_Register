@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:login_register/Register/sign_up_page.dart';
 
 import '../../Login/login_api_services.dart';
 import '../../Routes/route_names.dart';
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Text("Don't have an account?",style: TextStyle(fontSize: 16),),
                   TextButton(
                       onPressed: (){
-                        Navigator.pushNamed(context, RouteName.signUp);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
                       },
                       child: Text("Sign Up",style: TextStyle(
                         fontSize: 16,color: button,fontWeight: FontWeight.bold),)

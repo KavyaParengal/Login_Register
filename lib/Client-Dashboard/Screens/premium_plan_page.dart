@@ -31,8 +31,8 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
   }
 
   _launchPayment(String pId) async {
-    await launch("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}/pid=$pId", forceSafariVC: false);
-    print("https://shebirth.pythonanywhere.com/home/payment_gateway/x=${widget.id.toString()}/pid=$pId");
+    await launch("https://gentlebirthmethod.in/home/payment_gateway/x=${widget.id.toString()}/pid=$pId", forceSafariVC: false);
+    print("https://gentlebirthmethod.in/home/payment_gateway/x=${widget.id.toString()}/pid=$pId");
   }
 
   @override
@@ -75,12 +75,12 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
             );
           }
           final planList = value.planList;
-          return planList == null ? Center(
+          return planList == null || planList.isEmpty ? Center(
             child: Text('No Payment Plans Available',
               style: GoogleFonts.poppins(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.teal.shade700,
               ),
             ),
           ) : Column(

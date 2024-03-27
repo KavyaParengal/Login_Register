@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/delete_free_content_api.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_free_video_provider.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_free_content.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -71,7 +72,7 @@ class _AdminViewFreeContentState extends State<AdminViewFreeContent> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
             )

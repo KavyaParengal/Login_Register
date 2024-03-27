@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:login_register/Doctor-Dashboard/Screens/login_page.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
 import 'package:login_register/Utilities/colors.dart';
@@ -62,7 +63,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                // Global().onLogout(context: context);
                 SharedPreferences localStorage = await  SharedPreferences.getInstance();
                 localStorage.setString('token', '');
-                Navigator.pushNamed(context, RouteName.login);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
               },
               child: Text("Logout",style: TextStyle(
                 color: Colors.teal.shade800

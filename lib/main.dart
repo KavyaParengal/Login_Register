@@ -14,6 +14,7 @@ import 'package:login_register/Admin-Dashboard/Screens/add_notification.dart';
 import 'package:login_register/Client-Dashboard/Provider/free_content_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
+import 'package:login_register/Client-Dashboard/Screens/splash_screen.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Routes/route_navigations.dart';
 import 'package:provider/provider.dart';
@@ -52,8 +53,7 @@ Future<void> main() async {
             // primarySwatch: Colors.grey
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: RouteName.splashScreen,
-          onGenerateRoute: RouteNavigation.generateRoute,
+          home: SplashScreen(),
         ),
       )
   );

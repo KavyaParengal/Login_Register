@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../Doctor-Dashboard/Screens/login_page.dart';
 import 'register_api_service.dart';
 import '../Routes/route_names.dart';
 import '../Utilities/colors.dart';
@@ -235,7 +236,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const Text("Already have an account?",style: TextStyle(fontSize: 16),),
                     TextButton(
                         onPressed: (){
-                          Navigator.pushNamed(context, RouteName.login);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                         },
                         child: Text("Login",style: TextStyle(
                             fontSize: 16,color: button, fontWeight: FontWeight.bold),)

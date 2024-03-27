@@ -8,13 +8,13 @@ import '../../Utilities/constants.dart';
 class ViewFreeContentDataAPI{
 
    Future<List<FreeContentDataModel>> getFreeContentData(String token) async {
-    final url = APIConstants.url + APIConstants.get_video_free;
+    final url = APIConstants.get_video_free;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",
     });
-    print(response);
-    if (response.statusCode == 200) {
+    print('Response : ${response.statusCode}');
+    if (response.statusCode == 200 && response.body is Map) {
       var body = json.decode(response.body);
       print(body);
       List<FreeContentDataModel> data =  body.map<FreeContentDataModel>((e) => FreeContentDataModel.fromJson(e)).toList();

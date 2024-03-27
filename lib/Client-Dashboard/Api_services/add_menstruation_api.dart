@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Routes/route_names.dart';
@@ -18,7 +19,7 @@ class AddMenstruationDateApi {
         "menstration": date,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.add_menstrual_date;
+      final urls = APIConstants.add_menstrual_date;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
@@ -29,7 +30,7 @@ class AddMenstruationDateApi {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));
-        Navigator.pushNamed(context, RouteName.home);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

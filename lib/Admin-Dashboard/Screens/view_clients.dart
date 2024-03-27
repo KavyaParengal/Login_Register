@@ -6,6 +6,7 @@ import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 import '../../Utilities/colors.dart';
 import '../Provider/client_list_provider.dart';
+import 'admin_home_page.dart';
 
 class ViewClients extends StatefulWidget {
   const ViewClients({super.key});
@@ -58,7 +59,7 @@ class _ViewClientsState extends State<ViewClients> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home, color: Colors.white,)
             )

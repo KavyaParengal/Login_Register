@@ -6,7 +6,7 @@ import '../Model/week_wise_content_model.dart';
 
 class AdminViewWeekWiseAPI{
   Future<List<AdminViewWeekWiseModel>> getWeekWiseContent(String token) async {
-    final url = APIConstants.url + APIConstants.admin_view_week_wise_data;
+    final url = APIConstants.admin_view_week_wise_data;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

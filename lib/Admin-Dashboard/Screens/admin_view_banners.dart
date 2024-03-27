@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provider.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_banners.dart';
 import 'package:login_register/Utilities/constants.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +60,7 @@ class _AdminViewBannersState extends State<AdminViewBanners> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
             )
@@ -106,7 +107,7 @@ class _AdminViewBannersState extends State<AdminViewBanners> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image.network(APIConstants.url + bannerList.banners.toString()),
+                        child: Image.network(APIConstants.baseUrl + bannerList.banners.toString()),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(10.0),

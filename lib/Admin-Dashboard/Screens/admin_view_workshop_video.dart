@@ -8,6 +8,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '/Widgets/loading_icon.dart';
 import '../../Routes/route_names.dart';
+import 'admin_home_page.dart';
 
 class AdminViewWorkshopVideo extends StatefulWidget {
   const AdminViewWorkshopVideo({super.key});
@@ -66,7 +67,7 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
             )

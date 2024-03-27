@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Login/login_page.dart';
 
 import '../Routes/route_names.dart';
 import '../Utilities/constants.dart';
@@ -25,7 +26,7 @@ class RegisterApi{
         "location" : location,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.register;
+      final urls = APIConstants.register;
       print(urls);
       var response = await http.post(Uri.parse(urls),body: data);
       var body = json.decode(response.body);
@@ -34,7 +35,7 @@ class RegisterApi{
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successfully !'),
             ));
-        Navigator.pushNamed(context, RouteName.login);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

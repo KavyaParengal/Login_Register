@@ -4,6 +4,7 @@ import 'dart:ffi';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Login/login_page.dart';
@@ -25,7 +26,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
 
   late SharedPreferences localStorage;
-  String token = '';
+  String? token;
   String check = '';
   int role = 0;
   bool aniCon = false;
@@ -33,7 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
   animateFun(){
     Timer mytimer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
-
         aniCon = !aniCon;
       });
     });
@@ -43,16 +43,14 @@ class _SplashScreenState extends State<SplashScreen> {
     localStorage = await SharedPreferences.getInstance();
     token = (localStorage.getString("token") ?? '');
     role = (localStorage.getInt("role") ?? 0);
-
     if (token != check && role == 1) {
-      Navigator.pushNamed(context, RouteName.home);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
     }
     else if(token != check && role == 2){
-      Navigator.pushNamed(context, RouteName.admin_home);
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
     }
     else {
-      Navigator.pushNamed(context, RouteName.login);
-
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
     }
   }
 

@@ -6,7 +6,7 @@ import '../../Utilities/constants.dart';
 
 class AdminViewFreeVideoAPI{
   Future<List<AdminViewFreeVideoModel>> getFreeVideo(String token) async {
-    final url = APIConstants.url + APIConstants.admin_view_free_video;
+    final url = APIConstants.admin_view_free_video;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

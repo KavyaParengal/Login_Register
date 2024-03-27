@@ -11,6 +11,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '/Widgets/loading_icon.dart';
 import '../Provider/admin_view_paid_video_provider.dart';
+import 'admin_home_page.dart';
 
 class AdminViewPremiumContent extends StatefulWidget {
   @override
@@ -74,7 +75,7 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
             )

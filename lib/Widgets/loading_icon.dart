@@ -6,10 +6,7 @@ class LoadingIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 10),
-      // height: 50,width: 50,
-      // alignment: Alignment.topCenter,
+    return Center(
       child: ConstrainedBox(
         child: CircularProgressIndicator(
           color: primary,

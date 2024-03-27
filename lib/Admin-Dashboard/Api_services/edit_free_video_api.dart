@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_free_content.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Routes/route_names.dart';
@@ -24,7 +25,7 @@ class EditFreeContentApi {
         "month": month,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.edit_free_content;
+      final urls = APIConstants.edit_free_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
@@ -36,7 +37,7 @@ class EditFreeContentApi {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));
-        Navigator.pushNamed(context, RouteName.admin_view_free_content);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewFreeContent()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

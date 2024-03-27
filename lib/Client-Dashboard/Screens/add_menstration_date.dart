@@ -65,7 +65,7 @@ class _AddMenstrationDateState extends State<AddMenstrationDate> {
                 AddMenstruationDateApi.addMenstruationDate(context, dateController.text.trim());
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17),)),
+                  child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

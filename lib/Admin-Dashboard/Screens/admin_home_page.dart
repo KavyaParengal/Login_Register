@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Screens/add_notification.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_banners.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_free_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_premium_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_price_plan.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_week_wise_content.dart';
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_workshop_video.dart';
 import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../Login/login_page.dart';
 import '../../Routes/route_names.dart';
 import '../../Utilities/global.dart';
 import 'add_banner.dart';
@@ -44,12 +51,12 @@ class _AdminHomePageState extends State<AdminHomePage> {
   ];
 
   List navigationView = [
-    RouteName.admin_view_free_content,
-    RouteName.admin_view_premium_content,
-    RouteName.admin_view_week_wise_content,
-    RouteName.admin_view_price_plan,
-    RouteName.admin_view_banners,
-    RouteName.admin_view_workshop_videos
+    AdminViewFreeContent(),
+    AdminViewPremiumContent(),
+    AdminViewWeekWiseContent(),
+    AdminViewPricePlan(),
+    AdminViewBanners(),
+    AdminViewWorkshopVideo()
   ];
 
   @override
@@ -83,7 +90,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                   onPressed: () async {
                     SharedPreferences localStorage = await  SharedPreferences.getInstance();
                     localStorage.setString('token', '');
-                    Navigator.pushNamed(context, RouteName.login);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                   },
                   icon: Icon(Icons.logout,color: Colors.white,),
                 ),
@@ -112,7 +119,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                       return GridTile(
                         child: image[index]=='assets/clients.png'?InkWell(
                           onTap: (){
-                            Navigator.pushNamed(context, RouteName.view_client,);
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewClients()));
                           },
                           child: Container(
                               margin: const EdgeInsets.all(5.0),

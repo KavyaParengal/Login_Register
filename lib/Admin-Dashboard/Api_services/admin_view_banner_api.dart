@@ -6,7 +6,7 @@ import '../../Utilities/constants.dart';
 
 class AdminViewBannersAPI{
   Future<List<BannerModel>> getBanners(String token) async {
-    final url = APIConstants.url + APIConstants.admin_view_banners;
+    final url = APIConstants.admin_view_banners;
     print(url);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

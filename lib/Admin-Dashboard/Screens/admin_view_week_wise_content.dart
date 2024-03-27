@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../Routes/route_names.dart';
 import '/Widgets/loading_icon.dart';
+import 'admin_home_page.dart';
 
 class AdminViewWeekWiseContent extends StatefulWidget {
   @override
@@ -59,7 +60,7 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
           actions: [
             IconButton(
                 onPressed: (){
-                  Navigator.pushNamed(context, RouteName.admin_home);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
             )
@@ -107,7 +108,7 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Image.network(APIConstants.url + weekWiseList[index].image.toString()),
+                      child: Image.network(APIConstants.baseUrl + weekWiseList[index].image.toString()),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

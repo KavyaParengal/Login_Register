@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Admin-Dashboard/Screens/admin_view_premium_content.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Routes/route_names.dart';
@@ -22,7 +23,7 @@ class EditPremiumContentApi {
         "advice": advice
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.edit_paid_content;
+      final urls = APIConstants.edit_paid_content;
       print(urls);
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
@@ -33,7 +34,7 @@ class EditPremiumContentApi {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),
         //     ));
-        Navigator.pushNamed(context, RouteName.admin_view_premium_content);
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewPremiumContent()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

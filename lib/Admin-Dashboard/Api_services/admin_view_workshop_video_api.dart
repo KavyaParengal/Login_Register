@@ -6,7 +6,7 @@ import '../../Utilities/constants.dart';
 
 class AdminViewWorkshopVideoAPI{
   Future<List<WorkshopModel>> getWorkshopVideo(String token) async {
-    final url = APIConstants.url + APIConstants.admin_view_workshop_video;
+    final url = APIConstants.admin_view_workshop_video;
     print(url + token);
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",

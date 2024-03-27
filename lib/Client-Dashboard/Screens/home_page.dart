@@ -3,13 +3,12 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provider.dart';
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_video_provider.dart';
+import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
 import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
-import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -20,7 +19,6 @@ import '../Models/dashboardDataModal.dart';
 import '../../Utilities/colors.dart';
 import '../../Utilities/constants.dart';
 import '../../Utilities/global.dart';
-import '../Models/freecontentmodel.dart';
 import '../drawer.dart';
 import '/Widgets/loading_icon.dart';
 
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage>{
 
   Future<DashbordDataModel?> fetchUserDetails() async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-    token = localStorage.getString('token');
+    token = await localStorage.getString('token');
     try {
       final details = await ViewDashboardData().getDashboardData(token!);
       userDetails=details;
@@ -184,7 +182,7 @@ class _HomePageState extends State<HomePage>{
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: userDetails!.dashbordDetails!.image==null? Container():Image(
-                    image:NetworkImage(APIConstants.url+'${userDetails!.dashbordDetails!.image.toString()}'),
+                    image:NetworkImage(APIConstants.baseUrl+'${userDetails!.dashbordDetails!.image.toString()}'),
                     height: 60,
                   ),
                   //child: Image.asset('assets/logo.png'),
@@ -320,7 +318,7 @@ class _HomePageState extends State<HomePage>{
                     ElevatedButton(
                       onPressed: () {
                         //Navigator.pushNamed(context, RouteName.premium_content);
-                        Navigator.pushNamed(context, RouteName.free_content);
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FreeContent()));
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: button, // foreground (text) color
@@ -341,7 +339,7 @@ class _HomePageState extends State<HomePage>{
               ),
               onTap: () {
                 if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.pushNamed(context, RouteName.premium_content);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
                 else{
                   _premiumAlert();
                 }
@@ -388,7 +386,7 @@ class _HomePageState extends State<HomePage>{
                       onPressed: () {
                         //Navigator.pushNamed(context, RouteName.premium_content);
                         if(userDetails!.clientDetails!.subscribed == true)
-                          Navigator.pushNamed(context, RouteName.premium_content);
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
                         else{
                           _premiumAlert();
                         }
@@ -412,7 +410,7 @@ class _HomePageState extends State<HomePage>{
               ),
               onTap: () {
                 if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.pushNamed(context, RouteName.premium_content);
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
                 else{
                   Navigator.pop(context);
                   _premiumAlert();
@@ -437,27 +435,30 @@ class _HomePageState extends State<HomePage>{
         final banners = value.bannerList;
         List<Widget> images = banners.map((banner) {
           return Image.network(
-            APIConstants.url + '${banner.banners}',
+            APIConstants.baseUrl + '${banner.banners}',
             fit: BoxFit.contain,
           );
         }).toList();
 
-        return Container(
-          // margin: EdgeInsets.only(bottom: 8),
-          child: CarouselSlider(
-            options: CarouselOptions(
-              // height: MediaQuery.of(context).size.height / 3,
-              aspectRatio: 16 / 9,
-              autoPlay: true,
-              enlargeCenterPage: true,
-              autoPlayInterval: Duration(milliseconds: 4500),
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndexBanner = index;
-                });
-              },
+        return Visibility(
+          visible: banners.isEmpty ? false : true,
+          child: Container(
+            // margin: EdgeInsets.only(bottom: 8),
+            child: CarouselSlider(
+              options: CarouselOptions(
+                // height: MediaQuery.of(context).size.height / 3,
+                aspectRatio: 16 / 9,
+                autoPlay: true,
+                enlargeCenterPage: true,
+                autoPlayInterval: Duration(milliseconds: 4500),
+                onPageChanged: (index, reason) {
+                  setState(() {
+                    _currentIndexBanner = index;
+                  });
+                },
+              ),
+              items: images,
             ),
-            items: images,
           ),
         );
       },
@@ -471,49 +472,52 @@ class _HomePageState extends State<HomePage>{
           return const Center(child: LoadingIcon());
         }
         final workshop = value.workshopVideoList;
-        return Container(
-          height: 250,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            children: List.generate(workshop.length, (index) {
-              final workshops = workshop[index];
-              String videoId = YoutubePlayer.convertUrlToId(workshops.video ?? '')!;
-              _controller = YoutubePlayerController(
-                initialVideoId: videoId,
-                flags: YoutubePlayerFlags(
-                  autoPlay: false,
-                  loop: true,
-                  mute: false,
-                ),
-              );
-              return Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  bottom: 10,
-                  left: 2,
-                  right: 2,
-                ),
-                child: YoutubePlayerBuilder(
-                  player: YoutubePlayer(
-                    onReady: () {
-                      _controller.addListener(listener);
-                    },
-                    aspectRatio: 16 / 9,
-                    bottomActions: [],
-                    topActions: [],
-                    showVideoProgressIndicator: false,
-                    controller: _controller,
+        return Visibility(
+          visible: workshop.isEmpty ? false : true,
+          child: Container(
+            height: 250,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              children: List.generate(workshop.length, (index) {
+                final workshops = workshop[index];
+                String videoId = YoutubePlayer.convertUrlToId(workshops.video ?? '')!;
+                _controller = YoutubePlayerController(
+                  initialVideoId: videoId,
+                  flags: YoutubePlayerFlags(
+                    autoPlay: false,
+                    loop: true,
+                    mute: false,
                   ),
-                  builder: (context, player) {
-                    return Container(
-                      width: 320, // Adjust width as needed
-                      child: player,
-                    );
-                  },
-                ),
-              );
-            }),
+                );
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    bottom: 10,
+                    left: 2,
+                    right: 2,
+                  ),
+                  child: YoutubePlayerBuilder(
+                    player: YoutubePlayer(
+                      onReady: () {
+                        _controller.addListener(listener);
+                      },
+                      aspectRatio: 16 / 9,
+                      bottomActions: [],
+                      topActions: [],
+                      showVideoProgressIndicator: false,
+                      controller: _controller,
+                    ),
+                    builder: (context, player) {
+                      return Container(
+                        width: 320, // Adjust width as needed
+                        child: player,
+                      );
+                    },
+                  ),
+                );
+              }),
+            ),
           ),
         );
       },
@@ -674,7 +678,7 @@ class _HomePageState extends State<HomePage>{
           ),
         ],
       ),
-      body: token ==  null ? Center(child: CircularProgressIndicator(color: primary,),) :
+      body: token ==  null || token!.isEmpty ? LoadingIcon() :
       Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

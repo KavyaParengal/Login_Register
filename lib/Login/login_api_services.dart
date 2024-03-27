@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/add_menstration_date.dart';
+import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +20,7 @@ class LoginApi {
         "password": password,
       };
       print(data);
-      final urls = APIConstants.url + APIConstants.login;
+      final urls = APIConstants.login;
       print(urls);
       var response = await http.post(Uri.parse(urls), body: data);
       var body = json.decode(response.body);
@@ -32,12 +35,12 @@ class LoginApi {
           print('Role: ${body['role']}, Date: ${body['date']}');
           if (body['role'] == 1) {
             if (body['date'] == true) {
-              Navigator.pushNamed(context, RouteName.home);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
             } else {
-              Navigator.pushNamed(context, RouteName.add_menstration);
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>AddMenstrationDate()));
             }
           } else if (body['role'] == 2) {
-            Navigator.pushNamed(context, RouteName.admin_home);
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
           }
         } else {
           if (body['message'] == "Invalid credentials") {
