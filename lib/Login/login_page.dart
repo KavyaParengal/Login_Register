@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool passwordVisible1=false;
   bool passwordVisible2=false;
+  bool _isLoading = false;
 
   TextEditingController emailController=TextEditingController();
   TextEditingController pwdController=TextEditingController();
@@ -106,13 +107,21 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 height: 55,
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
-                  if (_formKey.currentState!.validate()) {
-                    LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
-                  }
-                },
+                child: ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        await LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
+                        setState(() {
+                          _isLoading = false;
+                        });
+                      }
+                    },
                 style: ElevatedButton.styleFrom(backgroundColor: button, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Login",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) :
+                    Text("Login",style: TextStyle(fontSize: 17, color: Colors.white),)),
               ),
             ),
 

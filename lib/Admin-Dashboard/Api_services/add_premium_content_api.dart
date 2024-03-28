@@ -10,9 +10,7 @@ import '../../Utilities/constants.dart';
 class AddPremiumContentApi {
   static Future<void> addPremiumContent(
       BuildContext context,String video,String title, String description ,String month, String advice) async {
-
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-
     try {
       var data = {
         "video": video,
@@ -27,8 +25,9 @@ class AddPremiumContentApi {
       String token = (localStorage.getString('token') ?? '' );
       String newToken = 'token $token';
       print(token);
-        var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
       var body = json.decode(response.body);
+      print(body);
       if (response.statusCode == 200) {
         // ScaffoldMessenger.of(context).showSnackBar(
         //     SnackBar(content: Text(body['message']),

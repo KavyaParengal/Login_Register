@@ -9,6 +9,7 @@ import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 import '../Provider/admin_view_paid_video_provider.dart';
 import 'admin_home_page.dart';
@@ -70,7 +71,7 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
               onPressed: (){
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back)
+              icon: Icon(Icons.arrow_back, color: Colors.white,)
           ),
           actions: [
             IconButton(
@@ -90,12 +91,12 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
             );
           }
           final paidVideoList = value.paidVideoList;
-          return paidVideoList == null ? Center(
+          return paidVideoList.isEmpty ? Center(
             child: Text('No Content Available',
               style: GoogleFonts.poppins(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.teal.shade600,
               ),
             ),
           ): ListView.builder(
@@ -109,7 +110,7 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
               _controller = YoutubePlayerController(
                 initialVideoId: videoId,
                 flags: YoutubePlayerFlags(
-                  autoPlay: true,
+                  autoPlay: false,
                   mute: false,
                 ),);
               return Container(
@@ -220,7 +221,37 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.red),
                               onPressed: () {
-                                DeletePaidContent.deletePaidContent(context, paidContent.id.toString());
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text('Are you Sure?'),
+                                    content: const Text('Once you delete this item, You will not be able to recover this !'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () async {
+                                          DeletePaidContent.deletePaidContent(context, paidContent.id.toString());
+                                        },
+                                        child: Text("Delete",
+                                          style: TextStyle(
+                                              color: button,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text("Cancel",
+                                          style: TextStyle(
+                                              color: button,
+                                              fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
                               },
                               child: Text(
                                 "Delete",

@@ -31,8 +31,8 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
   }
 
   _launchPayment(String pId) async {
-    await launch("https://gentlebirthmethod.in/home/payment_gateway/x=${widget.id.toString()}/pid=$pId", forceSafariVC: false);
-    print("https://gentlebirthmethod.in/home/payment_gateway/x=${widget.id.toString()}/pid=$pId");
+    await launch("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId", forceSafariVC: false);
+    print("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId");
   }
 
   @override
@@ -132,7 +132,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                                       color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16))
                                 ])),
                                 RichText(text: TextSpan(children:[
-                                  TextSpan(text: "Amount : ",style: TextStyle(
+                                  TextSpan(text: "Amount    : ",style: TextStyle(
                                       color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
                                   TextSpan(text:planList[index].price.toString()??'0',style: TextStyle(
                                       color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)

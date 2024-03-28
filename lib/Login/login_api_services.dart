@@ -8,16 +8,17 @@ import 'package:login_register/Utilities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Routes/route_names.dart';
+import '../Utilities/global.dart';
 
 class LoginApi {
   static Future<void> loginUser(
       BuildContext context, String email, String password) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
-
     try {
       var data = {
         "email": email,
         "password": password,
+        "fcm_token": await Global.getFirebaseToken()
       };
       print(data);
       final urls = APIConstants.login;
@@ -30,7 +31,7 @@ class LoginApi {
           localStorage.setString('token', body['token']);
           localStorage.setInt('role', body['role']);
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Login Successful!')),
+            SnackBar(content: Text('Login Successful!', style: TextStyle(color: Colors.white),), backgroundColor: Colors.green.shade600,),
           );
           print('Role: ${body['role']}, Date: ${body['date']}');
           if (body['role'] == 1) {

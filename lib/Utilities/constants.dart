@@ -21,7 +21,7 @@ class APIConstants{
   static const add_premium_content = '$baseUrl/home/add_video/';
   static const add_banners = '$baseUrl/home/add_banner/';
   static const add_workshop_video = '$baseUrl/home/add_workshop_video/';
-  static const add_notification = '$baseUrl/home/pushnotification/';
+  static const add_notification = '$baseUrl/home/push_notification/';
 
   static const admin_view_free_video = '$baseUrl/home/free_vedio_list/';
   static const admin_view_paid_video = '$baseUrl/home/paid_vedio_list/';

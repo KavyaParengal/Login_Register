@@ -89,7 +89,7 @@ class _AddWeekWiseContentState extends State<AddWeekWiseContent> {
               child: TextFormField(
                 controller: monthController,
                 decoration: InputDecoration(
-                    hintText: "Month",
+                    hintText: "Week",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12)
                     )

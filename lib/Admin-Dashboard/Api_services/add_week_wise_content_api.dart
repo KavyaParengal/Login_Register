@@ -25,12 +25,11 @@ class AddWeekWiseContentApi {
     try {
       var uri = Uri.parse(APIConstants.add_week_wise_content);
       var request = http.MultipartRequest('POST', uri);
-
       String? token = localStorage.getString('token');
       if (token != null) {
         request.headers['Authorization'] = 'token $token';
+        print(token);
       }
-
       request.fields['month'] = month;
       request.fields['size'] = size;
       request.fields['description'] = description;
@@ -49,7 +48,6 @@ class AddWeekWiseContentApi {
       );
       request.files.add(multipartFile);
       var response = await request.send();
-
       if (response.statusCode == 200) {
         print('Week Wise Content added successfully');
         Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewWeekWiseContent()));

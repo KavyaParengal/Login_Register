@@ -57,7 +57,7 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                   Navigator.pop(context);
                 },
                 icon: Icon(
-                    Icons.arrow_back
+                    Icons.arrow_back, color: Colors.white,
                 )
             ),
             actions: [
@@ -77,12 +77,12 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
               );
             }
             final planList = value.planList;
-            return planList == null ? Center(
+            return planList.isEmpty ? Center(
               child: Text('No Payment Plans Available',
                 style: GoogleFonts.poppins(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.teal.shade600,
                 ),
               ),
             ) : ListView.builder(
@@ -140,78 +140,6 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                               )
                             ])),
                           ),
-                          // Row(
-                          //   children: [
-                          //     Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text('Plan Type ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text('Price ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text('Description ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         )
-                          //       ],
-                          //     ),
-                          //     Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       children: [
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text(' : ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text(' : ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text(' : ',style: TextStyle(
-                          //               color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                          //         )
-                          //       ],
-                          //     ),
-                          //     Column(
-                          //       crossAxisAlignment: CrossAxisAlignment.start,
-                          //       //  mainAxisAlignment: MainAxisAlignment.start,
-                          //       children: [
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text('${Global().capitalizeAllWord(planList[index].plan??'not Given')} ',style: TextStyle(
-                          //               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Text('${planList[index].price??'0'} ',style: TextStyle(
-                          //               color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)),
-                          //         ),
-                          //         Padding(
-                          //           padding: const EdgeInsets.all(5.0),
-                          //           child: Container(
-                          //             constraints: BoxConstraints(
-                          //               // maxWidth: MediaQuery.of(context).size.width/2
-                          //             ),
-                          //             child: Text('Plan Type Plan Type Plan Type Plan Type  ',style: TextStyle(
-                          //                 color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16),
-                          //                 maxLines: 14,
-                          //             ),
-                          //           ),
-                          //         )
-                          //       ],
-                          //     )
-                          //   ],
-                          // ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
@@ -238,7 +166,37 @@ class _AdminViewPricePlanState extends State<AdminViewPricePlan> {
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.red),
                                       onPressed: () {
-                                        DeletePlanItem.deletePlanItem(context, planList[index].id.toString());
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: const Text('Are you Sure?'),
+                                            content: const Text('Once you delete this item, You will not be able to recover this !'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () async {
+                                                  DeletePlanItem.deletePlanItem(context, planList[index].id.toString());
+                                                },
+                                                child: Text("Delete",
+                                                  style: TextStyle(
+                                                      color: button,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                              ),
+                                              TextButton(
+                                                onPressed: () async {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text("Cancel",
+                                                  style: TextStyle(
+                                                      color: button,
+                                                      fontWeight: FontWeight.bold
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        );
                                       },
                                       child: Text(
                                         "Delete",

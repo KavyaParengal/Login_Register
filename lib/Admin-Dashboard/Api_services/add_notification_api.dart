@@ -24,12 +24,13 @@ class NotificationAPI{
       String newToken = 'token $token';
       print(token);
       var response = await http.post(Uri.parse(urls), headers: {'Authorization': newToken}, body: data);
+      print(response.body);
       var body = json.decode(response.body);
       if (response.statusCode == 200) {
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //     SnackBar(content: Text(body['message']),
-        //     ));
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewFreeContent()));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Notification added successfully'),backgroundColor: Colors.green,)
+        );
+        // Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminViewFreeContent()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(

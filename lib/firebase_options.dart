@@ -17,15 +17,15 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      // return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        // return ios;
       case TargetPlatform.macOS:
-        return macos;
+        // return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,41 +43,41 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDDrqVCZ7k8JvJMAFcT8QoIcZB5Dd2qBlk',
-    appId: '1:863574233401:web:25894efddd5fc5805058e8',
-    messagingSenderId: '863574233401',
-    projectId: 'shebirth-56315',
-    authDomain: 'shebirth-56315.firebaseapp.com',
-    storageBucket: 'shebirth-56315.appspot.com',
-    measurementId: 'G-RYDPEVQEH0',
-  );
+  // static const FirebaseOptions web = FirebaseOptions(
+  //   apiKey: 'AIzaSyDDrqVCZ7k8JvJMAFcT8QoIcZB5Dd2qBlk',
+  //   appId: '1:863574233401:web:25894efddd5fc5805058e8',
+  //   messagingSenderId: '863574233401',
+  //   projectId: 'shebirth-56315',
+  //   authDomain: 'shebirth-56315.firebaseapp.com',
+  //   storageBucket: 'shebirth-56315.appspot.com',
+  //   measurementId: 'G-RYDPEVQEH0',
+  // );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDcY5I4qYaF5Ss-Bwbge7hy0diH8Cfjm3E',
-    appId: '1:863574233401:android:789772ea880738265058e8',
-    messagingSenderId: '863574233401',
-    projectId: 'shebirth-56315',
-    storageBucket: 'shebirth-56315.appspot.com',
+    apiKey: 'AIzaSyCB_B0ZJmgIEMTg-RpQfETo1oab1b1efS0',
+    appId: '1:581896556215:android:0c7c1685b90301a4aa8732',
+    messagingSenderId: '581896556215',
+    projectId: 'gentle-birth',
+    storageBucket: 'gentle-birth.appspot.com',
   );
 
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAwhSgr-GP11i4uRWAxft8H0Jxr5Xt0RFs',
-    appId: '1:863574233401:ios:780b5e948807c7625058e8',
-    messagingSenderId: '863574233401',
-    projectId: 'shebirth-56315',
-    storageBucket: 'shebirth-56315.appspot.com',
-    iosClientId: '863574233401-7gh5o7p9h9ms9l8cmcgibrrh5eilmohd.apps.googleusercontent.com',
-    iosBundleId: 'com.smartbirth.shebirth',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAwhSgr-GP11i4uRWAxft8H0Jxr5Xt0RFs',
-    appId: '1:863574233401:ios:780b5e948807c7625058e8',
-    messagingSenderId: '863574233401',
-    projectId: 'shebirth-56315',
-    storageBucket: 'shebirth-56315.appspot.com',
-    iosClientId: '863574233401-7gh5o7p9h9ms9l8cmcgibrrh5eilmohd.apps.googleusercontent.com',
-    iosBundleId: 'com.smartbirth.shebirth',
-  );
+  // static const FirebaseOptions ios = FirebaseOptions(
+  //   apiKey: 'AIzaSyAwhSgr-GP11i4uRWAxft8H0Jxr5Xt0RFs',
+  //   appId: '1:863574233401:ios:780b5e948807c7625058e8',
+  //   messagingSenderId: '863574233401',
+  //   projectId: 'shebirth-56315',
+  //   storageBucket: 'shebirth-56315.appspot.com',
+  //   iosClientId: '863574233401-7gh5o7p9h9ms9l8cmcgibrrh5eilmohd.apps.googleusercontent.com',
+  //   iosBundleId: 'com.smartbirth.shebirth',
+  // );
+  //
+  // static const FirebaseOptions macos = FirebaseOptions(
+  //   apiKey: 'AIzaSyAwhSgr-GP11i4uRWAxft8H0Jxr5Xt0RFs',
+  //   appId: '1:863574233401:ios:780b5e948807c7625058e8',
+  //   messagingSenderId: '863574233401',
+  //   projectId: 'shebirth-56315',
+  //   storageBucket: 'shebirth-56315.appspot.com',
+  //   iosClientId: '863574233401-7gh5o7p9h9ms9l8cmcgibrrh5eilmohd.apps.googleusercontent.com',
+  //   iosBundleId: 'com.smartbirth.shebirth',
+  // );
 }

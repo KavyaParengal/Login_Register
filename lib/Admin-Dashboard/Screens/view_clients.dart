@@ -124,14 +124,22 @@ class _ViewClientsState extends State<ViewClients> {
                                 ),
                                 Row(
                                   children: [
-                                    Text('${clientList[index].firstName.toString()[0].toUpperCase()}${clientList[index].firstName.toString().substring(1).toLowerCase()}',
+                                    clientList[index].firstName == null ||  clientList[index].firstName == '' ? Text('Null', style: GoogleFonts.poppins(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),):Text('${clientList[index].firstName.toString()[0].toUpperCase()}${clientList[index].firstName.toString().substring(1).toLowerCase()}',
                                       style: GoogleFonts.poppins(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),),
                                     SizedBox(width: 8,),
-                                    Text('${clientList[index].lastName.toString()[0].toUpperCase()}${clientList[index].lastName.toString().substring(1).toLowerCase()}',
+                                    clientList[index].lastName == null || clientList[index].lastName == '' ? Text('Null', style: GoogleFonts.poppins(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),):Text('${clientList[index].lastName.toString()[0].toUpperCase()}${clientList[index].lastName.toString().substring(1).toLowerCase()}',
                                       style: GoogleFonts.poppins(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -139,18 +147,30 @@ class _ViewClientsState extends State<ViewClients> {
                                     ),),
                                   ],
                                 ),
-                                Text('${clientList[index].location.toString()[0].toUpperCase()}${clientList[index].location.toString().substring(1).toLowerCase()}',
+                                clientList[index].location == null ? Text('Null', style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),):Text('${clientList[index].location.toString()[0].toUpperCase()}${clientList[index].location.toString().substring(1).toLowerCase()}',
                                   style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),),
-                                Text(clientList[index].mobile.toString(),style: GoogleFonts.poppins(
+                                clientList[index].mobile == null ? Text('Null', style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),):Text(clientList[index].mobile.toString(),style: GoogleFonts.poppins(
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),),
-                                Text(clientList[index].email.toString(),style: GoogleFonts.poppins(
+                                clientList[index].email == null ? Text('Null', style: GoogleFonts.poppins(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),):Text(clientList[index].email.toString(),style: GoogleFonts.poppins(
                                   fontSize: 13,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,

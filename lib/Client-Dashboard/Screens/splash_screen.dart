@@ -59,24 +59,24 @@ class _SplashScreenState extends State<SplashScreen> {
     animateFun();
     super.initState();
     startTime();
-    // try {
-    //   super.initState();
-    //   // onInit();
-    // } catch (e) {
-    //   //print(e);
-    // }
+    try {
+      super.initState();
+      onInit();
+    } catch (e) {
+      //print(e);
+    }
   }
 
-  // onInit() async {
-  //   try {
-  //     await FirebaseMessaging.instance.setAutoInitEnabled(true);
-  //     await Global().validateToken(null);
-  //     await Global().listenForTokenUpdate();
-  //     await FirebaseApi().initNotifications();
-  //   } catch (e) {
-  //     //print(e);
-  //   }
-  // }
+  onInit() async {
+    try {
+      await FirebaseMessaging.instance.setAutoInitEnabled(true);
+      await Global().validateToken(null);
+      await Global().listenForTokenUpdate();
+      await NotificationServices().setFCM();
+    } catch (e) {
+      //print(e);
+    }
+  }
 
   startTime() async {
     var duration = new Duration(seconds: 6);

@@ -68,9 +68,13 @@ class _HomePageState extends State<HomePage>{
     try {
       final details = await ViewDashboardData().getDashboardData(token!);
       userDetails=details;
+      String uname = '${userDetails!.clientDetails!.firstName} ${userDetails!.clientDetails!.lastName}';
+
+      await localStorage.setString('userName', uname);
+      print(Global.prefs!.getString("userName"));
       setState(() {
-        print(token);
-        print('userDetails--$userDetails');
+        // print(token);
+        // print('userDetails--$userDetails');
       });
     }
     catch(e){
@@ -317,7 +321,6 @@ class _HomePageState extends State<HomePage>{
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        //Navigator.pushNamed(context, RouteName.premium_content);
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>FreeContent()));
                       },
                       style: ElevatedButton.styleFrom(
@@ -338,11 +341,7 @@ class _HomePageState extends State<HomePage>{
                 ),
               ),
               onTap: () {
-                if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
-                else{
-                  _premiumAlert();
-                }
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>FreeContent()));
               },
             ),
           ],
@@ -354,12 +353,6 @@ class _HomePageState extends State<HomePage>{
           children: [
             InkWell(
               child: Container(
-                // constraints: BoxConstraints(
-                //     minWidth: 125,
-                //     maxWidth: 150,
-                //     minHeight: 125,
-                //     maxHeight: 150),
-                // color: Colors.black.withOpacity(0.05),
                 decoration: BoxDecoration(
                     color: Colors.teal.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10)
@@ -384,7 +377,6 @@ class _HomePageState extends State<HomePage>{
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        //Navigator.pushNamed(context, RouteName.premium_content);
                         if(userDetails!.clientDetails!.subscribed == true)
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
                         else{
@@ -412,9 +404,7 @@ class _HomePageState extends State<HomePage>{
                 if(userDetails!.clientDetails!.subscribed == true)
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
                 else{
-                  Navigator.pop(context);
                   _premiumAlert();
-                  Navigator.pop(context);
                 }
               },
             ),
@@ -707,7 +697,8 @@ class _HomePageState extends State<HomePage>{
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: _buildOptions(),
-              )
+              ),
+              SizedBox(height: 70,)
             ],
           ),
         ),

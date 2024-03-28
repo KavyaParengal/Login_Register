@@ -101,7 +101,7 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("Month",style: TextStyle(
+              child: Text("Week",style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                   color: Colors.teal.shade800

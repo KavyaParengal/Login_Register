@@ -64,6 +64,12 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
             ),
             textAlign: TextAlign.start,
           ),
+          leading: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back,color: Colors.white,)
+          ),
           actions: [
             IconButton(
                 onPressed: (){
@@ -82,12 +88,12 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
             );
           }
           final workshopVideoList = value.workshopVideoList;
-          return workshopVideoList == null ? Center(
+          return workshopVideoList.isEmpty ? Center(
             child: Text('No Video Available',
               style: GoogleFonts.poppins(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.teal.shade600,
               ),
             ),
           ) : ListView.builder(
@@ -99,7 +105,7 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
               _controller = YoutubePlayerController(
                 initialVideoId: videoId,
                 flags: YoutubePlayerFlags(
-                  autoPlay: true,
+                  autoPlay: false,
                   mute: false,
                 ),);
               return Container(
@@ -137,38 +143,35 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
                               );
                             })
                     ),
-
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 70),
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.teal.shade500),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditWorkshopVideo(
-                                  id: workshopVideo.id??0,
-                                  videoLink: workshopVideo.video??'',
-                                )));
-                              },
-                              child: Text(
-                                "Edit",
-                                style: TextStyle(color: Colors.white),
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 50),
-                          child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
-                              onPressed: () {
-                                //DeleteFreeContent.deleteFreeContent(context, freeContent.id.toString());
-                              },
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(color: Colors.white),
-                              )),
-                        ),
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.teal.shade500),
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => EditWorkshopVideo(
+                                id: workshopVideo.id??0,
+                                videoLink: workshopVideo.video??'',
+                              )));
+                            },
+                            child: Text(
+                              "Edit",
+                              style: TextStyle(color: Colors.white),
+                            )),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(left: 50),
+                        //   child: ElevatedButton(
+                        //       style: ElevatedButton.styleFrom(
+                        //           backgroundColor: Colors.red),
+                        //       onPressed: () {
+                        //         //DeleteFreeContent.deleteFreeContent(context, freeContent.id.toString());
+                        //       },
+                        //       child: Text(
+                        //         "Delete",
+                        //         style: TextStyle(color: Colors.white),
+                        //       )),
+                        // ),
                       ],
                     )
                   ],

@@ -9,6 +9,7 @@ import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 
 import '../../Routes/route_names.dart';
+import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 import 'admin_home_page.dart';
 
@@ -55,7 +56,7 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
               onPressed: (){
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back)
+              icon: Icon(Icons.arrow_back, color: Colors.white,)
           ),
           actions: [
             IconButton(
@@ -75,12 +76,12 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
             );
           }
           final weekWiseList = value.weekWiseData;
-          return weekWiseList == null ? Center(
+          return weekWiseList.isEmpty ? Center(
             child: Text('No Week Wise Content Available',
               style: GoogleFonts.poppins(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
+                color: Colors.teal.shade600,
               ),
             ),
           ) : ListView.builder(
@@ -113,7 +114,7 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: RichText(text: TextSpan(children:[
-                        TextSpan(text: "Month : ",style: TextStyle(
+                        TextSpan(text: "Week : ",style: TextStyle(
                             color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
                         TextSpan(text: weekWiseList[index].month.toString(),style: TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16))
@@ -191,7 +192,37 @@ class _AdminViewWeekWiseContentState extends State<AdminViewWeekWiseContent> {
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Colors.red),
                                 onPressed: () {
-                                  DeleteWeekWiseContent.deleteWeekWiseContent(context, weekWiseList[index].id.toString());
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text('Are you Sure?'),
+                                      content: const Text('Once you delete this item, You will not be able to recover this !'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () async {
+                                            DeleteWeekWiseContent.deleteWeekWiseContent(context, weekWiseList[index].id.toString());
+                                          },
+                                          child: Text("Delete",
+                                            style: TextStyle(
+                                                color: button,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text("Cancel",
+                                            style: TextStyle(
+                                                color: button,
+                                                fontWeight: FontWeight.bold
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 },
                                 child: Text(
                                   "Delete",

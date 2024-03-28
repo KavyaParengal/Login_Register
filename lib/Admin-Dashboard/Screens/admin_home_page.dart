@@ -186,22 +186,35 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                                     Navigator.pop(context);
                                                     Navigator.push(context, MaterialPageRoute(builder: (context)=>navigationAdd[index]));
                                                   },
-                                                  child: Text("Add",style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.teal.shade800
-                                                  ),),
+                                                  child: TextButton(
+                                                    child: Text('Add',style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.teal.shade800
+                                                    ),),
+                                                    onPressed: (){
+                                                      Navigator.pop(context);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>navigationAdd[index]));
+                                                    },
+                                                  )
                                                 ),
                                               ),
+
                                               PopupMenuItem(
                                                 child: InkWell(
                                                   onTap: (){
                                                     Navigator.pop(context);
-                                                    Navigator.pushNamed(context, navigationView[index]);
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> navigationView[index]));
                                                   },
-                                                  child: Text("View",style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.teal.shade800
-                                                  ),),
+                                                  child: TextButton(
+                                                    child: Text('View',style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.teal.shade800
+                                                    ),),
+                                                    onPressed: (){
+                                                      Navigator.pop(context);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> navigationView[index]));
+                                                    },
+                                                  )
                                                 ),
                                               ),
                                             ];

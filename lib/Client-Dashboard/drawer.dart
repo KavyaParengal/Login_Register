@@ -1,13 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:login_register/Doctor-Dashboard/Screens/login_page.dart';
-import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
 import 'package:login_register/Utilities/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
+import '../Login/login_page.dart';
 import 'Api_services/viewDashbordDataApi.dart';
 import 'Models/dashboardDataModal.dart';
 import '../Utilities/global.dart';
@@ -22,31 +19,14 @@ class FreeNavigationDrawer extends StatefulWidget {
 
 class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
 
-  DashbordDataModel? userDetails;
-  String? token;
+  String? uname;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchUserDetails();
-  }
-
-  Future<DashbordDataModel?> fetchUserDetails() async {
-    SharedPreferences localStorage = await SharedPreferences.getInstance();
-    token = localStorage.getString('token');
-    try {
-      final details = await ViewDashboardData().getDashboardData(token!);
-      userDetails=details;
-      setState(() {
-        print(token);
-        print('userDetails--$userDetails');
-      });
-    }
-    catch(e){
-      print('Failed to fetch user details: $e');
-      return null;
-    }
+    Global.getPreferences();
+    uname = Global.prefs!.getString("userName");
   }
 
   @override
@@ -63,6 +43,7 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                // Global().onLogout(context: context);
                 SharedPreferences localStorage = await  SharedPreferences.getInstance();
                 localStorage.setString('token', '');
+                localStorage.setString('userName', '');
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
               },
               child: Text("Logout",style: TextStyle(
@@ -95,19 +76,18 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     color: button,
                   ),
-                  child: token==null? Container() :Column(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      userDetails!.clientDetails!.firstName ==null ? Text(
-                        "Hi, ",
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
-                          color: Colors.white,
-                        ),
+                      uname == null ?  Text(
+                        "Hi,",style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        color: Colors.white,
+                      ),
                         textAlign: TextAlign.center,
                       ) : Text(
-                        "Hi, ${Global().capitalizeAllWord(userDetails!.clientDetails!.firstName)}",style: GoogleFonts.poppins(
+                        "Hi, $uname",style: GoogleFonts.poppins(
                           fontSize: 22,
                           color: Colors.white,
                         ),

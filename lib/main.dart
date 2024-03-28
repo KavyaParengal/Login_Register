@@ -17,19 +17,30 @@ import 'package:login_register/Client-Dashboard/Provider/premium_content_provide
 import 'package:login_register/Client-Dashboard/Screens/splash_screen.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Routes/route_navigations.dart';
+import 'package:login_register/firebase_api.dart';
 import 'package:provider/provider.dart';
 import 'Admin-Dashboard/Provider/admin_view_wee_wise_provider.dart';
+import 'firebase_options.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
-  print('Handling a background message ${message.messageId}');
-}
+
+const AndroidNotificationChannel channel = AndroidNotificationChannel(
+    'high_importance_channel', // id
+    'High Importance Notifications', // title
+    description:
+    'This channel is used for important notifications.', // description
+    importance: Importance.high,
+    playSound: true);
+
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  await FirebaseMessaging.instance.getInitialMessage();
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  NotificationServices().setFCM();
+  // await FirebaseMessaging.instance.getInitialMessage();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   runApp(
       MultiProvider(
         providers:
