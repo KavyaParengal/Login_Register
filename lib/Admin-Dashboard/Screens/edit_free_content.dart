@@ -40,6 +40,7 @@ class _EditFreeContentState extends State<EditFreeContent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
@@ -49,6 +50,12 @@ class _EditFreeContentState extends State<EditFreeContent> {
                     colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
                 )
             ),
+          ),
+          leading: IconButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.white,),
           ),
           elevation: 0,
           title: Text(

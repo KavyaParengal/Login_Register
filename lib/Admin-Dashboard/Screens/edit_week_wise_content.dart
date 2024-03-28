@@ -82,6 +82,12 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                 )
             ),
           ),
+          leading: IconButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.white,),
+          ),
           elevation: 0,
           title: Text(
             'Edit Week Wise Content',
