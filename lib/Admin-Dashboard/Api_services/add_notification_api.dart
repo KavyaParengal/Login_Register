@@ -10,7 +10,7 @@ import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
 class NotificationAPI{
-  static void sendNotification(BuildContext context, String title, String description) async{
+  static Future<void> sendNotification(BuildContext context, String title, String description) async{
     Global.getPreferences();
     try{
       var data = {

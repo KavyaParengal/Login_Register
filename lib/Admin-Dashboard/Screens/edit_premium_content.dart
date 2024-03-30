@@ -33,6 +33,8 @@ class EditPremiumContent extends StatefulWidget {
    TextEditingController monthController=TextEditingController();
    TextEditingController adviceController=TextEditingController();
 
+   bool _isLoading = false;
+
    @override
    void initState() {
     // TODO: implement initState
@@ -196,20 +198,23 @@ class EditPremiumContent extends StatefulWidget {
                padding: const EdgeInsets.all(8.0),
                child: Container(
                  width: MediaQuery.of(context).size.width,
-                 child: ElevatedButton(onPressed: (){
-                   // if (_formKey.currentState!.validate()) {
-                     EditPremiumContentApi.editPremiumContent(
-                         context,
+                 child: ElevatedButton(onPressed: () async{
+                   setState(() {
+                     _isLoading = true;
+                   });
+                     await EditPremiumContentApi.editPremiumContent(context,
                          videoController.text,
                          titleController.text,
                          descriptionController.text,
                          monthController.text,
                          adviceController.text,
                          widget.id);
-                   // }
+                     setState(() {
+                       _isLoading = true;
+                     });
                  },
                      style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                     child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                     child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
                ),
              ),
            ],

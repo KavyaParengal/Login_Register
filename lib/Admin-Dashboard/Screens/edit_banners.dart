@@ -25,6 +25,7 @@ class EditBanners extends StatefulWidget {
 class _EditBannersState extends State<EditBanners> {
 
   TextEditingController orderController=TextEditingController();
+  bool _isLoading = false;
 
   XFile? image;
   final ImagePicker picker = ImagePicker();
@@ -153,11 +154,17 @@ class _EditBannersState extends State<EditBanners> {
             child: Container(
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
-                  onPressed: (){
-                      EditBannerAPI.editBanner(context, orderController.text, image!.path, widget.id);
+                  onPressed: () async{
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await EditBannerAPI.editBanner(context, orderController.text, image!.path, widget.id);
+                    setState(() {
+                      _isLoading = false;
+                    });
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

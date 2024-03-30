@@ -22,6 +22,7 @@ class _AddPremiumContentState extends State<AddPremiumContent> {
   TextEditingController adviceController=TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -169,19 +170,25 @@ class _AddPremiumContentState extends State<AddPremiumContent> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
+                child: ElevatedButton(onPressed: () async{
                   if (_formKey.currentState!.validate()) {
-                    AddPremiumContentApi.addPremiumContent(context,
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await AddPremiumContentApi.addPremiumContent(context,
                         videoController.text.trim(),
                         titleController.text.trim(),
                         descriptionController.text,
                         monthController.text.trim(),
                         adviceController.text,
                     );
+                    setState(() {
+                      _isLoading = false;
+                    });
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
               ),
             ),
           ],

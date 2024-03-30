@@ -16,6 +16,7 @@ class _AddWorkShopVideosState extends State<AddWorkShopVideos> {
 
   TextEditingController videoController=TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -78,13 +79,19 @@ class _AddWorkShopVideosState extends State<AddWorkShopVideos> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
+                child: ElevatedButton(onPressed: () async{
                   if (_formKey.currentState!.validate()) {
-                    AddWorkshopVideoApi.addWorkshopVideo(context, videoController.text);
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await AddWorkshopVideoApi.addWorkshopVideo(context, videoController.text);
+                    setState(() {
+                      _isLoading = false;
+                    });
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
               ),
             ),
           ],

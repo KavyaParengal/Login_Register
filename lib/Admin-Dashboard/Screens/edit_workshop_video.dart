@@ -17,6 +17,7 @@ class EditWorkshopVideo extends StatefulWidget {
 class _EditWorkshopVideoState extends State<EditWorkshopVideo> {
 
   TextEditingController videoController=TextEditingController();
+  bool _isLoading = false;
 
   @override
   void initState() {
@@ -87,15 +88,21 @@ class _EditWorkshopVideoState extends State<EditWorkshopVideo> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(onPressed: (){
-                  EditWorkshopVideoApi.editWorkshopVideo(
+              child: ElevatedButton(onPressed: () async{
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  await EditWorkshopVideoApi.editWorkshopVideo(
                       context,
                       videoController.text,
                       widget.id
                   );
+                  setState(() {
+                    _isLoading = false;
+                  });
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Edit",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17,  color: Colors.white),)),
             ),
           ),
         ],

@@ -53,6 +53,8 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
   final ImagePicker picker = ImagePicker();
   String imageName = 'Select Image';
 
+  bool _isLoading = false;
+
   Future<void> getImage(ImageSource source) async {
     try {
       XFile? pickedImage = await picker.pickImage(source: source);
@@ -248,9 +250,11 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
-                  // if (_formKey.currentState!.validate()) {
-                    EditWeekWiseContentApi.editWeekWiseContent(context,
+                child: ElevatedButton(onPressed: () async{
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await EditWeekWiseContentApi.editWeekWiseContent(context,
                         monthController.text.trim(),
                         image!.path,
                         sizeController.text.trim(),
@@ -259,11 +263,12 @@ class _EditWeekWiseContentState extends State<EditWeekWiseContent> {
                         weightController.text.trim(),
                         widget.id,
                     );
-                  //   print('--------${basename(image!.path)}');
-                  // }
+                    setState(() {
+                      _isLoading = false;
+                    });
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
               ),
             ),
           ],

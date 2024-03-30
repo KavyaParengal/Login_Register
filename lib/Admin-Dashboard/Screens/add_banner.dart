@@ -17,6 +17,7 @@ class AddBanners extends StatefulWidget {
 class _AddBannersState extends State<AddBanners> {
 
   final _formKey = GlobalKey<FormState>();
+  bool _isLoading = false;
 
   TextEditingController orderController=TextEditingController();
 
@@ -126,18 +127,24 @@ class _AddBannersState extends State<AddBanners> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
+                child: ElevatedButton(onPressed: () async{
                   if (_formKey.currentState!.validate()) {
-                    AddBannerAPI.addBanner(
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await AddBannerAPI.addBanner(
                         context,
                         orderController.text,
                         image!.path,
                     );
+                    setState(() {
+                      _isLoading = false;
+                    });
                     print('--------${basename(image!.path)}');
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
               ),
             ),
           ],

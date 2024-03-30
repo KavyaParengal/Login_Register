@@ -15,6 +15,7 @@ class AddMenstrationDate extends StatefulWidget {
 class _AddMenstrationDateState extends State<AddMenstrationDate> {
 
   TextEditingController dateController = TextEditingController();
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -61,11 +62,17 @@ class _AddMenstrationDateState extends State<AddMenstrationDate> {
             padding: const EdgeInsets.all(12.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(onPressed: (){
-                AddMenstruationDateApi.addMenstruationDate(context, dateController.text.trim());
+              child: ElevatedButton(onPressed: () async{
+                setState(() {
+                  _isLoading = true;
+                });
+                await AddMenstruationDateApi.addMenstruationDate(context, dateController.text.trim());
+                setState(() {
+                  _isLoading = false;
+                });
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

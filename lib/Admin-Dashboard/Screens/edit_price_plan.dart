@@ -41,6 +41,8 @@ class _EditPricePlanState extends State<EditPricePlan> {
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
 
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,19 +150,23 @@ class _EditPricePlanState extends State<EditPricePlan> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(onPressed: (){
-                // if (_formKey.currentState!.validate()) {
-                EditPremiumPriceApi.editPremiumPrice(
+              child: ElevatedButton(onPressed: () async{
+                setState(() {
+                  _isLoading = true;
+                });
+                await EditPremiumPriceApi.editPremiumPrice(
                     context,
                     titleController.text,
                     priceController.text,
                     descriptionController.text,
                     widget.id
                 );
-                // }
+                setState(() {
+                  _isLoading = false;
+                });
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

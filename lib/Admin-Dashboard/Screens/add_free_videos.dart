@@ -19,6 +19,7 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
   TextEditingController descriptionController=TextEditingController();
   TextEditingController monthController=TextEditingController();
 
+  bool _isLoading = false;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -145,19 +146,25 @@ class _AdminAddVideosState extends State<AdminAddVideos> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(onPressed: (){
+                child: ElevatedButton(onPressed: () async{
                   if (_formKey.currentState!.validate()) {
-                    AddFreeContentApi.addFreeContent(
+                    setState(() {
+                      _isLoading = true;
+                    });
+                    await AddFreeContentApi.addFreeContent(
                         context,
                         videoController.text.trim(),
                         titleController.text.trim(),
                         descriptionController.text.trim(),
                         monthController.text.trim()
                     );
+                    setState(() {
+                      _isLoading = false;
+                    });
                   }
                 },
                     style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: const Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17,  color: Colors.white),)),
               ),
             ),
           ],

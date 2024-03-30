@@ -18,6 +18,8 @@ class AddNotification extends StatefulWidget {
 }
 
 class _AddNotificationState extends State<AddNotification> {
+
+  bool _isLoading = false;
   String? mtoken = '';
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
@@ -193,15 +195,17 @@ class _AddNotificationState extends State<AddNotification> {
                 String title = titleController.text;
                 String description = descriptionController.text;
                 if(title != "" && description != ""){
-                  // DocumentSnapshot snap = await FirebaseFirestore.instance.collection('UserTokens').doc('admin').get();
-                  // String token = snap['token'];
-                  // print(token);
-                  // _addOffer(title, description);
-                  NotificationAPI.sendNotification(context, title, description);
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  await NotificationAPI.sendNotification(context, title, description);
+                  setState(() {
+                    _isLoading = false;
+                  });
                 }
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Add",style: TextStyle(fontSize: 17, color: Colors.white),)),
             ),
           ),
         ],

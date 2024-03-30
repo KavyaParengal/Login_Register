@@ -28,6 +28,8 @@ class _EditFreeContentState extends State<EditFreeContent> {
   // TextEditingController descriptionController=TextEditingController();
   TextEditingController monthController=TextEditingController();
 
+  bool _isLoading = false;
+
   @override
   void initState() {
     // TODO: implement initState
@@ -159,19 +161,23 @@ class _EditFreeContentState extends State<EditFreeContent> {
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(onPressed: (){
-                // if (_formKey.currentState!.validate()) {
-                  EditFreeContentApi.editFreeContent(context,
+              child: ElevatedButton(onPressed: () async{
+                setState(() {
+                  _isLoading = true;
+                });
+                 await EditFreeContentApi.editFreeContent(context,
                       videoController.text.trim(),
                       titleController.text.trim(),
                       // descriptionController.text.trim(),
                       monthController.text.trim(),
                       widget.id
                   );
-                // }
+                 setState(() {
+                   _isLoading = false;
+                 });
               },
                   style: ElevatedButton.styleFrom(backgroundColor: button, fixedSize: const Size(300, 55),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                  child: const Text("Edit",style: TextStyle(fontSize: 17,  color: Colors.white),)),
+                  child: _isLoading ? CircularProgressIndicator(color: Colors.white,) : Text("Edit",style: TextStyle(fontSize: 17,  color: Colors.white),)),
             ),
           ),
         ],
