@@ -148,16 +148,6 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   List<Citation> citations = [
-    // Citation(
-    //   title: "SkimResources",
-    //   link:
-    //       "https://go.skimresources.com/?id=2866X1446369&isjs=1&jv=15.4.2-stackpath&sref=https%3A%2F%2Fwww.thebump.com%2Fa%2Fpregnancy-books&url=https%3A%2F%2Fwww.walmart.com%2Fip%2FIna-May-s-Guide-to-Childbirth-Updated-with-New-Material-Paperback-9780553381153%2F1955925&xs=1&xtz=-330&xuuid=2225463b54c9594ee652d3e914aceb32&xjsf=other_click__touchstart%20%5B%5D&cci=a34cf277feba3c91ec836fcdd7033d90",
-    // ),
-    // Citation(
-    //     title: "Walmart",
-    //     link:
-    //         "https://www.walmart.com/ip/The-Pregnancy-Countdown-Book-Nine-Months-of-Practical-Tips-Useful-Advice-and-Uncensored-Truths/17105117?irgwc=1&sourceid=imp_14w3xnwF2xyPTxeS1y2cw1LgUkFylsTmEzLGWg0&veh=aff&wmlspartner=imp_10078&clickid=14w3xnwF2xyPTxeS1y2cw1LgUkFylsTmEzLGWg0&sharedid=thebump.com&affiliates_ad_id=612734&campaign_id=9383")
-    // ,
     Citation(
       title: "Citation",
       link: "https://shebirth.com/citation/",

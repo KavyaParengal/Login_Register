@@ -2,7 +2,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Screens/ProfileDetails.dart';
+import 'package:login_register/PrivacyPolicy/privacy_policy.dart';
+import 'package:login_register/PrivacyPolicy/terms&conditions.dart';
 import 'package:login_register/Utilities/colors.dart';
+import 'package:login_register/contact_us.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Login/login_page.dart';
 import 'Api_services/viewDashbordDataApi.dart';
@@ -97,35 +100,13 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                         height: 10,
                         thickness: .01,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProfileDetails(),
-                                ),
-                              );
-                            },
-                            child: Text(
-                              "Profile & Other Setting",
-                              style: GoogleFonts.poppins(
-                                fontSize: 15,
-                                color: Colors.white,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            // onPressed: () {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => Profile(route: "free_package",)),
-                            //   );
-                            // },
-                          )
-                        ],
+                      Text(
+                        "Profile & Other Setting",
+                        style: GoogleFonts.poppins(
+                          fontSize: 15,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
                       )
                     ],
                   ),
@@ -151,163 +132,63 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
                   );
                 }
             ),
-            // ListTile(
-            //     leading:
-            //     Icon(Icons.calendar_today_rounded, color: Colors.white),
-            //     title: Text(
-            //       "Appointment",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => Appointment(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.medical_services, color: Colors.white),
-            //     title: Text(
-            //       "Support Team",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => SupportTeam(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.person, color: Colors.white),
-            //     title: Text(
-            //       "My Doctor",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => MyDoctor(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.payment, color: Colors.white),
-            //     title: Text(
-            //       "Payment",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => Payment(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Image(image: AssetImage('assets/ScanIcon.png'),
-            //         height: 20),
-            //     title: Text(
-            //       "Scan Details",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => ScanDates(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.scanner, color: Colors.white),
-            //     title: Text(
-            //       "Last Week Report",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => Report(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Icon(Icons.message, color: Colors.white),
-            //     title: Text(
-            //       "Message",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => AllMessages(),
-            //         ),
-            //       );
-            //     }),
-
-            // ListTile(
-            //     leading: Icon(Icons.info_outline),
-            //     title: Text(
-            //       "About Us",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => AboutScreen(),
-            //         ),
-            //       );
-            //     }),
-            // ListTile(
-            //     leading: Image(image: AssetImage('assets/TermIcon.png'),
-            //       height: 20,),
-            //     title: Text(
-            //       "Terms of Use",
-            //       style: GoogleFonts.poppins(
-            //         fontSize: 12,
-            //         color: Colors.white,
-            //       ),
-            //     ),
-            //     onTap: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(
-            //           builder: (context) => Terms(),
-            //         ),
-            //       );
-            //     }),
+            ListTile(
+                leading: Image(image: AssetImage('assets/TermIcon.png',),color: button,
+                  height: 20,),
+                title: Text(
+                  "Terms and Condition",
+                  style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TermsAndCondition(),
+                    ),
+                  );
+                }),
+            ListTile(
+                leading: Image(image: AssetImage('assets/privacy-policy.png',),
+                  color: button,
+                  height: 28,),
+                title: Text(
+                  "Privacy Policy",
+                  style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PrivacyPolicy(),
+                    ),
+                  );
+                }),
+            ListTile(
+                leading: Icon(Icons.call, color: button),
+                title: Text(
+                  "Contact us",
+                  style: GoogleFonts.poppins(
+                      fontSize: 15,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ContactUs(),
+                    ),
+                  );
+                }),
             ListTile(
                 leading: Icon(Icons.logout, color: button),
                 title: Text(
