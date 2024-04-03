@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
+import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +32,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
   }
 
   _launchPayment(String pId) async {
-    await launch("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId", forceSafariVC: false);
+    await launch("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId", forceSafariVC: false, );
     print("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId");
   }
 
@@ -60,7 +61,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
               ),
             leading: IconButton(
                 onPressed: (){
-                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                 },
                 icon: Icon(
                   Icons.arrow_back, color: Colors.white,

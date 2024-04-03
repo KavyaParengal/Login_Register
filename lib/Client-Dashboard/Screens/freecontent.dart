@@ -2,16 +2,15 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'package:http/http.dart' as http;
 import 'package:login_register/Client-Dashboard/Provider/free_content_provider.dart';
+import 'package:login_register/Utilities/state_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../Models/freecontentmodel.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
-import '../drawer.dart';
 import '/Widgets/loading_icon.dart';
 
 class FreeContent extends StatefulWidget {
@@ -37,16 +36,6 @@ class _FreeContentState extends State<FreeContent> {
   }
 
   List<Citation> citations = [
-    // Citation(
-    //   title: "SkimResources",
-    //   link:
-    //       "https://go.skimresources.com/?id=2866X1446369&isjs=1&jv=15.4.2-stackpath&sref=https%3A%2F%2Fwww.thebump.com%2Fa%2Fpregnancy-books&url=https%3A%2F%2Fwww.walmart.com%2Fip%2FIna-May-s-Guide-to-Childbirth-Updated-with-New-Material-Paperback-9780553381153%2F1955925&xs=1&xtz=-330&xuuid=2225463b54c9594ee652d3e914aceb32&xjsf=other_click__touchstart%20%5B%5D&cci=a34cf277feba3c91ec836fcdd7033d90",
-    // ),
-    // Citation(
-    //     title: "Walmart",
-    //     link:
-    //         "https://www.walmart.com/ip/The-Pregnancy-Countdown-Book-Nine-Months-of-Practical-Tips-Useful-Advice-and-Uncensored-Truths/17105117?irgwc=1&sourceid=imp_14w3xnwF2xyPTxeS1y2cw1LgUkFylsTmEzLGWg0&veh=aff&wmlspartner=imp_10078&clickid=14w3xnwF2xyPTxeS1y2cw1LgUkFylsTmEzLGWg0&sharedid=thebump.com&affiliates_ad_id=612734&campaign_id=9383")
-    // ,
     Citation(
       title: "Citation",
       link: "https://shebirth.com/citation/",
@@ -132,7 +121,7 @@ class _FreeContentState extends State<FreeContent> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      "${index + 1})${citations[index].title}",
+                      "${citations[index].title}",
                       style: GoogleFonts.poppins(color: Colors.blue),
                     ),
                   ));
@@ -210,13 +199,13 @@ class _FreeContentState extends State<FreeContent> {
           physics: ScrollPhysics(),
           child: Consumer<FreeContentDataProvider>(
             builder: (context, value, child){
-              if (value.isLoading) {
+              if (value.state == StateEnum.loading) {
                 return const Center(
                     child: LoadingIcon()
                 );
               }
               final freeDatas = value.freeDatas;
-              return freeDatas.isEmpty ? Align(
+              return freeDatas.isEmpty && value.state != StateEnum.success ? Align(
                 alignment: Alignment.center,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -255,7 +244,7 @@ class _FreeContentState extends State<FreeContent> {
                           _controller = YoutubePlayerController(
                             initialVideoId: videoId,
                             flags: YoutubePlayerFlags(
-                              autoPlay: true,
+                              autoPlay: false,
                               mute: false,
                             ),);
 

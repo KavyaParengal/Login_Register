@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -9,9 +10,11 @@ import 'package:login_register/Admin-Dashboard/Provider/admin_view_banner_provid
 import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_video_provider.dart';
 import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
 import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../Api_services/viewDashbordDataApi.dart';
@@ -43,6 +46,25 @@ class _HomePageState extends State<HomePage>{
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = true;
 
+  // String _latestLink = 'Unknown';
+  // StreamSubscription? _sub;
+  //
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   _sub?.cancel();
+  // }
+  //
+  // void initUniLinks() async {
+  //   _sub = linkStream.listen((String? link) {
+  //     setState(() {
+  //       _latestLink = link ?? 'Unknown';
+  //       print('Link : $_latestLink');
+  //     });
+  //   });
+  // }
+
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +73,7 @@ class _HomePageState extends State<HomePage>{
       Provider.of<AdminViewBannerProvider>(context, listen: false).getBanners();
       Provider.of<AdminViewWorkshopVideoProvider>(context, listen: false).getWorkshopVideoList();
     });
+    // initUniLinks();
   }
 
   void listener() {
@@ -378,9 +401,10 @@ class _HomePageState extends State<HomePage>{
                     ElevatedButton(
                       onPressed: () {
                         if(userDetails!.clientDetails!.subscribed == true)
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
                         else{
                           _premiumAlert();
+                          // Navigator.pop(context);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -402,9 +426,10 @@ class _HomePageState extends State<HomePage>{
               ),
               onTap: () {
                 if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumPlanPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
                 else{
                   _premiumAlert();
+                  // Navigator.pop(context);
                 }
               },
             ),

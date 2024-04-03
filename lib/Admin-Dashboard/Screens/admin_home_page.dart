@@ -147,6 +147,36 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                 ),
                               )
                           ),
+                        ):image[index]=='assets/add.png'?InkWell(
+                          onTap: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNotification()));
+                          },
+                          child: Container(
+                              margin: const EdgeInsets.all(5.0),
+                              decoration: ShapeDecoration(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                gradient: RadialGradient(
+                                  colors: <Color>[ Colors.white, Colors.teal.shade100],
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Image.asset('assets/add.png', width: 66,),
+                                    Text('Add Notifications',style: GoogleFonts.poppins(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),textAlign: TextAlign.center,),
+                                  ],
+                                ),
+                              )
+                          ),
                         ):Container(
                           margin: const EdgeInsets.all(5.0),
                           decoration: ShapeDecoration(

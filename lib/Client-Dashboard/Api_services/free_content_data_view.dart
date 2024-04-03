@@ -14,13 +14,12 @@ class ViewFreeContentDataAPI{
       'Authorization': "Token $token",
     });
     print('Response : ${response.statusCode}');
-    if (response.statusCode == 200 && response.body is Map) {
+    if (response.statusCode == 200) {
       var body = json.decode(response.body);
       print(body);
       List<FreeContentDataModel> data =  body.map<FreeContentDataModel>((e) => FreeContentDataModel.fromJson(e)).toList();
-      //print(data);
+      print(data);
       return data;
-
     } else {
       List<FreeContentDataModel> data = [];
       return data;

@@ -180,16 +180,6 @@ class _PremiumContentState extends State<PremiumContent> {
               ),
               elevation: 0,
               centerTitle: false,
-
-              // leading: IconButton(
-              //     icon: Icon(
-              //       Icons.arrow_back_ios,
-              //       size: 24.0,
-              //       color: Colors.white,
-              //     ),
-              //     onPressed: () {
-              //       Get.back();
-              //     }),
               title: Text(
                 Global().appName,
                 maxLines: 1,
@@ -201,6 +191,11 @@ class _PremiumContentState extends State<PremiumContent> {
                 ),
                 textAlign: TextAlign.start,
               ),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back,color: Colors.white,)),
               actions: [
                 IconButton(
                     onPressed: () {
@@ -211,14 +206,6 @@ class _PremiumContentState extends State<PremiumContent> {
             ),
           ),
           body: Container(
-            // width: MediaQuery.of(context).size.width,
-            // height: MediaQuery.of(context).size.height,
-            // decoration: BoxDecoration(
-            //     image: DecorationImage(
-            //       image: AssetImage('assets/logo.png',),
-            //       opacity: 0.3,
-            //     )
-            // ),
             child: SingleChildScrollView(
               physics: ScrollPhysics(),
               child: Column(
@@ -267,7 +254,7 @@ class _PremiumContentState extends State<PremiumContent> {
                               _controller = YoutubePlayerController(
                                 initialVideoId: videoId,
                                 flags: YoutubePlayerFlags(
-                                  autoPlay: true,
+                                  autoPlay: false,
                                   mute: false,
                                 ),);
 
@@ -316,17 +303,6 @@ class _PremiumContentState extends State<PremiumContent> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.all(8.0),
-                                  //   child: Text(
-                                  //     utf8.decode(Global()
-                                  //         .capitalizeAllWord(
-                                  //             currFreeContentData.crew ?? "")
-                                  //         .codeUnits),
-                                  //     style: GoogleFonts.poppins(
-                                  //         color: Colors.black),
-                                  //   ),
-                                  // ),
                                   Padding(
                                     padding: const EdgeInsets.all(9),
                                     child: referenceInfo(),
