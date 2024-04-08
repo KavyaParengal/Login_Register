@@ -195,45 +195,36 @@ class _FreeContentState extends State<FreeContent> {
             ],
           ),
         ),
-        body: SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: Consumer<FreeContentDataProvider>(
-            builder: (context, value, child) {
-              if (value.state == StateEnum.loading) {
-                return const Center(
-                  child: LoadingIcon(),
-                );
-              }
-              final freeDatas = value.freeDatas;
-              return freeDatas.isEmpty && value.state != StateEnum.success
-                  ? Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'No Content Found',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.teal.shade800,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              )
-                  : freeDatas.isEmpty
-                  ? Center(
+        body: Consumer<FreeContentDataProvider>(
+          builder: (context, value, child){
+            if (value.state == StateEnum.loading) {
+              return const Center(
+                  child: LoadingIcon()
+              );
+            }
+            final freeDatas = value.freeDatas;
+            return freeDatas.isEmpty && value.state != StateEnum.success ? Align(
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'No Content Found',
-                  style: TextStyle(
+                  'No Content Found',style: TextStyle(
                     fontSize: 16,
                     color: Colors.teal.shade800,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              )
-                  : Column(
+                    fontWeight: FontWeight.bold
+                ),),
+              ),):
+            freeDatas.isEmpty ? Center(
+              child: Text(
+                'No Content Found',style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.teal.shade800,
+                  fontWeight: FontWeight.bold
+              ),),
+            ) : Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
+                    padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
                     child: Text(
                       'Free Content',
                       style: GoogleFonts.poppins(
@@ -245,50 +236,49 @@ class _FreeContentState extends State<FreeContent> {
                     ),
                   ),
                   Container(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(bottom: 100),
-                      itemCount: freeDatas.length ?? 0,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final freeContent = freeDatas[index];
-                        String videoId =
-                        YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
+                  child: ListView.builder(
+                    // physics: NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(bottom: 100),
+                    itemCount: freeDatas.length ?? 0,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final freeContent = freeDatas[index];
+                      String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
 
                         _controller = YoutubePlayerController(
                           initialVideoId: videoId,
                           flags: YoutubePlayerFlags(
                             autoPlay: false,
                             mute: false,
-                          ),
-                        );
+                          ),);
 
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                Global().capitalizeAllWord(freeContent.title ?? ""),
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              Global().capitalizeAllWord(
+                                  freeContent.title ?? ""),
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                  top: 10,
-                                  bottom: 10,
-                                  left: 2,
-                                  right: 2,
-                                ),
-                                child: YoutubePlayerBuilder(
-                                    player: YoutubePlayer(
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                top: 10,
+                                bottom: 10,
+                                left: 2,
+                                right: 2,
+                              ),
+                              child: YoutubePlayerBuilder(
+                                  player: YoutubePlayer(
                                       onReady: () {
                                         _controller.addListener(listener);
                                       },
@@ -296,34 +286,33 @@ class _FreeContentState extends State<FreeContent> {
                                       bottomActions: [],
                                       topActions: [],
                                       showVideoProgressIndicator: false,
-                                      controller: _controller,
-                                    ),
-                                    builder: (context, player) {
-                                      return Container(
-                                        child: player,
-                                      );
-                                    })),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(9),
-                              child: referenceInfo(),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                                      controller: _controller),
+                                  builder: (context, player) {
+                                    return Container(
+                                      child: player,
+                                    );
+                                  })
+
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: referenceInfo(),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      );
+                    },
                   ),
+                                      ),
                 ],
               );
-            },
-          ),
-        ),
-
+          },
+        )
       ),
     );
   }
