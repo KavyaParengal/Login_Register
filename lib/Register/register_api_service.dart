@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_register/Login/login_page.dart';
 
-import '../Routes/route_names.dart';
 import '../Utilities/constants.dart';
 
 class RegisterApi{

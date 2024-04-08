@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/delete_premium_content_api.dart';
-import 'package:login_register/Admin-Dashboard/Model/paid_video_model.dart';
-import 'package:login_register/Admin-Dashboard/Provider/admin_view_free_video_provider.dart';
 import 'package:login_register/Admin-Dashboard/Screens/edit_premium_content.dart';
-import 'package:login_register/Routes/route_names.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 

@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_register/Admin-Dashboard/Screens/admin_view_free_content.dart';
 import 'package:login_register/Utilities/global.dart';
 
-import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
 class NotificationAPI{

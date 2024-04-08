@@ -1,5 +1,4 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,15 +6,9 @@ import 'package:http/http.dart' as http;
 import 'package:login_register/Client-Dashboard/Models/premiumContentModel.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
 import 'package:provider/provider.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
-
-import '../../Routes/route_names.dart';
-import '../../Login/login_page.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
-import '../drawer.dart';
 import '/Widgets/loading_icon.dart';
 
 class PremiumContent extends StatefulWidget {

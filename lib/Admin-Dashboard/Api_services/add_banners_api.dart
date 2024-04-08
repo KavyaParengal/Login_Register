@@ -8,7 +8,6 @@ import 'package:login_register/Admin-Dashboard/Screens/admin_view_banners.dart';
 import 'package:path/path.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Routes/route_names.dart';
 import '../../Utilities/constants.dart';
 
 class AddBannerAPI {
