@@ -13,7 +13,7 @@ class ViewFreeContentDataAPI{
     var response = await http.get(Uri.parse(url), headers: {
       'Authorization': "Token $token",
     });
-    print('Response : ${response.statusCode}');
+    print('Response : ${response.body}');
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
       print(body);

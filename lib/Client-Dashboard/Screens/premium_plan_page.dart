@@ -6,8 +6,11 @@ import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Login/login_page.dart';
 import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 
@@ -29,12 +32,65 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Provider.of<PlanListProvider>(context, listen: false).getPlanList();
     });
+    // initUniLinks();
   }
 
   _launchPayment(String pId) async {
     await launch("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId", forceSafariVC: false, );
     print("https://gentlebirthmethod.in/home/payment_gateway/?x=${widget.id.toString()}&plan_id=$pId");
   }
+
+  // String _latestLink = 'Unknown';
+  // Uri? _latestUri;
+  //
+  // void initUniLinks() async {
+  //   // Platform messages may fail, so we use a try/catch PlatformException.
+  //   try {
+  //     // Attach a listener to the links stream
+  //     getUriLinksStream().listen((Uri? uri) {
+  //       if (!mounted) return;
+  //       setState(() {
+  //         _latestLink = uri.toString();
+  //         _latestUri = uri;
+  //       });
+  //       // Check if the deep link matches the success link
+  //       if (_latestUri?.toString() == 'yourapp://payment/success') {
+  //         // Navigate to the login page
+  //         // You can replace this with your actual navigation logic
+  //         Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(builder: (context) => LoginPage()),
+  //         );
+  //       }
+  //     }, onError: (Object err) {
+  //       if (!mounted) return;
+  //       setState(() {
+  //         _latestLink = 'Failed to get latest link: $err.';
+  //         _latestUri = null;
+  //       });
+  //     });
+  //
+  //     // Get the latest link
+  //     final initialLink = await getInitialUri();
+  //     if (initialLink != null) {
+  //       setState(() {
+  //         _latestLink = initialLink.toString();
+  //         _latestUri = initialLink;
+  //       });
+  //       // Check if the deep link matches the success link
+  //       if (_latestUri?.toString() == 'yourapp://payment/success') {
+  //         // Navigate to the login page
+  //         // You can replace this with your actual navigation logic
+  //         Navigator.pushReplacement(
+  //           context,
+  //           MaterialPageRoute(builder: (context) => LoginPage()),
+  //         );
+  //       }
+  //     }
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +117,7 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
               ),
             leading: IconButton(
                 onPressed: (){
+                  // Navigator.pop(context);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
                 },
                 icon: Icon(
@@ -142,9 +199,13 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
                               ],
                             ),
                             ElevatedButton(
-                              onPressed: () {
+                              onPressed: () async{
                                 //Navigator.pushNamed(context, RouteName.premium_content);
-                                _launchPayment(planList[index].id.toString());
+                                await _launchPayment(planList[index].id.toString());
+                                SharedPreferences localStorage = await  SharedPreferences.getInstance();
+                                localStorage.setString('token', '');
+                                localStorage.setString('userName', '');
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
                               },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: button, // foreground (text) color

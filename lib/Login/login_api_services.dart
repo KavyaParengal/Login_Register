@@ -25,7 +25,7 @@ class LoginApi {
       print(urls);
       var response = await http.post(Uri.parse(urls), body: data);
       var body = json.decode(response.body);
-      print('Response body: $body');
+      print('Response body: ${response.body}');
       if (response.statusCode == 200) {
         if (body['token'] != null) {
           localStorage.setString('token', body['token']);
@@ -44,7 +44,7 @@ class LoginApi {
             Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
           }
         } else {
-          if (body['message'] == "Invalid credentials") {
+          if (body['message'] == "Invalid credentials" || response.body == 'Invalid user' ){
             showErrorMessage(context, 'Invalid email or password');
           } else {
             showErrorMessage(context, 'User not registered');
@@ -78,7 +78,7 @@ class LoginApi {
 
   static void showErrorMessage(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
+      SnackBar(content: Text(message), backgroundColor: Colors.red,),
     );
   }
 }

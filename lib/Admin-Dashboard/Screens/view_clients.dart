@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Routes/route_names.dart';
 import 'package:login_register/Utilities/global.dart';
@@ -123,28 +124,34 @@ class _ViewClientsState extends State<ViewClients> {
                                     ),),
                                 ),
                                 Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    clientList[index].firstName == null ||  clientList[index].firstName == '' ? Text('Null', style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),):Text('${clientList[index].firstName.toString()[0].toUpperCase()}${clientList[index].firstName.toString().substring(1).toLowerCase()}',
-                                      style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),),
-                                    SizedBox(width: 8,),
-                                    clientList[index].lastName == null || clientList[index].lastName == '' ? Text('Null', style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),):Text('${clientList[index].lastName.toString()[0].toUpperCase()}${clientList[index].lastName.toString().substring(1).toLowerCase()}',
-                                      style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),),
+                                    Row(
+                                      children: [
+                                        clientList[index].firstName == null ||  clientList[index].firstName == '' ? Text('Null', style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),):Text('${clientList[index].firstName.toString()[0].toUpperCase()}${clientList[index].firstName.toString().substring(1).toLowerCase()}',
+                                          style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),),
+                                        SizedBox(width: 8,),
+                                        clientList[index].lastName == null || clientList[index].lastName == '' ? Text('Null', style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),):Text('${clientList[index].lastName.toString()[0].toUpperCase()}${clientList[index].lastName.toString().substring(1).toLowerCase()}',
+                                          style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),),
+                                      ],
+                                    ),
+                                    Icon(clientList[index].subscribed == true ? FontAwesomeIcons.crown : null, color: Colors.teal.shade700,) ,
                                   ],
                                 ),
                                 clientList[index].location == null ? Text('Null', style: GoogleFonts.poppins(

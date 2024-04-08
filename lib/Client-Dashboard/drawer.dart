@@ -56,7 +56,6 @@ class _FreeNavigationDrawerState extends State<FreeNavigationDrawer> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-
               },
               child: Text("Cancel",style: TextStyle(
                   color: Colors.teal.shade800

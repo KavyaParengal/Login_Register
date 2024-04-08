@@ -198,40 +198,53 @@ class _FreeContentState extends State<FreeContent> {
         body: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Consumer<FreeContentDataProvider>(
-            builder: (context, value, child){
+            builder: (context, value, child) {
               if (value.state == StateEnum.loading) {
                 return const Center(
-                    child: LoadingIcon()
+                  child: LoadingIcon(),
                 );
               }
               final freeDatas = value.freeDatas;
-              return freeDatas.isEmpty && value.state != StateEnum.success ? Align(
-                alignment: Alignment.center,
+              return freeDatas.isEmpty && value.state != StateEnum.success
+                  ? Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'No Content Found',style: TextStyle(
+                    'No Content Found',
+                    style: TextStyle(
                       fontSize: 16,
                       color: Colors.teal.shade800,
-                      fontWeight: FontWeight.bold
-                  ),
-                  ),
-                ),):
-                Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
-                      child: Text(
-                        'Free Content',
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal.shade800,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
+                      fontWeight: FontWeight.bold,
                     ),
-                    Container(
+                  ),
+                ),
+              )
+                  : freeDatas.isEmpty
+                  ? Center(
+                child: Text(
+                  'No Content Found',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.teal.shade800,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+                  : Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
+                    child: Text(
+                      'Free Content',
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800,
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                  Container(
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.only(bottom: 100),
@@ -239,14 +252,16 @@ class _FreeContentState extends State<FreeContent> {
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         final freeContent = freeDatas[index];
-                        String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
+                        String videoId =
+                        YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
 
-                          _controller = YoutubePlayerController(
-                            initialVideoId: videoId,
-                            flags: YoutubePlayerFlags(
-                              autoPlay: false,
-                              mute: false,
-                            ),);
+                        _controller = YoutubePlayerController(
+                          initialVideoId: videoId,
+                          flags: YoutubePlayerFlags(
+                            autoPlay: false,
+                            mute: false,
+                          ),
+                        );
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,8 +269,7 @@ class _FreeContentState extends State<FreeContent> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                Global().capitalizeAllWord(
-                                    freeContent.title ?? ""),
+                                Global().capitalizeAllWord(freeContent.title ?? ""),
                                 style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -275,35 +289,23 @@ class _FreeContentState extends State<FreeContent> {
                                 ),
                                 child: YoutubePlayerBuilder(
                                     player: YoutubePlayer(
-                                        onReady: () {
-                                          _controller.addListener(listener);
-                                        },
-                                        aspectRatio: 16 / 9,
-                                        bottomActions: [],
-                                        topActions: [],
-                                        showVideoProgressIndicator: false,
-                                        controller: _controller),
+                                      onReady: () {
+                                        _controller.addListener(listener);
+                                      },
+                                      aspectRatio: 16 / 9,
+                                      bottomActions: [],
+                                      topActions: [],
+                                      showVideoProgressIndicator: false,
+                                      controller: _controller,
+                                    ),
                                     builder: (context, player) {
                                       return Container(
                                         child: player,
                                       );
-                                    })
-
-                            ),
+                                    })),
                             const SizedBox(
                               height: 10,
                             ),
-                            // Padding(
-                            //   padding: const EdgeInsets.all(8.0),
-                            //   child: Text(
-                            //     utf8.decode(Global()
-                            //         .capitalizeAllWord(
-                            //             currFreeContentData.crew ?? "")
-                            //         .codeUnits),
-                            //     style: GoogleFonts.poppins(
-                            //         color: Colors.black),
-                            //   ),
-                            // ),
                             Padding(
                               padding: const EdgeInsets.all(9),
                               child: referenceInfo(),
@@ -315,12 +317,13 @@ class _FreeContentState extends State<FreeContent> {
                         );
                       },
                     ),
-                                        ),
-                  ],
-                );
+                  ),
+                ],
+              );
             },
           ),
-        )
+        ),
+
       ),
     );
   }

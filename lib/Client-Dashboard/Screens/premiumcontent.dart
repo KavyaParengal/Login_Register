@@ -215,7 +215,7 @@ class _PremiumContentState extends State<PremiumContent> {
                     child: Padding(
                       padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
                       child: Text(
-                        'Premium Content',
+                        'Premium Membership',
                         style: GoogleFonts.poppins(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,

@@ -23,6 +23,9 @@ class _AdminViewFreeContentState extends State<AdminViewFreeContent> {
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = true;
 
+  int? selectedWeek;
+
+
   @override
   void initState() {
     super.initState();
@@ -39,6 +42,44 @@ class _AdminViewFreeContentState extends State<AdminViewFreeContent> {
       });
     }
   }
+
+  Future<dynamic> _premiumAlert() {
+    return showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Filter, Which Week content data do you want ? '),
+        content: DropdownButtonFormField<int>(
+          value: selectedWeek,
+          items: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((week) {
+            return DropdownMenuItem<int>(
+              value: week,
+              child: Text('Week $week'),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              selectedWeek = value;
+            });
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+            },
+            child: Text(
+              "OK",
+              style: TextStyle(
+                color: button,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +111,19 @@ class _AdminViewFreeContentState extends State<AdminViewFreeContent> {
               },
               icon: Icon(Icons.arrow_back, color: Colors.white,)),
           actions: [
+            // IconButton(
+            //     onPressed: (){
+            //       _premiumAlert();
+            //       // Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
+            //     },
+            //     icon: Icon(Icons.filter_list_alt,color: Colors.white,)
+            // ),
             IconButton(
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
                 },
                 icon: Icon(Icons.home,color: Colors.white,)
-            )
+            ),
           ],
         ),
       ),
@@ -115,6 +163,10 @@ class _AdminViewFreeContentState extends State<AdminViewFreeContent> {
                           itemBuilder: (context, index) {
                             final freeContent = freeVideoList[index];
                             String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
+
+                            // if (selectedWeek != null && freeContent.month != selectedWeek) {
+                            //   return SizedBox.shrink();
+                            // }
 
                             _controller = YoutubePlayerController(
                               initialVideoId: videoId,

@@ -46,6 +46,7 @@ class _EditPricePlanState extends State<EditPricePlan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(

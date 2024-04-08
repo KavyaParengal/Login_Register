@@ -11,10 +11,10 @@ import 'package:login_register/Admin-Dashboard/Provider/admin_view_workshop_vide
 import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
 import 'package:login_register/Client-Dashboard/Screens/premium_plan_page.dart';
 import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
+import 'package:login_register/Login/login_page.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../Api_services/viewDashbordDataApi.dart';
@@ -46,25 +46,6 @@ class _HomePageState extends State<HomePage>{
   late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = true;
 
-  // String _latestLink = 'Unknown';
-  // StreamSubscription? _sub;
-  //
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _sub?.cancel();
-  // }
-  //
-  // void initUniLinks() async {
-  //   _sub = linkStream.listen((String? link) {
-  //     setState(() {
-  //       _latestLink = link ?? 'Unknown';
-  //       print('Link : $_latestLink');
-  //     });
-  //   });
-  // }
-
-
   @override
   void initState() {
     super.initState();
@@ -73,7 +54,6 @@ class _HomePageState extends State<HomePage>{
       Provider.of<AdminViewBannerProvider>(context, listen: false).getBanners();
       Provider.of<AdminViewWorkshopVideoProvider>(context, listen: false).getWorkshopVideoList();
     });
-    // initUniLinks();
   }
 
   void listener() {
@@ -102,7 +82,7 @@ class _HomePageState extends State<HomePage>{
     }
     catch(e){
       print('Failed to fetch user details: $e');
-      return null;
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
     }
   }
 
@@ -399,7 +379,7 @@ class _HomePageState extends State<HomePage>{
                       thickness: .01,
                     ),
                     ElevatedButton(
-                      onPressed: () {
+                      onPressed: () async{
                         if(userDetails!.clientDetails!.subscribed == true)
                           Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
                         else{
@@ -424,7 +404,7 @@ class _HomePageState extends State<HomePage>{
                   ],
                 ),
               ),
-              onTap: () {
+              onTap: () async{
                 if(userDetails!.clientDetails!.subscribed == true)
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
                 else{
@@ -538,65 +518,6 @@ class _HomePageState extends State<HomePage>{
       },
     );
   }
-
-  // Widget _buildWorkshopVideo() {
-  //   return Consumer<AdminViewWorkshopVideoProvider>(
-  //     builder: (context, value, child) {
-  //       if (value.isLoading) {
-  //         return const Center(child: LoadingIcon());
-  //       }
-  //       final workshop = value.workshopVideoList;
-  //       return Container(
-  //         height: 250,
-  //         child: CarouselSlider.builder(
-  //           itemCount: workshop.length,
-  //           // itemCount: 4,
-  //           options: CarouselOptions(
-  //             //autoPlay: true,
-  //             aspectRatio: 16 / 9,
-  //             enlargeCenterPage: true,
-  //           ),
-  //           itemBuilder: (context, index, realIndex) {
-  //             String videoId = YoutubePlayer.convertUrlToId('${workshop[index].video}')!;
-  //             _controller = YoutubePlayerController(
-  //               initialVideoId: videoId,
-  //               flags: YoutubePlayerFlags(
-  //                 autoPlay: true,
-  //                 mute: false,
-  //               ),
-  //             );
-  //             return Padding(
-  //               padding: const EdgeInsets.only(
-  //                 top: 10,
-  //                 bottom: 10,
-  //                 left: 2,
-  //                 right: 2,
-  //               ),
-  //               child: YoutubePlayerBuilder(
-  //                 player: YoutubePlayer(
-  //                   onReady: () {
-  //                     _controller.addListener(listener);
-  //                   },
-  //                   aspectRatio: 16 / 9,
-  //                   bottomActions: [],
-  //                   topActions: [],
-  //                   showVideoProgressIndicator: false,
-  //                   controller: _controller,
-  //                 ),
-  //                 builder: (context, player) {
-  //                   return Container(
-  //                     width: MediaQuery.of(context).size.width,
-  //                     child: player,
-  //                   );
-  //                 },
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
 
   Future<dynamic> _premiumAlert() {
     return showDialog(
