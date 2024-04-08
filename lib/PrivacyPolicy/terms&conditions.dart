@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../Utilities/colors.dart';
 import '../Widgets/bulletList.dart';
 
 class TermsAndCondition extends StatefulWidget {
@@ -79,9 +80,7 @@ class _TermsAndConditionState extends State<TermsAndCondition> {
           titleSpacing: 0,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                color: appBarColor
             ),
           ),
           elevation: 0,

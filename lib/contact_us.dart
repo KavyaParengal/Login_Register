@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'Utilities/colors.dart';
 import 'Utilities/global.dart';
 
 class ContactUs extends StatelessWidget {
@@ -16,11 +17,7 @@ class ContactUs extends StatelessWidget {
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
-            ),
+              color: appBarColor
           ),
           leading: IconButton(
             icon: Icon(Icons.arrow_back, color: Colors.white,),

@@ -10,7 +10,6 @@ import '../Models/freecontentmodel.dart';
 class FreeContentDataProvider extends ChangeNotifier{
 
   final _service = ViewFreeContentDataAPI();
-  // bool isLoading = false;
   late StateEnum state;
   late StateEnum userDataState;
   List<FreeContentDataModel> _freeDatas = [];

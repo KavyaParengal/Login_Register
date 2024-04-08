@@ -34,9 +34,7 @@ class _ViewClientsState extends State<ViewClients> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                color: appBarColor
             ),
           ),
           elevation: 0,

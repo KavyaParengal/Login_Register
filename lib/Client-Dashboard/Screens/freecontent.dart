@@ -8,6 +8,8 @@ import 'package:login_register/Utilities/state_enum.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../Utilities/colors.dart';
+import '../BottomNavigationBar.dart';
 import '../Models/freecontentmodel.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/global.dart';
@@ -150,173 +152,168 @@ class _FreeContentState extends State<FreeContent> {
   }
 
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        // drawer: FreeNavigationDrawer(),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: AppBar(
-            titleSpacing: 0,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                  )
-              ),
+    return Scaffold(
+      bottomNavigationBar: NavigationBottomBar(2),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: AppBar(
+          titleSpacing: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                color: appBarColor
             ),
-            elevation: 0,
-            centerTitle: false,
-
-            leading: IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
+          ),
+          elevation: 0,
+          centerTitle: false,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+          }),
+          title: Text(
+            Global().appName,
+            maxLines: 1,
+            style: TextStyle(
+              //fontSize: 18.5,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Gilroy',
+            ),
+            textAlign: TextAlign.start,
+          ),
+          actions: [
+            IconButton(
                 onPressed: () {
                   Navigator.pop(context);
-            }),
-            title: Text(
-              Global().appName,
-              maxLines: 1,
-              style: TextStyle(
-                //fontSize: 18.5,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'Gilroy',
-              ),
-              textAlign: TextAlign.start,
-            ),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.home, color: Colors.white,))
-            ],
-          ),
+                },
+                icon: const Icon(Icons.home, color: Colors.white,))
+          ],
         ),
-        body: Consumer<FreeContentDataProvider>(
-          builder: (context, value, child){
-            if (value.state == StateEnum.loading) {
-              return const Center(
-                  child: LoadingIcon()
-              );
-            }
-            final freeDatas = value.freeDatas;
-            return freeDatas.isEmpty && value.state != StateEnum.success ? Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'No Content Found',style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.teal.shade800,
-                    fontWeight: FontWeight.bold
-                ),),
-              ),):
-            freeDatas.isEmpty ? Center(
+      ),
+      body: Consumer<FreeContentDataProvider>(
+        builder: (context, value, child){
+          if (value.state == StateEnum.loading) {
+            return const Center(
+                child: LoadingIcon()
+            );
+          }
+          final freeDatas = value.freeDatas;
+          return freeDatas.isEmpty && value.state != StateEnum.success ? Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 'No Content Found',style: TextStyle(
                   fontSize: 16,
                   color: Colors.teal.shade800,
                   fontWeight: FontWeight.bold
               ),),
-            ) : SingleChildScrollView(
-              physics: ScrollPhysics(),
-              child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
-                      child: Text(
-                        'Free Content',
-                        style: GoogleFonts.poppins(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.teal.shade800,
-                        ),
-                        textAlign: TextAlign.start,
+            ),):
+          freeDatas.isEmpty ? Center(
+            child: Text(
+              'No Content Found',style: TextStyle(
+                fontSize: 16,
+                color: Colors.teal.shade800,
+                fontWeight: FontWeight.bold
+            ),),
+          ) : SingleChildScrollView(
+            physics: ScrollPhysics(),
+            child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
+                    child: Text(
+                      'Free Content',
+                      style: GoogleFonts.poppins(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal.shade800,
                       ),
+                      textAlign: TextAlign.start,
                     ),
-                    Container(
-                    child: ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(bottom: 100),
-                      itemCount: freeDatas.length ?? 0,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        final freeContent = freeDatas[index];
-                        String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
-              
-                          _controller = YoutubePlayerController(
-                            initialVideoId: videoId,
-                            flags: YoutubePlayerFlags(
-                              autoPlay: false,
-                              mute: false,
-                            ),);
-              
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                Global().capitalizeAllWord(
-                                    freeContent.title ?? ""),
-                                style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
+                  ),
+                  Container(
+                  child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(bottom: 100),
+                    itemCount: freeDatas.length ?? 0,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final freeContent = freeDatas[index];
+                      String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
+
+                        _controller = YoutubePlayerController(
+                          initialVideoId: videoId,
+                          flags: YoutubePlayerFlags(
+                            autoPlay: false,
+                            mute: false,
+                          ),);
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              Global().capitalizeAllWord(
+                                  freeContent.title ?? ""),
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
                               ),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                  top: 10,
-                                  bottom: 10,
-                                  left: 2,
-                                  right: 2,
-                                ),
-                                child: YoutubePlayerBuilder(
-                                    player: YoutubePlayer(
-                                        onReady: () {
-                                          _controller.addListener(listener);
-                                        },
-                                        aspectRatio: 16 / 9,
-                                        bottomActions: [],
-                                        topActions: [],
-                                        showVideoProgressIndicator: false,
-                                        controller: _controller),
-                                    builder: (context, player) {
-                                      return Container(
-                                        child: player,
-                                      );
-                                    })
-              
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(9),
-                              child: referenceInfo(),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                                        ),
-                  ],
-                ),
-            );
-          },
-        )
-      ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                top: 10,
+                                bottom: 10,
+                                left: 2,
+                                right: 2,
+                              ),
+                              child: YoutubePlayerBuilder(
+                                  player: YoutubePlayer(
+                                      onReady: () {
+                                        _controller.addListener(listener);
+                                      },
+                                      aspectRatio: 16 / 9,
+                                      bottomActions: [],
+                                      topActions: [],
+                                      showVideoProgressIndicator: false,
+                                      controller: _controller),
+                                  builder: (context, player) {
+                                    return Container(
+                                      child: player,
+                                    );
+                                  })
+
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: referenceInfo(),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                                      ),
+                ],
+              ),
+          );
+        },
+      )
     );
   }
 }

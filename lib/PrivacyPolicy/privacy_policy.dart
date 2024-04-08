@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Widgets/bulletList.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Utilities/colors.dart';
 import '../Utilities/global.dart';
 
 class PrivacyPolicy extends StatefulWidget {
@@ -113,9 +114,10 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
           titleSpacing: 0,
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                // gradient: LinearGradient(
+                //     colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
+                // )
+                color: appBarColor
             ),
           ),
           elevation: 0,

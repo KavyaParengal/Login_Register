@@ -52,9 +52,7 @@ class _EditPricePlanState extends State<EditPricePlan> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                color: appBarColor
             ),
           ),
           leading: IconButton(

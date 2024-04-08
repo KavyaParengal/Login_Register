@@ -1,37 +1,31 @@
-
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:login_register/Admin-Dashboard/Screens/admin_home_page.dart';
-import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
-import 'package:login_register/Login/login_page.dart';
-import 'package:login_register/Utilities/colors.dart';
-import 'package:login_register/firebase_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Admin-Dashboard/Screens/admin_home_page.dart';
+import '../../Login/login_page.dart';
 import '../../Utilities/global.dart';
-import '/Widgets/loading_icon.dart';
-
+import '../../Widgets/loading_icon.dart';
+import '../../firebase_api.dart';
+import 'home_page.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   late SharedPreferences localStorage;
   String? token;
-  String check = '';
   int role = 0;
   bool aniCon = false;
 
-  animateFun(){
-    Timer mytimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  animateFun() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         aniCon = !aniCon;
       });
@@ -40,16 +34,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> checkRoleAndNavigate() async {
     localStorage = await SharedPreferences.getInstance();
-    token = (localStorage.getString("token") ?? '');
-    role = (localStorage.getInt("role") ?? 0);
-    if (token != check && role == 1) {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
-    }
-    else if(token != check && role == 2){
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
-    }
-    else {
-      Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+    token = localStorage.getString("token") ?? '';
+    role = localStorage.getInt("role") ?? 0;
+    if (token != null && token!.isNotEmpty && role == 1) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
+    } else if (token != null && token!.isNotEmpty && role == 2) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
     }
   }
 
@@ -59,10 +51,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     startTime();
     try {
-      super.initState();
       onInit();
     } catch (e) {
-      //print(e);
+      // Handle error
     }
   }
 
@@ -73,12 +64,12 @@ class _SplashScreenState extends State<SplashScreen> {
       await Global().listenForTokenUpdate();
       await NotificationServices().setFCM();
     } catch (e) {
-      //print(e);
+      // Handle error
     }
   }
 
   startTime() async {
-    var duration = new Duration(seconds: 6);
+    var duration = Duration(seconds: 6);
     return Timer(duration, checkRoleAndNavigate);
   }
 
@@ -88,55 +79,36 @@ class _SplashScreenState extends State<SplashScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
-            // image: DecorationImage(
-            //     image: Image.asset('assets/Background.png').image,
-            //     fit: BoxFit.cover)
-          color: Colors.white
-        ),
+        color: Colors.white,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Column(
-              children: [
-                Center(
-                  child: AnimatedContainer(
-                    height: aniCon?130:70,
-                    duration: Duration(seconds: 1)
-                    ,child: Image.asset("assets/logo.png")
-                    ,),
-                ),
-                Divider(
-                  //height: 100,
-                  color: Colors.transparent,
-                  thickness: .1,
-                ),
-                Text(
-                  "${Global().appName.toUpperCase()}",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.teal.shade500,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 40.0,
-                  ),
-                ),
-                // Text(
-                //   "An Initiative By Shebirth",
-                //   textAlign: TextAlign.center,
-                //   style: TextStyle(
-                //     color: Colors.teal.shade700,
-                //     fontWeight: FontWeight.bold,
-                //     fontSize: 18.0,
-                //   ),
-                // ),
-                Divider(
-                  thickness: .1,
-                  color: Colors.transparent,
-                ),
-                LoadingIcon()
-              ],
+            Center(
+              child: AnimatedContainer(
+                height: aniCon ? 130 : 70,
+                duration: Duration(seconds: 1),
+                child: Image.asset("assets/logo.png"),
+              ),
             ),
+            const Divider(
+              color: Colors.transparent,
+              thickness: .1,
+            ),
+            Text(
+              "${Global().appName.toUpperCase()}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.teal.shade500,
+                fontWeight: FontWeight.bold,
+                fontSize: 40.0,
+              ),
+            ),
+            const Divider(
+              thickness: .1,
+              color: Colors.transparent,
+            ),
+            LoadingIcon(),
           ],
         ),
       ),

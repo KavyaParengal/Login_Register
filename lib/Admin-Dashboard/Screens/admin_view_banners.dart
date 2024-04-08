@@ -7,6 +7,7 @@ import 'package:login_register/Admin-Dashboard/Screens/edit_banners.dart';
 import 'package:login_register/Utilities/constants.dart';
 import 'package:provider/provider.dart';
 
+import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 
 class AdminViewBanners extends StatefulWidget {
@@ -34,11 +35,7 @@ class _AdminViewBannersState extends State<AdminViewBanners> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-                  Colors.teal.shade500,
-                  Colors.teal.shade500,
-                  Colors.black
-                ])),
+                color: appBarColor),
           ),
           elevation: 0,
           title: Text(

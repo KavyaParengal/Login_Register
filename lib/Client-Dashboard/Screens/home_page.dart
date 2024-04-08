@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../Api_services/viewDashbordDataApi.dart';
+import '../BottomNavigationBar.dart';
 import '../Models/dashboardDataModal.dart';
 import '../../Utilities/colors.dart';
 import '../../Utilities/constants.dart';
@@ -74,10 +75,10 @@ class _HomePageState extends State<HomePage>{
       String uname = '${userDetails!.clientDetails!.firstName} ${userDetails!.clientDetails!.lastName}';
 
       await localStorage.setString('userName', uname);
-      print(Global.prefs!.getString("userName"));
+      await localStorage.setString('subscription', userDetails!.clientDetails!.subscribed.toString());
+      await localStorage.setString('id', userDetails!.clientDetails!.id.toString());
+      print(Global.prefs!.getString("subscription"));
       setState(() {
-        // print(token);
-        // print('userDetails--$userDetails');
       });
     }
     catch(e){
@@ -292,133 +293,6 @@ class _HomePageState extends State<HomePage>{
     );
   }
 
-  Widget _buildOptions() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          children: [
-            InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.teal.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    const FaIcon(FontAwesomeIcons.crown,color: Colors.transparent,size: 14,),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/learning.png'),
-                      height: 60,
-                      color: Colors.black,
-                    ),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>FreeContent()));
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: button, // foreground (text) color
-                          shape: RoundedRectangleBorder()
-                      ),
-                      child: Text(
-                        "Knowledge Base",
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>FreeContent()));
-              },
-            ),
-          ],
-        ),
-        Divider(
-          height: 20,
-        ),
-        Column(
-          children: [
-            InkWell(
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.teal.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(10)
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    const FaIcon(FontAwesomeIcons.crown,color: Colors.black,size: 14,),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/free_content.png'),
-                      height: 60,
-                      color: Colors.black,
-                    ),
-                    const Divider(
-                      height: 10,
-                      thickness: .01,
-                    ),
-                    ElevatedButton(
-                      onPressed: () async{
-                        if(userDetails!.clientDetails!.subscribed == true)
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
-                        else{
-                          _premiumAlert();
-                          // Navigator.pop(context);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: button, // foreground (text) color
-                          shape: RoundedRectangleBorder()
-                      ),
-                      child: Text(
-                        "Premium Content",
-                        style: GoogleFonts.poppins(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              onTap: () async{
-                if(userDetails!.clientDetails!.subscribed == true)
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>PremiumContent()));
-                else{
-                  _premiumAlert();
-                  // Navigator.pop(context);
-                }
-              },
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildBannerSlide() {
     return Consumer<AdminViewBannerProvider>(
       builder: (context, value, child) {
@@ -519,29 +393,6 @@ class _HomePageState extends State<HomePage>{
     );
   }
 
-  Future<dynamic> _premiumAlert() {
-    return showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Are you Subscribed?'),
-        content: const Text('Only Subcribed Users Can Access This !'),
-        actions: [
-          TextButton(
-            onPressed: () async {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PremiumPlanPage(id: userDetails!.clientDetails!.id)));
-            },
-            child: Text("OK",
-              style: TextStyle(
-                  color: button,
-                  fontWeight: FontWeight.bold
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   _launchWhatsapp() async {
     await launch("https://wa.me/919710841234", forceSafariVC: false);
   }
@@ -558,15 +409,15 @@ class _HomePageState extends State<HomePage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: NavigationBottomBar(0),
       drawer: FreeNavigationDrawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
+          iconTheme: IconThemeData(color: Colors.white),
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                color: appBarColor
             ),
           ),
           elevation: 0,
@@ -640,10 +491,10 @@ class _HomePageState extends State<HomePage>{
                 padding: const EdgeInsets.all(10.0),
                 child: _buildImage(),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: _buildOptions(),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: _buildOptions(),
+              // ),
               SizedBox(height: 70,)
             ],
           ),

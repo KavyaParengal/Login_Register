@@ -51,24 +51,11 @@ class _ProfileDetailsState extends State<ProfileDetails> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              Colors.teal.shade500,
-              Colors.teal.shade500,
-              Colors.black
-            ])),
+                color: appBarColor),
           ),
           elevation: 0,
           title: Column(
             children: [
-              // Text(
-              //   'Gentle Birth',
-              //   style: GoogleFonts.poppins(
-              //     fontSize: 20,
-              //     fontWeight: FontWeight.bold,
-              //     color: Colors.white,
-              //   ),
-              //   textAlign: TextAlign.start,
-              // ),
               Text(
                 'Gentle Birth Method',
                 style: GoogleFonts.poppins(
@@ -89,27 +76,9 @@ class _ProfileDetailsState extends State<ProfileDetails> {
           ),
         ),
       ),
-      // appBar: AppBar(
-      //   backgroundColor: Colors.teal.shade500,
-      //   title: Text(
-      //     "Profile Details",
-      //     style: TextStyle(
-      //         color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-      //   ),
-      //   leading: Icon(
-      //     Icons.arrow_back,
-      //     color: Colors.black,
-      //   ),
-      // ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        // decoration: BoxDecoration(
-        //     image: DecorationImage(
-        //       image: AssetImage('assets/logo.png',),
-        //       opacity: 0.3,
-        //     )
-        // ),
         child: token == null ? Center(child: CircularProgressIndicator(color: primary,),):
         Center(
           child: SingleChildScrollView(

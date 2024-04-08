@@ -6,6 +6,7 @@ import 'package:login_register/Admin-Dashboard/Screens/edit_workshop_video.dart'
 import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 import 'admin_home_page.dart';
 
@@ -48,9 +49,7 @@ class _AdminViewWorkshopVideoState extends State<AdminViewWorkshopVideo> {
         child: AppBar(
           flexibleSpace: Container(
             decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                )
+                color: appBarColor
             ),
           ),
           elevation: 0,

@@ -10,6 +10,7 @@ import 'package:login_register/Admin-Dashboard/Screens/admin_view_workshop_video
 import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Login/login_page.dart';
+import '../../Utilities/colors.dart';
 import '../../Utilities/global.dart';
 import 'add_banner.dart';
 import 'add_free_videos.dart';
@@ -64,13 +65,13 @@ class _AdminHomePageState extends State<AdminHomePage> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65),
           child: AppBar(
+            automaticallyImplyLeading: false,
             flexibleSpace: Container(
               decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                  )
+                  color: appBarColor
               ),
             ),
+            centerTitle: true,
             elevation: 0,
             title: Text(
               '${Global().appName}',
@@ -81,7 +82,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
               ),
               textAlign: TextAlign.start,
             ),
-            centerTitle: true,
+            // centerTitle: true,
             actions: [
               Padding(
                 padding: const EdgeInsets.all(8.0),

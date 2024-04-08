@@ -14,7 +14,7 @@ import '../../Utilities/colors.dart';
 import '/Widgets/loading_icon.dart';
 
 class PremiumPlanPage extends StatefulWidget {
-  final int? id;
+  final String? id;
   const PremiumPlanPage({super.key, this.id});
 
   @override
@@ -99,9 +99,10 @@ class _PremiumPlanPageState extends State<PremiumPlanPage> {
           child: AppBar(
               flexibleSpace: Container(
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
-                    )
+                    // gradient: LinearGradient(
+                    //     colors: [Colors.teal.shade500, Colors.teal.shade500, Colors.black]
+                    // )
+                    color: appBarColor
                 ),
               ),
               elevation: 0,
