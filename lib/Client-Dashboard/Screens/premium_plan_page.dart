@@ -6,7 +6,6 @@ import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:uni_links/uni_links.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Login/login_page.dart';

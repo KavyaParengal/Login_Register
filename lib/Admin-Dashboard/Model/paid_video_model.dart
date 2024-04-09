@@ -5,6 +5,7 @@ class AdminViewPaidVideoModel {
   String? discription;
   String? advice;
   int? month;
+  int? plan;
 
   AdminViewPaidVideoModel(
       {this.id,
@@ -12,7 +13,8 @@ class AdminViewPaidVideoModel {
         this.title,
         this.discription,
         this.advice,
-        this.month});
+        this.month,
+        this.plan});
 
   AdminViewPaidVideoModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -21,6 +23,7 @@ class AdminViewPaidVideoModel {
     discription = json['discription'];
     advice = json['advice'];
     month = json['month'];
+    plan = json['plan'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +34,7 @@ class AdminViewPaidVideoModel {
     data['discription'] = this.discription;
     data['advice'] = this.advice;
     data['month'] = this.month;
+    data['plan'] = this.plan;
     return data;
   }
 }

@@ -1,8 +1,12 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Admin-Dashboard/Api_services/edit_premium_video_api.dart';
+import 'package:provider/provider.dart';
 
+import '../../Client-Dashboard/Provider/plan_list_provider.dart';
+import '../../Utilities/GenericDropdown.dart';
 import '../../Utilities/colors.dart';
 
 class EditPremiumContent extends StatefulWidget {
@@ -12,17 +16,19 @@ class EditPremiumContent extends StatefulWidget {
   final String description;
   final String advice;
   final int week;
+  final String plan;
 
    @override
    State<EditPremiumContent> createState() => _EditPremiumContentState();
 
   EditPremiumContent(
       {required this.id,
-      required this.videoLink,
-      required this.title,
-      required this.description,
-      required this.advice,
-      required this.week});
+        required this.videoLink,
+        required this.title,
+        required this.description,
+        required this.advice,
+        required this.week,
+        required this.plan});
 }
 
  class _EditPremiumContentState extends State<EditPremiumContent> {
@@ -34,6 +40,8 @@ class EditPremiumContent extends StatefulWidget {
    TextEditingController adviceController=TextEditingController();
 
    bool _isLoading = false;
+   String _option = '';
+   String _selectedPlanId = '';
 
    @override
    void initState() {
@@ -44,6 +52,7 @@ class EditPremiumContent extends StatefulWidget {
     descriptionController.text = widget.description;
     monthController.text = widget.week.toString();
     adviceController.text = widget.advice;
+    // planController.text = widget.plan;
   }
 
    @override
@@ -190,6 +199,54 @@ class EditPremiumContent extends StatefulWidget {
                ),
              ),
 
+             const SizedBox(height: 10,),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Text("Plan Type",style: TextStyle(
+                   fontSize: 16,
+                   fontWeight: FontWeight.bold,
+                   color: Colors.teal.shade800
+               ),),
+             ),
+             Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: Container(
+                 width: MediaQuery.of(context).size.width,
+                 decoration: BoxDecoration(
+                     border: Border.all(color: Colors.grey,),
+                     borderRadius: BorderRadius.circular(12)
+                 ),
+                 child: Consumer<PlanListProvider>(
+                     builder: (context, value, child) {
+                       var list = value.planList.map((e) => e.plan.toString()).toList();
+                       var id = value.planList.map((e) => e.id.toString()).toList();
+                       // _option = list.isNotEmpty ? list[0] : '';
+                       // print(value.planList.map((e) => e));
+                       return list.isNotEmpty ? Padding(
+                           padding: EdgeInsets.all(8),
+                           child: Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             children: [
+                               Text('Select Plan Type :  ',style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade600, fontSize: 16),),
+                               value.planList.isNotEmpty ? GenericDropdown<String>(
+                                 options: value.planList.map((e) => e.plan.toString()).toList(),
+                                 selectedValue: _option == ''?list[0]:_option,
+                                 onChanged: (val) {
+                                   setState(() {
+                                     _option = val!;
+                                     int index = list.indexOf(val);
+                                     _selectedPlanId = id[index];
+                                   });
+                                 },
+                               ): Text('data'),
+                             ],
+                           )
+                       ):Container();
+                     }
+                 ),
+               ),
+             ),
+
              const SizedBox(height: 36,),
 
              Padding(
@@ -206,7 +263,9 @@ class EditPremiumContent extends StatefulWidget {
                          descriptionController.text,
                          monthController.text,
                          adviceController.text,
-                         widget.id);
+                         widget.id,
+                         _selectedPlanId,
+                     );
                      setState(() {
                        _isLoading = true;
                      });

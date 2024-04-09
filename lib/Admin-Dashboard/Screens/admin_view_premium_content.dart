@@ -200,7 +200,8 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                                   week: paidContent.month??0,
                                   title: paidContent.title??'',
                                   description: paidContent.discription??'Not given',
-                                  advice: paidContent.advice??'Not given'
+                                  advice: paidContent.advice??'Not given',
+                                  plan: ""
                                 )));
                               },
                               child: Text(

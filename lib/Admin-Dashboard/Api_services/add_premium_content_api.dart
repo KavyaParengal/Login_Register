@@ -8,7 +8,7 @@ import '../../Utilities/constants.dart';
 
 class AddPremiumContentApi {
   static Future<void> addPremiumContent(
-      BuildContext context,String video,String title, String description ,String month, String advice) async {
+      BuildContext context,String video,String title, String description ,String month, String advice, String plan) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     try {
       var data = {
@@ -16,7 +16,8 @@ class AddPremiumContentApi {
         "title": title,
         "discription": description,
         "month": month,
-        "advice": advice
+        "advice": advice,
+        "plan": plan
       };
       print(data);
       final urls = APIConstants.add_premium_content;

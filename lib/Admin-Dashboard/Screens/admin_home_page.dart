@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:login_register/Admin-Dashboard/Screens/add_notification.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_view_banners.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_view_free_content.dart';
@@ -7,6 +8,7 @@ import 'package:login_register/Admin-Dashboard/Screens/admin_view_premium_conten
 import 'package:login_register/Admin-Dashboard/Screens/admin_view_price_plan.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_view_week_wise_content.dart';
 import 'package:login_register/Admin-Dashboard/Screens/admin_view_workshop_video.dart';
+import 'package:login_register/Admin-Dashboard/Screens/paid_user_list.dart';
 import 'package:login_register/Admin-Dashboard/Screens/view_clients.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Login/login_page.dart';
@@ -47,7 +49,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
     AddBanners(),
     AddWorkShopVideos(),
     AddNotification(),
-    ViewClients()
+    // ViewClients()
   ];
 
   List navigationView = [
@@ -117,36 +119,82 @@ class _AdminHomePageState extends State<AdminHomePage> {
                     ),
                     itemBuilder: (BuildContext context, int index) {
                       return GridTile(
-                        child: image[index]=='assets/clients.png'?InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewClients()));
-                          },
-                          child: Container(
-                              margin: const EdgeInsets.all(5.0),
-                              decoration: ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                gradient: RadialGradient(
-                                  colors: <Color>[ Colors.white, Colors.teal.shade100],
-                                ),
+                        child: image[index]=='assets/clients.png'?Container(
+                            margin: const EdgeInsets.all(5.0),
+                            decoration: ShapeDecoration(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Image.asset('assets/clients.png', width: 66,),
-                                    Text('Client List',style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black,
-                                    ),textAlign: TextAlign.center,),
-                                  ],
-                                ),
-                              )
-                          ),
+                              gradient: RadialGradient(
+                                colors: <Color>[ Colors.white, Colors.teal.shade100],
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset('assets/clients.png', width: 66,),
+                                  Text('Client List',style: GoogleFonts.poppins(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),textAlign: TextAlign.center,),
+                                  Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: PopupMenuButton(
+                                        icon: const Icon(Icons.more_vert),
+                                        //color: scaffoldBgColor,
+                                        elevation: 0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        itemBuilder: (context) {
+                                          return <PopupMenuEntry>[
+                                            PopupMenuItem(
+                                              child: InkWell(
+                                                  onTap: (){
+                                                    Navigator.pop(context);
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewClients()));
+                                                  },
+                                                  child: TextButton(
+                                                    child: Text('All Users',style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.teal.shade800
+                                                    ),),
+                                                    onPressed: (){
+                                                      Navigator.pop(context);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=>ViewClients()));
+                                                    },
+                                                  )
+                                              ),
+                                            ),
+
+                                            PopupMenuItem(
+                                              child: InkWell(
+                                                  onTap: (){
+                                                    Navigator.pop(context);
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context)=> PaidUserList()));
+                                                  },
+                                                  child: TextButton(
+                                                    child: Text('Paid Users',style: TextStyle(
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Colors.teal.shade800
+                                                    ),),
+                                                    onPressed: (){
+                                                      Navigator.pop(context);
+                                                      Navigator.push(context, MaterialPageRoute(builder: (context)=> PaidUserList()));
+                                                    },
+                                                  )
+                                              ),
+                                            ),
+                                          ];
+                                        }),
+                                  )
+                                ],
+                              ),
+                            )
                         ):image[index]=='assets/add.png'?InkWell(
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (context)=>AddNotification()));

@@ -15,6 +15,7 @@ class APIConstants{
   /////////////// Admin ///////////////////
 
   static const client_list = '$baseUrl/home/clients_list/';
+  static const paid_users = '$baseUrl/home/paid_user_list/';
 
   static const add_free_content = '$baseUrl/home/add_video_free/';
   static const add_price = '$baseUrl/home/add_payment/';

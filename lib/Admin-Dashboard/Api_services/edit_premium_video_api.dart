@@ -8,7 +8,7 @@ import '../../Utilities/constants.dart';
 
 class EditPremiumContentApi {
   static Future<void> editPremiumContent(
-      BuildContext context,String video,String title, String description ,String month, String advice, int videoId) async {
+      BuildContext context,String video,String title, String description ,String month, String advice, int videoId, String plan) async {
 
     SharedPreferences localStorage = await SharedPreferences.getInstance();
 
@@ -19,7 +19,8 @@ class EditPremiumContentApi {
         "title": title,
         "discription": description,
         "month": month,
-        "advice": advice
+        "advice": advice,
+        "plan_id": plan
       };
       print(data);
       final urls = APIConstants.edit_paid_content;
