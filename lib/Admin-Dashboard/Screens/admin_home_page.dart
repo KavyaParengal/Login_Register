@@ -217,7 +217,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                                   children: [
                                     Image.asset('assets/add.png', width: 66,),
                                     Text('Add Notifications',style: GoogleFonts.poppins(
-                                      fontSize: 15,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
                                     ),textAlign: TextAlign.center,),
@@ -243,7 +243,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
                               children: [
                                 Image.asset(image[index], width: 66,),
                                 Text(title[index],style: GoogleFonts.poppins(
-                                  fontSize: 15,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),textAlign: TextAlign.center,),

@@ -16,7 +16,7 @@ class ViewPremiumContentDataAPI{
     print(response);
     if (response.statusCode == 200) {
       var body = json.decode(response.body);
-      print(body);
+      print('============$body');
       List<PremiumContentDataModel> data =  body.map<PremiumContentDataModel>((e) => PremiumContentDataModel.fromJson(e)).toList();
       //print(data);
       return data;

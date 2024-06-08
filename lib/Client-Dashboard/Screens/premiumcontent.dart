@@ -1,13 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:login_register/Client-Dashboard/Models/premiumContentModel.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
 import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
-import 'package:provider/provider.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/colors.dart';
 import '../../Utilities/global.dart';
@@ -23,8 +20,8 @@ class _PremiumContentState extends State<PremiumContent> {
   bool isLoading = true;
   late YoutubePlayerController _controller;
   List<PremiumContentDataModel> _premiumContent = [];
-  late PlayerState  _playerState;
-  late YoutubeMetaData  _videoMetaData;
+  late PlayerState _playerState;
+  late YoutubeMetaData _videoMetaData;
   bool _isPlayerReady = true;
 
   @override
@@ -34,13 +31,6 @@ class _PremiumContentState extends State<PremiumContent> {
       Provider.of<PremiumContentDataProvider>(context, listen: false).getPremiumContents();
     });
   }
-
-  List<Citation> citations = [
-    Citation(
-      title: "Citation",
-      link: "https://shebirth.com/citation/",
-    ),
-  ];
 
   void listener() {
     if (_isPlayerReady && mounted && !_controller.value.isFullScreen) {
@@ -110,159 +100,168 @@ class _PremiumContentState extends State<PremiumContent> {
     );
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        bottomNavigationBar: NavigationBottomBar(3),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(60),
-          child: AppBar(
-            titleSpacing: 0,
-            flexibleSpace: Container(
-              decoration: BoxDecoration(
-                  color: appBarColor
-              ),
+      bottomNavigationBar: NavigationBottomBar(3),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(60),
+        child: AppBar(
+          titleSpacing: 0,
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                color: appBarColor
             ),
-            elevation: 0,
-            centerTitle: false,
-            title: Text(
-              Global().appName,
-              maxLines: 1,
-              style: TextStyle(
-                //fontSize: 18.5,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-                fontFamily: 'Gilroy',
-              ),
-              textAlign: TextAlign.start,
-            ),
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back,color: Colors.white,)),
-            actions: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-                  },
-                  icon: const Icon(Icons.home,color: Colors.white,))
-            ],
           ),
+          elevation: 0,
+          centerTitle: false,
+          title: Text(
+            Global().appName,
+            maxLines: 1,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontFamily: 'Gilroy',
+            ),
+            textAlign: TextAlign.start,
+          ),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back, color: Colors.white),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              },
+              icon: const Icon(Icons.home, color: Colors.white),
+            ),
+          ],
         ),
-        body: Consumer<PremiumContentDataProvider>(
-          builder: (context, value, child){
-            if (value.isLoading) {
-              return const Center(
-                  child: LoadingIcon()
-              );
-            }
-            final premiumDatas = value.premiumDatas;
-            return
-              premiumDatas == null || premiumDatas.isEmpty ? Center(
-                child: Text(
-                  'No Premium Data Found',style: TextStyle(
-                    color: Colors.teal.shade800,
-                    fontWeight: FontWeight.bold
-                ),),
-              ) :
-              SingleChildScrollView(
-                physics: ScrollPhysics(),
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 10,left: 8,right: 8),
-                        child: Text(
-                          'Premium Content',
-                          style: GoogleFonts.poppins(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.teal.shade800,
-                          ),
-                          textAlign: TextAlign.start,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(bottom: 100),
-                        itemCount: premiumDatas.length ?? 0,
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          final freeContent = premiumDatas[index];
-                          String videoId = YoutubePlayer.convertUrlToId(freeContent.video.toString())!;
-
-                          _controller = YoutubePlayerController(
-                            initialVideoId: videoId,
-                            flags: YoutubePlayerFlags(
-                              autoPlay: false,
-                              mute: false,
-                            ),);
-
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  Global().capitalizeAllWord(
-                                      freeContent.title ?? ""),
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 10,
-                                    bottom: 10,
-                                    left: 2,
-                                    right: 2,
-                                  ),
-                                  child: YoutubePlayerBuilder(
-                                      player: YoutubePlayer(
-                                          onReady: () {
-                                            _controller.addListener(listener);
-                                          },
-                                          aspectRatio: 16 / 9,
-                                          bottomActions: [],
-                                          topActions: [],
-                                          showVideoProgressIndicator: false,
-                                          controller: _controller),
-                                      builder: (context, player) {
-                                        return Container(
-                                          child: player,
-                                        );
-                                      })
-
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(9),
-                                child: referenceInfo(),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                    ),
-                  ],
+      ),
+      body: Consumer<PremiumContentDataProvider>(
+        builder: (context, value, child) {
+          if (value.isLoading) {
+            return const Center(
+              child: LoadingIcon(),
+            );
+          }
+          final premiumDatas = value.premiumDatas;
+          if (premiumDatas == null || premiumDatas.isEmpty) {
+            return Center(
+              child: Text(
+                'No Premium Data Found',
+                style: TextStyle(
+                  color: Colors.teal.shade800,
+                  fontWeight: FontWeight.bold,
                 ),
-              );
-          },
-        )
+              ),
+            );
+          } else {
+            return SingleChildScrollView(
+              physics: ScrollPhysics(),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10, left: 8, right: 8),
+                      child: Text(
+                        'Premium Content',
+                        style: GoogleFonts.poppins(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.teal.shade800,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(bottom: 100),
+                    itemCount: premiumDatas.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      final premiumContent = premiumDatas[index];
+                      String? videoId = YoutubePlayer.convertUrlToId(premiumContent.video.toString());
+                      print('VideoId : $videoId');
+                      if (videoId != null) {
+                        _controller = YoutubePlayerController(
+                          initialVideoId: videoId,
+                          flags: YoutubePlayerFlags(
+                            autoPlay: false,
+                            mute: false,
+                          ),
+                        );
+                      }
+
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              Global().capitalizeAllWord(premiumContent.title ?? ""),
+                              style: GoogleFonts.poppins(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          if (videoId != null)
+                          Padding(
+                              padding: EdgeInsets.only(
+                                top: 10,
+                                bottom: 10,
+                                left: 2,
+                                right: 2,
+                              ),
+                              child: YoutubePlayerBuilder(
+                                  player: YoutubePlayer(
+                                      onReady: () {
+                                        _controller.addListener(listener);
+                                      },
+                                      aspectRatio: 16 / 9,
+                                      bottomActions: [],
+                                      topActions: [],
+                                      showVideoProgressIndicator: false,
+                                      controller: _controller),
+                                  builder: (context, player) {
+                                    return Container(
+                                      child: player,
+                                    );
+                                  })
+
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.all(9),
+                            child: referenceInfo(),
+                          ),
+                          const SizedBox(height: 10),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+      ),
     );
   }
+
+  List<Citation> citations = [
+    Citation(
+      title: "Citation",
+      link: "https://shebirth.com/citation/",
+    ),
+  ];
+
 }

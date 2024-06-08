@@ -17,7 +17,6 @@ class AdminViewPremiumContent extends StatefulWidget {
 }
 
 class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
-
   late YoutubePlayerController _controller;
   late PlayerState _playerState;
   late YoutubeMetaData _videoMetaData;
@@ -47,12 +46,11 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
-            decoration: BoxDecoration(
-                color: appBarColor),
+            decoration: BoxDecoration(color: appBarColor),
           ),
           elevation: 0,
           title: Text(
-            'View Premium  Content',
+            'View Premium Content',
             style: GoogleFonts.poppins(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -61,63 +59,67 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
             textAlign: TextAlign.start,
           ),
           leading: IconButton(
-              onPressed: (){
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back, color: Colors.white,)
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back, color: Colors.white),
           ),
           actions: [
             IconButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminHomePage()));
-                },
-                icon: Icon(Icons.home,color: Colors.white,)
-            )
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminHomePage()));
+              },
+              icon: Icon(Icons.home, color: Colors.white),
+            ),
           ],
         ),
       ),
       body: Consumer<AdminViewPaidVideoProvider>(
-        builder: (context, value, child){
+        builder: (context, value, child) {
           if (value.isLoading) {
-            return const Center(
-                child: LoadingIcon()
-            );
+            return const Center(child: LoadingIcon());
           }
           final paidVideoList = value.paidVideoList;
-          return paidVideoList.isEmpty ? Center(
-            child: Text('No Content Available',
+          return paidVideoList.isEmpty
+              ? Center(
+            child: Text(
+              'No Content Available',
               style: GoogleFonts.poppins(
                 fontSize: 16,
                 fontWeight: FontWeight.w400,
                 color: Colors.teal.shade600,
               ),
             ),
-          ): ListView.builder(
+          )
+              : ListView.builder(
             shrinkWrap: true,
             itemCount: paidVideoList.length,
-            itemBuilder: (context, index){
+            itemBuilder: (context, index) {
               final paidContent = paidVideoList[index];
-              String videoId = YoutubePlayer.convertUrlToId(paidContent.video.toString())!;
+              String? videoId = YoutubePlayer.convertUrlToId(paidContent.video.toString());
 
+              if (videoId != null) {
+                _controller = YoutubePlayerController(
+                  initialVideoId: videoId,
+                  flags: YoutubePlayerFlags(
+                    autoPlay: false,
+                    mute: false,
+                  ),
+                );
+              }
 
-              _controller = YoutubePlayerController(
-                initialVideoId: videoId,
-                flags: YoutubePlayerFlags(
-                  autoPlay: false,
-                  mute: false,
-                ),);
               return Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.teal,
-                          offset: Offset(1.1, 3),
-                          blurRadius: 2,
-                          spreadRadius: 1
-                      )
-                    ]
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.teal,
+                      offset: Offset(1.1, 3),
+                      blurRadius: 2,
+                      spreadRadius: 1,
+                    ),
+                  ],
                 ),
                 margin: EdgeInsets.all(10),
                 padding: EdgeInsets.all(10),
@@ -125,141 +127,212 @@ class _AdminViewPremiumContentState extends State<AdminViewPremiumContent> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: YoutubePlayerBuilder(
+                    if (videoId != null)
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: YoutubePlayerBuilder(
                           player: YoutubePlayer(
-                              onReady: () {
-                                _controller.addListener(listener);
-                              },
-                              aspectRatio: 16 / 9,
-                              bottomActions: [],
-                              topActions: [],
-                              showVideoProgressIndicator: false,
-                              controller: _controller),
+                            onReady: () {
+                              _controller.addListener(listener);
+                            },
+                            aspectRatio: 16 / 9,
+                            controller: _controller,
+                          ),
                           builder: (context, player) {
-                            return Container(
-                              child: player,
-                            );
-                          })
+                            return Container(child: player);
+                          },
+                        ),
+                      ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Title: ",
+                              style: TextStyle(
+                                color: Colors.teal.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            TextSpan(
+                              text: paidContent.title,
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: RichText(text: TextSpan(children:[
-                        TextSpan(text: "Title : ",style: TextStyle(
-                            color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                        TextSpan(text: paidContent.title,style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16))
-                      ])),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Description: ",
+                              style: TextStyle(
+                                color: Colors.teal.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            TextSpan(
+                              text: paidContent.discription ?? 'Not given',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-
-
-
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: RichText(text: TextSpan(children:[
-                        TextSpan(text: "Description : ",style: TextStyle(
-                            color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                        TextSpan(text: paidContent.discription ?? 'Not given',style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16))
-                      ])),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Week: ",
+                              style: TextStyle(
+                                color: Colors.teal.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            TextSpan(
+                              text: paidContent.month.toString(),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: RichText(text: TextSpan(children:[
-                        TextSpan(text: "Week : ",style: TextStyle(
-                            color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                        TextSpan(text: paidContent.month.toString() ?? '0',style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)
-                        )
-                      ])),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: "Advice: ",
+                              style: TextStyle(
+                                color: Colors.teal.shade700,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            TextSpan(
+                              text: paidContent.advice ?? 'Not given',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: RichText(text: TextSpan(children:[
-                        TextSpan(text: "Advice : ",style: TextStyle(
-                            color: Colors.teal.shade700,fontWeight: FontWeight.bold, fontSize: 16)),
-                        TextSpan(text: paidContent.advice ?? 'Not given',style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16)
-                        )
-                      ])),
-                    ),
-
                     Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 70),
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.teal.shade500),
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => EditPremiumContent(
-                                  id: paidContent.id??0,
-                                  videoLink: paidContent.video??'',
-                                  week: paidContent.month??0,
-                                  title: paidContent.title??'',
-                                  description: paidContent.discription??'Not given',
-                                  advice: paidContent.advice??'Not given',
-                                  plan: ""
-                                )));
-                              },
-                              child: Text(
-                                "Edit",
-                                style: TextStyle(color: Colors.white),
-                              )),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.teal.shade500,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => EditPremiumContent(
+                                    id: paidContent.id ?? 0,
+                                    videoLink: paidContent.video ?? '',
+                                    week: paidContent.month ?? 0,
+                                    title: paidContent.title ?? '',
+                                    description: paidContent.discription ?? 'Not given',
+                                    advice: paidContent.advice ?? 'Not given',
+                                    plan: "",
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Edit",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
                           child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red),
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AlertDialog(
-                                    title: const Text('Are you Sure?'),
-                                    content: const Text('Once you delete this item, You will not be able to recover this !'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () async {
-                                          DeletePaidContent.deletePaidContent(context, paidContent.id.toString());
-                                        },
-                                        child: Text("Delete",
-                                          style: TextStyle(
-                                              color: button,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                      ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text("Cancel",
-                                          style: TextStyle(
-                                              color: button,
-                                              fontWeight: FontWeight.bold
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red,
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Are you Sure?'),
+                                  content: const Text(
+                                    'Once you delete this item, You will not be able to recover this!',
                                   ),
-                                );
-                              },
-                              child: Text(
-                                "Delete",
-                                style: TextStyle(color: Colors.white),
-                              )),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () async {
+                                        DeletePaidContent.deletePaidContent(
+                                          context,
+                                          paidContent.id.toString(),
+                                        );
+                                      },
+                                      child: Text(
+                                        "Delete",
+                                        style: TextStyle(
+                                          color: button,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        "Cancel",
+                                        style: TextStyle(
+                                          color: button,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Delete",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );
             },
           );
-        }
+        },
       ),
     );
   }
