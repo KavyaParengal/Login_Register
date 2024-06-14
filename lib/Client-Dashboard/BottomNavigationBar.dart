@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:login_register/Client-Dashboard/Screens/freecontent.dart';
-import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/HomePage/home_page.dart';
 import 'package:login_register/Client-Dashboard/Screens/premiumcontent.dart';
 import 'package:login_register/Utilities/colors.dart';
 import 'package:login_register/Widgets/about_us.dart';

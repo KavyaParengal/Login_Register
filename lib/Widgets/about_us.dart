@@ -5,7 +5,7 @@ import 'package:login_register/Client-Dashboard/BottomNavigationBar.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../Client-Dashboard/Screens/home_page.dart';
+import '../Client-Dashboard/Screens/HomePage/home_page.dart';
 import '../Utilities/colors.dart';
 
 class AboutUs extends StatefulWidget {

@@ -12,7 +12,8 @@ import 'package:login_register/Admin-Dashboard/Provider/client_list_provider.dar
 import 'package:login_register/Client-Dashboard/Provider/free_content_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
-import 'package:login_register/Client-Dashboard/Screens/splash_screen.dart';
+import 'package:login_register/Client-Dashboard/Screens/HomePage/home_page.dart';
+import 'package:login_register/SplashScreen/splash_screen.dart';
 import 'package:login_register/firebase_api.dart';
 import 'package:provider/provider.dart';
 import 'Admin-Dashboard/Provider/admin_view_wee_wise_provider.dart';
@@ -61,6 +62,7 @@ Future<void> main() async {
           ),
           debugShowCheckedModeBanner: false,
           home: SplashScreen(),
+          // home: HomePage(),
         ),
       )
   );

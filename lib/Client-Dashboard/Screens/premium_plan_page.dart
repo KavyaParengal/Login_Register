@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Client-Dashboard/Provider/plan_list_provider.dart';
-import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/HomePage/home_page.dart';
 import 'package:login_register/Utilities/global.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,6 +1,10 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:login_register/Register/sign_up_page.dart';
+import 'package:login_register/Widgets/custom_textfield.dart';
 
 import 'login_api_services.dart';
 import '../Utilities/colors.dart';
@@ -32,115 +36,85 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text("Login",style: TextStyle(fontSize: 39,fontWeight: FontWeight.bold,),),
-            const SizedBox(height: 27,),
-            const Text("Welcome back! Login with your Credentials",style: TextStyle(fontSize: 15),),
-
-            const SizedBox(height: 39,),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.email,color: primary,),
-                    hintText: "Email ID",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                    ),
-                ),
-
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'This field is required';
-                  }
-                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  return null;
-                },
-
+            Container(
+              height: MediaQuery.of(context).size.height / 2.5,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/main.png'), fit: BoxFit.fill),
               ),
             ),
-
-            const SizedBox(height: 10,),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: pwdController,
-                obscureText: passwordVisible1,
-                decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      icon: Icon(passwordVisible1
-                          ? Icons.visibility_off
-                          : Icons.visibility,color: primary,),
-                      onPressed: () {
-                        setState(
-                              () {
-                            passwordVisible1 = !passwordVisible1;
-                          },
-                        );
+            Expanded(
+              flex: 2,
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: const Text("Login",style: TextStyle(fontSize: 29,fontWeight: FontWeight.bold,),),
+                    ),
+                    CustomTextField(
+                        controller: emailController,
+                        hintText: 'Email'
+                    ),
+                    CustomTextField(
+                      controller: pwdController,
+                      hintText: "Password",
+                      obscureText: passwordVisible1,
+                      onSuffixIconPressed: () {
+                        setState(() {
+                          passwordVisible1 = !passwordVisible1;
+                        });
+                      },
+                      showSuffixIcon: true,
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'This field is required';
+                        }
+                        return null;
                       },
                     ),
-                    prefixIcon: Icon(Icons.lock,color: primary,),
-                    hintText: "Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12)
-                    )
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: 49,
+                        width: MediaQuery.of(context).size.width,
+                        child: ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  _isLoading = true;
+                                });
+                                await LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
+                                setState(() {
+                                  _isLoading = false;
+                                });
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(backgroundColor: button, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(22.0)),),
+                            child: _isLoading ? CircularProgressIndicator(color: Colors.white,) :
+                            Text("Login",style: GoogleFonts.headlandOne(fontSize: 17, color: Colors.white),)),
+                      ),
+                    ),
+
+                    const SizedBox(height: 20,),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account?",style: GoogleFonts.headlandOne(fontSize: 15),),
+                        TextButton(
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
+                            },
+                            child: Text("Sign Up Now",style: GoogleFonts.headlandOne(
+                                fontSize: 15,color: Colors.deepOrange,fontWeight: FontWeight.bold),)
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'This field is required';
-                  }
-                  return null;
-                },
               ),
-            ),
-
-            const SizedBox(height: 36,),
-
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 55,
-                width: MediaQuery.of(context).size.width,
-                child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        setState(() {
-                          _isLoading = true;
-                        });
-                        await LoginApi.loginUser(context, emailController.text.trim(), pwdController.text.trim());
-                        setState(() {
-                          _isLoading = false;
-                        });
-                      }
-                    },
-                style: ElevatedButton.styleFrom(backgroundColor: button, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),),
-                    child: _isLoading ? CircularProgressIndicator(color: Colors.white,) :
-                    Text("Login",style: TextStyle(fontSize: 17, color: Colors.white),)),
-              ),
-            ),
-
-            const SizedBox(height: 20,),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account?",style: TextStyle(fontSize: 16),),
-                TextButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpPage()));
-                    },
-                    child: Text("Sign Up",style: TextStyle(
-                      fontSize: 16,color: button,fontWeight: FontWeight.bold),)
-                ),
-                const SizedBox(height: 50,)
-              ],
-            ),
+            )
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/HomePage/home_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../Utilities/constants.dart';

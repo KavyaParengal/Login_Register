@@ -4,12 +4,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../Admin-Dashboard/Screens/admin_home_page.dart';
-import '../../Login/login_page.dart';
-import '../../Utilities/global.dart';
-import '../../Widgets/loading_icon.dart';
-import '../../firebase_api.dart';
-import 'home_page.dart';
+import '../Admin-Dashboard/Screens/admin_home_page.dart';
+import '../Login/login_page.dart';
+import '../Utilities/global.dart';
+import '../Widgets/loading_icon.dart';
+import '../firebase_api.dart';
+import '../Client-Dashboard/Screens/HomePage/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

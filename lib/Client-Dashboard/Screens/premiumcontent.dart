@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:login_register/Client-Dashboard/Models/premiumContentModel.dart';
 import 'package:login_register/Client-Dashboard/Provider/premium_content_provider.dart';
-import 'package:login_register/Client-Dashboard/Screens/home_page.dart';
+import 'package:login_register/Client-Dashboard/Screens/HomePage/home_page.dart';
 import '../../Utilities/aboutscreen.dart';
 import '../../Utilities/colors.dart';
 import '../../Utilities/global.dart';

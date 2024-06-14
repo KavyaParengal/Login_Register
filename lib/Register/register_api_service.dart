@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:login_register/Login/login_page.dart';
+import 'package:login_register/Register/sign_up_success.dart';
 
 import '../Utilities/constants.dart';
 
@@ -34,7 +35,7 @@ class RegisterApi{
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Registration Successfully !'),
             ));
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpSuccess()));
       }
       else {
         ScaffoldMessenger.of(context).showSnackBar(
